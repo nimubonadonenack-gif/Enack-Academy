@@ -3,29 +3,615 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enack-Academy - Physique Générale</title>
-    <!-- Support des formules de physique avec KaTeX -->
+    <title>Enack-Academy | Physique Générale</title>
+    <!-- KaTeX pour le rendu des équations mathématiques et physiques -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; background-color: #f4f4f9; color: #333; }
-        header { background-color: #0056b3; color: white; padding: 20px; text-align: center; border-radius: 8px; }
-        main { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #0056b3; }
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success: #22c55e;
+            --error: #ef4444;
+            --border: #334155;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* En-tête */
+        header {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-card);
+            border-color: var(--accent-color);
+        }
+
+        /* Écrans Authentification & Dashboard */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .auth-card {
+            background-color: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            margin: 3rem auto;
+            border: 1px solid var(--border);
+        }
+
+        .auth-card h2 {
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .auth-card p.subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background-color: var(--bg-input);
+            color: white;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .auth-toggle a {
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .alert {
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .alert-success {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        /* Dashboard de Cours */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .course-list {
+            list-style: none;
+        }
+
+        .course-item {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            transition: background 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .course-item:hover, .course-item.active {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .main-content {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .course-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-body {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .course-body h3 {
+            margin: 1.5rem 0 0.8rem 0;
+            color: var(--accent-color);
+        }
+
+        .formula-box {
+            background-color: #0f172a;
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.2rem 0;
+            overflow-x: auto;
+        }
+
+        /* Quiz Box */
+        .quiz-card {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #0f172a;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Bienvenue sur Enack-Academy</h1>
-        <p>Plateforme d'apprentissage de la Physique Générale</p>
+        <div class="logo">
+            ⚛️ <span>Enack-Academy</span>
+        </div>
+        <div class="user-nav">
+            <span id="user-display" class="hidden" style="font-size: 0.9rem; color: var(--text-secondary);"></span>
+            <button id="logout-btn" class="btn btn-outline hidden" onclick="auth.logout()">Déconnexion</button>
+        </div>
     </header>
-    <main>
-        <h2>Notre Mission</h2>
-        <p>Enack-Academy est dédiée à l'enseignement gratuit des notions fondamentales de la physique générale : mécanique, thermodynamique, électromagnétisme et physique moderne.</p>
-        
-        <h2>Exemple de formule :</h2>
-        <p>La relation d'équivalence masse-énergie : $$E = mc^2$$</p>
-    </main>
+
+    <div class="container">
+        <!-- FORMULAIRE D'AUTHENTIFICATION -->
+        <div id="auth-section">
+            <!-- Inscription -->
+            <div id="signup-box" class="auth-card">
+                <h2>Créer un compte</h2>
+                <p class="subtitle">Inscrivez-vous pour accéder gratuitement aux cours de Physique Générale.</p>
+                
+                <div id="signup-alert" class="alert"></div>
+
+                <form onsubmit="auth.signup(event)">
+                    <div class="form-group">
+                        <label for="signup-name">Nom complet</label>
+                        <input type="text" id="signup-name" required placeholder="ex: Isaac Newton">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Adresse Email</label>
+                        <input type="email" id="signup-email" required placeholder="etudiant@enack.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Mot de passe</label>
+                        <input type="password" id="signup-password" required minlength="6" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">S'inscrire</button>
+                </form>
+                <div class="auth-toggle">
+                    Déjà un compte ? <a onclick="auth.switchForm('login')">Se connecter</a>
+                </div>
+            </div>
+
+            <!-- Connexion -->
+            <div id="login-box" class="auth-card hidden">
+                <h2>Espace Connexion</h2>
+                <p class="subtitle">Connectez-vous pour continuer vos cours.</p>
+                
+                <div id="login-alert" class="alert"></div>
+
+                <form onsubmit="auth.login(event)">
+                    <div class="form-group">
+                        <label for="login-email">Adresse Email</label>
+                        <input type="email" id="login-email" required placeholder="etudiant@enack.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mot de passe</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Connexion</button>
+                </form>
+                <div class="auth-toggle">
+                    Pas encore de compte ? <a onclick="auth.switchForm('signup')">Créer un compte</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESPACE DE COURS (Protégé) -->
+        <div id="app-section" class="dashboard hidden">
+            <aside class="sidebar">
+                <h3>Programme de Physique</h3>
+                <ul class="course-list">
+                    <li class="course-item active" onclick="courses.load(0)">1. Cinématique & Dynamique</li>
+                    <li class="course-item" onclick="courses.load(1)">2. Travail & Énergie</li>
+                    <li class="course-item" onclick="courses.load(2)">3. Thermodynamique</li>
+                    <li class="course-item" onclick="courses.load(3)">4. Électromagnétisme</li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <div class="course-header">
+                    <h1 id="course-title">Chargement...</h1>
+                </div>
+                <div id="course-body" class="course-body">
+                    <!-- Contenu du cours injecté par JS -->
+                </div>
+
+                <div class="quiz-card">
+                    <h3>💡 Auto-évaluation rapide</h3>
+                    <p id="quiz-question" style="margin: 0.8rem 0; color: var(--text-secondary);"></p>
+                    <button id="quiz-btn" class="btn btn-outline" onclick="courses.checkQuiz()">Afficher la réponse</button>
+                    <p id="quiz-answer" class="hidden" style="margin-top: 0.8rem; color: var(--success); font-weight: 600;"></p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Enack-Academy. Tous droits réservés. Plateforme sécurisée d'enseignement scientifique.</p>
+    </footer>
+
+    <script>
+        /* ========================================================
+           SÉCURITÉ & HACHAGE (SHA-256)
+           Empêche le stockage des mots de passe en texte clair.
+           ======================================================== */
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password + "ENACK_SALT_2026");
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        /* ========================================================
+           GESTION DE L'AUTHENTIFICATION
+           ======================================================== */
+        const auth = {
+            switchForm(target) {
+                document.getElementById('signup-box').classList.toggle('hidden', target !== 'signup');
+                document.getElementById('login-box').classList.toggle('hidden', target !== 'login');
+            },
+
+            async signup(e) {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim().toLowerCase();
+                const password = document.getElementById('signup-password').value;
+                const alertBox = document.getElementById('signup-alert');
+
+                const users = JSON.parse(localStorage.getItem('enack_users') || '{}');
+                if (users[email]) {
+                    this.showAlert(alertBox, 'Cet email est déjà associé à un compte.', 'error');
+                    return;
+                }
+
+                const passwordHash = await hashPassword(password);
+                users[email] = { name, passwordHash };
+                localStorage.setItem('enack_users', JSON.stringify(users));
+
+                this.showAlert(alertBox, 'Compte créé avec succès ! Connexion en cours...', 'success');
+                setTimeout(() => this.setCurrentUser({ name, email }), 1200);
+            },
+
+            async login(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value.trim().toLowerCase();
+                const password = document.getElementById('login-password').value;
+                const alertBox = document.getElementById('login-alert');
+
+                const users = JSON.parse(localStorage.getItem('enack_users') || '{}');
+                const user = users[email];
+
+                if (!user) {
+                    this.showAlert(alertBox, 'Identifiants incorrects.', 'error');
+                    return;
+                }
+
+                const passwordHash = await hashPassword(password);
+                if (user.passwordHash !== passwordHash) {
+                    this.showAlert(alertBox, 'Identifiants incorrects.', 'error');
+                    return;
+                }
+
+                this.setCurrentUser({ name: user.name, email });
+            },
+
+            setCurrentUser(user) {
+                localStorage.setItem('enack_session', JSON.stringify(user));
+                this.checkSession();
+            },
+
+            logout() {
+                localStorage.removeItem('enack_session');
+                this.checkSession();
+            },
+
+            checkSession() {
+                const session = JSON.parse(localStorage.getItem('enack_session'));
+                const authSection = document.getElementById('auth-section');
+                const appSection = document.getElementById('app-section');
+                const userDisplay = document.getElementById('user-display');
+                const logoutBtn = document.getElementById('logout-btn');
+
+                if (session) {
+                    authSection.classList.add('hidden');
+                    appSection.classList.remove('hidden');
+                    userDisplay.classList.remove('hidden');
+                    logoutBtn.classList.remove('hidden');
+                    userDisplay.textContent = `👤 ${session.name}`;
+                    courses.load(0);
+                } else {
+                    authSection.classList.remove('hidden');
+                    appSection.classList.add('hidden');
+                    userDisplay.classList.add('hidden');
+                    logoutBtn.classList.add('hidden');
+                }
+            },
+
+            showAlert(element, message, type) {
+                element.className = `alert alert-${type}`;
+                element.textContent = message;
+                element.style.display = 'block';
+            }
+        };
+
+        /* ========================================================
+           BASE DE DONNÉES DE COURS & RENDU DU CONTENU
+           ======================================================== */
+        const coursesData = [
+            {
+                title: "1. Cinématique & Dynamique Newtonienne",
+                content: `
+                    <p>La mécanique classique repose sur les principes fondés par Isaac Newton pour décrire le mouvement des corps massiques.</p>
+                    <h3>Seconde Loi de Newton (Principe Fondamental de la Dynamique)</h3>
+                    <p>Dans un référentiel galiléen, la somme vectorielle des forces subies par un corps est égale au produit de sa masse par son vecteur accélération :</p>
+                    <div class="formula-box">$$\\vec{F} = m \\cdot \\vec{a}$$</div>
+                    <p>Où :</p>
+                    <ul>
+                        <li>$\\vec{F}$ représente la somme des forces appliquées (en Newtons, N)</li>
+                        <li>$m$ est la masse du corps (en kg)</li>
+                        <li>$\\vec{a}$ est l'accélération ($m/s^2$)</li>
+                    </ul>
+                `,
+                quizQuestion: "Quelle est l'unité de l'accélération dans le Système International ?",
+                quizAnswer: "Réponse : Le mètre par seconde carrée ($m/s^2$ ou $m \\cdot s^{-2}$)."
+            },
+            {
+                title: "2. Travail, Énergie & Conservation",
+                content: `
+                    <p>L'énergie est une grandeur physique scalaire qui caractérise l'état d'un système mécanique.</p>
+                    <h3>Énergie Cinétique ($E_c$)</h3>
+                    <p>L'énergie associée au mouvement d'un point matériel de masse $m$ déplacé à une vitesse $v$ s'exprime par :</p>
+                    <div class="formula-box">$$E_c = \\frac{1}{2} m v^2$$</div>
+                    <h3>Théorème de l'Énergie Cinétique</h3>
+                    <p>La variation d'énergie cinétique entre deux états est égale à la somme des travaux des forces extérieures appliquées :</p>
+                    <div class="formula-box">$$\\Delta E_c = W_{A \\rightarrow B}(\\vec{F})$$</div>
+                `,
+                quizQuestion: "Si la vitesse d'un objet est doublée, par combien son énergie cinétique est-elle multipliée ?",
+                quizAnswer: "Réponse : Elle est multipliée par 4 ($2^2 = 4$)."
+            },
+            {
+                title: "3. Principes de la Thermodynamique",
+                content: `
+                    <p>La thermodynamique étudie les échanges d'énergie sous forme de chaleur et de travail au sein de systèmes macroscopiques.</p>
+                    <h3>Premier Principe (Conservation de l'énergie)</h3>
+                    <p>Pour un système fermé subissant une transformation, la variation d'énergie interne $\\Delta U$ dépend uniquement du travail $W$ et de la chaleur $Q$ échangés :</p>
+                    <div class="formula-box">$$\\Delta U = W + Q$$</div>
+                `,
+                quizQuestion: "Que représente le 'Q' dans le premier principe de la thermodynamique ?",
+                quizAnswer: "Réponse : La quantité de chaleur échangée par le système (en Joules)."
+            },
+            {
+                title: "4. Électromagnétisme & Équations fondamentales",
+                content: `
+                    <p>L'interaction électromagnétique est l'une des quatre forces fondamentales de la nature.</p>
+                    <h3>Loi de Coulomb</h3>
+                    <p>La force d'attraction ou de répulsion électrostatique entre deux charges ponctuelles $q_1$ et $q_2$ séparées par une distance $r$ vaut :</p>
+                    <div class="formula-box">$$F = \\frac{1}{4\\pi\\varepsilon_0} \\frac{|q_1 \\cdot q_2|}{r^2}$$</div>
+                `,
+                quizQuestion: "Comment varie la force électrostatique si la distance entre deux charges est doublée ?",
+                quizAnswer: "Réponse : La force est divisée par 4 (loi en $1/r^2$)."
+            }
+        ];
+
+        const courses = {
+            currentIndex: 0,
+            load(index) {
+                this.currentIndex = index;
+                const data = coursesData[index];
+                
+                document.getElementById('course-title').textContent = data.title;
+                document.getElementById('course-body').innerHTML = data.content;
+                document.getElementById('quiz-question').textContent = data.quizQuestion;
+                document.getElementById('quiz-answer').textContent = data.quizAnswer;
+                document.getElementById('quiz-answer').classList.add('hidden');
+                document.getElementById('quiz-btn').textContent = "Afficher la réponse";
+
+                // Mise à jour de la classe CSS active
+                const items = document.querySelectorAll('.course-item');
+                items.forEach((item, idx) => {
+                    item.classList.toggle('active', idx === index);
+                });
+
+                // Rendu des formules mathématiques avec KaTeX
+                if (window.renderMathInElement) {
+                    renderMathInElement(document.getElementById('course-body'), {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                    renderMathInElement(document.getElementById('quiz-card'), {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                }
+            },
+
+            checkQuiz() {
+                const answer = document.getElementById('quiz-answer');
+                const btn = document.getElementById('quiz-btn');
+                const isHidden = answer.classList.contains('hidden');
+
+                if (isHidden) {
+                    answer.classList.remove('hidden');
+                    btn.textContent = "Masquer la réponse";
+                } else {
+                    answer.classList.add('hidden');
+                    btn.textContent = "Afficher la réponse";
+                }
+            }
+        };
+
+        // Initialisation de la session au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            auth.checkSession();
+        });
+    </script>
 </body>
-</html>x@0.16.8/dist/katex.min.css
+</html>
