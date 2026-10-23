@@ -1,5 +1,4 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -748,6 +747,66 @@ const PROGRAM = [
 
 
 /* =====================================================
+   TEXTES DES COURS (ajout)
+   Clé : numéro du chapitre - numéro de la leçon (à partir de 0)
+===================================================== */
+
+const COURS_TEXTE = {
+
+"0-0":[
+"La cinématique décrit le mouvement d'un corps sans chercher ce qui le provoque. On repère la position par un vecteur r qui dépend du temps, puis on en déduit la vitesse, qui mesure la rapidité du changement de position, et l'accélération, qui mesure celle du changement de vitesse.",
+"Dans le mouvement rectiligne uniformément accéléré, l'accélération est constante et la vitesse varie linéairement : v = v₀ + at, avec une position x = x₀ + v₀t + ½at². Un objet en chute libre près de la Terre en est un exemple, avec a ≈ 9,8 m/s² vers le bas.",
+"Le mouvement à deux dimensions se traite en séparant les axes : chaque composante évolue indépendamment de l'autre. Pour un projectile sans frottement, la composante horizontale reste uniforme tandis que la composante verticale subit la pesanteur. Cette décomposition est la méthode centrale des exercices de cinématique."
+],
+
+"0-1":[
+"La dynamique relie le mouvement aux forces. La première loi de Newton affirme qu'un corps sur lequel la force totale est nulle conserve sa vitesse : il reste au repos ou poursuit un mouvement rectiligne uniforme, dans un référentiel galiléen.",
+"La deuxième loi, ΣF = ma, est la relation de base : l'accélération est proportionnelle à la force résultante et inversement proportionnelle à la masse. Pour l'appliquer, on isole le système, on représente toutes les forces qui s'exercent sur lui, puis on projette l'équation sur des axes bien choisis.",
+"La troisième loi précise que si un corps A exerce une force sur un corps B, alors B exerce sur A une force de même intensité et de sens opposé. Ces deux forces agissent sur des corps différents : elles ne s'annulent donc jamais dans l'équation d'un seul système."
+],
+
+"0-2":[
+"Le travail d'une force mesure l'énergie qu'elle transfère à un corps lors d'un déplacement. Pour une force constante, il vaut W = F·d·cos θ, où θ est l'angle entre la force et le déplacement. Il est nul si la force est perpendiculaire au déplacement, comme la force normale d'un sol horizontal.",
+"Le théorème de l'énergie cinétique affirme que le travail total des forces est égal à la variation de l'énergie cinétique, ½mv². Lorsque seules des forces conservatives agissent, comme le poids ou la force d'un ressort, l'énergie mécanique, somme des énergies cinétique et potentielle, reste constante.",
+"La puissance exprime la rapidité avec laquelle l'énergie est transférée : P = dW/dt, soit P = F·v pour une force agissant sur un corps en mouvement. Elle s'exprime en watts, un watt valant un joule par seconde. Un moteur de 1 kW fournit ainsi 1 000 joules chaque seconde."
+],
+
+"0-3":[
+"La quantité de mouvement d'un corps est le produit de sa masse par sa vitesse : p = mv. C'est une grandeur vectorielle, qui a la direction et le sens de la vitesse. Plus un corps est massif ou rapide, plus il est difficile de l'arrêter.",
+"La deuxième loi de Newton s'écrit aussi ΣF = dp/dt. L'impulsion, produit de la force par la durée de son action, est égale à la variation de la quantité de mouvement. C'est pourquoi allonger la durée d'un choc, avec un airbag par exemple, réduit la force subie.",
+"Pour un système isolé, c'est-à-dire soumis à aucune force extérieure résultante, la quantité de mouvement totale se conserve. Dans une collision, cette conservation est toujours valable ; l'énergie cinétique, elle, ne se conserve que si le choc est élastique."
+],
+
+"0-4":[
+"La loi de la gravitation universelle de Newton décrit l'attraction entre deux masses : F = G·m₁m₂/r², où r est la distance entre leurs centres et G la constante gravitationnelle, environ 6,67×10⁻¹¹ N·m²/kg². La force est toujours attractive et diminue avec le carré de la distance.",
+"À la surface de la Terre, cette force s'identifie au poids. L'intensité de la pesanteur vaut g = GM/R², soit environ 9,8 m/s², où M et R sont la masse et le rayon de la Terre. Elle diminue lorsqu'on s'éloigne de la surface.",
+"L'énergie potentielle gravitationnelle entre deux masses s'écrit Ep = −G·m₁m₂/r, avec une valeur nulle à l'infini ; elle est donc négative pour un système lié. Cette expression permet de calculer la vitesse de libération, vitesse minimale pour échapper à l'attraction d'un astre."
+],
+
+"0-5":[
+"Un projectile lancé avec une vitesse initiale v₀ et un angle α suit, sans frottement, une trajectoire parabolique. La composante horizontale de la vitesse reste constante, v₀cos α, tandis que la composante verticale varie avec l'accélération g. À hauteur égale, la portée est maximale pour un angle de 45°.",
+"Un satellite en orbite circulaire est en chute libre permanente : la gravitation joue le rôle de force centripète. En écrivant GMm/r² = mv²/r, on obtient la vitesse orbitale v = √(GM/r), qui diminue quand le rayon de l'orbite augmente.",
+"La période d'une orbite circulaire vaut T = 2π√(r³/GM), ce qui correspond à la troisième loi de Kepler : T² est proportionnel à r³. Un satellite géostationnaire a une période de 24 heures et se trouve à environ 36 000 km d'altitude, au-dessus de l'équateur."
+],
+
+"0-6":[
+"Un oscillateur harmonique est un système dont la force de rappel est proportionnelle à l'écart par rapport à l'équilibre. Pour une masse m attachée à un ressort de raideur k, la période propre vaut T = 2π√(m/k). Elle ne dépend pas de l'amplitude, tant que le ressort reste dans son domaine élastique.",
+"Pour un pendule simple de longueur L, la période est T = 2π√(L/g). Cette formule est valable pour de petits angles, typiquement inférieurs à une quinzaine de degrés. Elle ne dépend pas de la masse suspendue.",
+"Au cours d'une oscillation, l'énergie passe sans cesse d'une forme à l'autre : elle est entièrement potentielle aux extrémités, où la vitesse s'annule, et entièrement cinétique au passage par la position d'équilibre. En l'absence de frottements, l'énergie mécanique totale reste constante."
+]
+
+};
+
+const COURS_SOURCES =
+    '<p style="color:var(--muted);font-size:14px;line-height:1.7;margin-top:18px">' +
+    'Pour approfondir (en anglais) : ' +
+    '<a style="color:var(--blue)" target="_blank" rel="noopener" href="https://openstax.org/subjects/physics">OpenStax Physics</a> · ' +
+    '<a style="color:var(--blue)" target="_blank" rel="noopener" href="https://ocw.mit.edu/search/?d=Physics">MIT OpenCourseWare</a> · ' +
+    '<a style="color:var(--blue)" target="_blank" rel="noopener" href="https://phys.libretexts.org">LibreTexts Physics</a>' +
+    '</p>';
+
+
+/* =====================================================
    UTILITAIRES
 ===================================================== */
 
@@ -934,6 +993,34 @@ function openLesson(chapterIndex,lessonIndex){
             exemples, exercices et corrections.
         </p>
         `;
+
+
+    const cleCours = chapterIndex + "-" + lessonIndex;
+
+    if(COURS_TEXTE[cleCours]){
+
+        const note =
+            document
+            .getElementById("lessonContent")
+            .querySelector("h3 + p");
+
+        const bloc =
+            document.createElement("div");
+
+        bloc.innerHTML =
+            COURS_TEXTE[cleCours]
+            .map(function(texte){
+
+                return '<p style="line-height:1.8;margin-bottom:14px">' +
+                       escapeHTML(texte) +
+                       '</p>';
+
+            })
+            .join("") + COURS_SOURCES;
+
+        note.replaceWith(bloc);
+
+    }
 
 
     if(window.renderMathInElement){
