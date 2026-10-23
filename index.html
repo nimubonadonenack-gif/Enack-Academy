@@ -1,2 +1,1804 @@
-# Enack-Academy
-Plateforme gratuite pour apprendre la physique générale 
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Enack-Academy | Physique Générale</title>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- KATEX POUR LES FORMULES -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<script defer
+src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+<script defer
+src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+<style>
+
+:root{
+    --bg:#0b132b;
+    --secondary:#1c2541;
+    --card:#202c4f;
+    --gold:#f7b801;
+    --blue:#48cae4;
+    --text:#edf2f4;
+    --muted:#9aa6bd;
+    --danger:#ef233c;
+    --success:#52b788;
+    --border:rgba(255,255,255,.12);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* HEADER */
+
+header{
+    height:68px;
+    background:var(--secondary);
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 20px;
+}
+
+.brand{
+    font-size:22px;
+    font-weight:800;
+}
+
+.brand span{
+    color:var(--gold);
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.btn{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+
+    padding:9px 13px;
+    border-radius:8px;
+}
+
+.btn:hover{
+    border-color:var(--gold);
+}
+
+.btn-primary{
+    background:var(--gold);
+    color:#111;
+    border:none;
+    font-weight:bold;
+}
+
+/* AUTH */
+
+.auth{
+    width:92%;
+    max-width:430px;
+
+    margin:60px auto;
+
+    background:var(--secondary);
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:28px;
+}
+
+.auth h1{
+    text-align:center;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.auth p{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.field{
+    margin-bottom:15px;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    margin-bottom:6px;
+}
+
+.field input{
+    width:100%;
+    padding:12px;
+
+    background:var(--card);
+    color:var(--text);
+
+    border:1px solid var(--border);
+    border-radius:8px;
+
+    outline:none;
+}
+
+.field input:focus{
+    border-color:var(--blue);
+}
+
+.auth-main-button{
+    width:100%;
+    padding:12px;
+
+    background:var(--gold);
+    color:#111;
+
+    border:0;
+    border-radius:8px;
+
+    font-weight:bold;
+}
+
+.message{
+    min-height:22px;
+    margin:8px 0;
+
+    color:var(--danger);
+    text-align:center;
+}
+
+.toggle{
+    margin-top:18px;
+    text-align:center;
+}
+
+.toggle a{
+    color:var(--blue);
+    cursor:pointer;
+}
+
+/* APPLICATION */
+
+.app-layout{
+    display:grid;
+    grid-template-columns:300px 1fr;
+
+    min-height:calc(100vh - 68px);
+}
+
+.sidebar{
+    background:var(--secondary);
+    border-right:1px solid var(--border);
+
+    overflow-y:auto;
+    padding:15px;
+}
+
+.sidebar h2{
+    color:var(--gold);
+    margin-bottom:12px;
+}
+
+.chapter{
+    padding:12px;
+
+    border-bottom:1px solid var(--border);
+
+    cursor:pointer;
+}
+
+.chapter:hover{
+    background:var(--card);
+}
+
+.lesson-list{
+    display:none;
+    margin-top:8px;
+}
+
+.chapter.open .lesson-list{
+    display:block;
+}
+
+.lesson{
+    padding:9px 8px 9px 20px;
+
+    color:var(--muted);
+
+    border-radius:6px;
+}
+
+.lesson:hover{
+    background:var(--card);
+    color:var(--blue);
+}
+
+/* MAIN */
+
+.main{
+    padding:25px;
+    overflow:auto;
+}
+
+.card{
+    background:var(--secondary);
+
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:25px;
+}
+
+.card h1{
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.tag{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.formula{
+    background:var(--card);
+
+    border-left:4px solid var(--blue);
+
+    padding:20px;
+
+    margin:20px 0;
+
+    text-align:center;
+
+    overflow:auto;
+}
+
+/* ADMIN */
+
+.admin{
+    padding:25px;
+}
+
+.admin-card{
+    background:var(--secondary);
+
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:25px;
+}
+
+.admin-card h1{
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+
+    margin:20px 0;
+}
+
+.stat{
+    background:var(--card);
+
+    padding:20px;
+
+    border-radius:10px;
+}
+
+.stat-title{
+    color:var(--muted);
+}
+
+.stat-number{
+    display:block;
+
+    font-size:30px;
+    font-weight:bold;
+
+    color:var(--gold);
+
+    margin-top:5px;
+}
+
+.table-container{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+
+    background:var(--card);
+}
+
+th,
+td{
+    padding:12px;
+
+    border-bottom:1px solid var(--border);
+
+    text-align:left;
+}
+
+th{
+    color:var(--gold);
+}
+
+.online{
+    color:var(--success);
+    font-weight:bold;
+}
+
+.offline{
+    color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:760px){
+
+    .app-layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        max-height:42vh;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .main{
+        padding:15px;
+    }
+
+    .admin{
+        padding:15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONFIGURATION
+===================================================== -->
+
+<script>
+
+const SUPABASE_URL = "TON_URL_SUPABASE";
+
+const SUPABASE_ANON_KEY = "TA_CLE_ANON";
+
+const ADMIN_EMAIL = "TON_EMAIL_ADMIN";
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+</script>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="brand">
+        ENACK-<span>ACADEMY</span>
+    </div>
+
+    <div class="header-buttons">
+
+        <button
+            id="studentsButton"
+            class="btn hidden"
+            onclick="openAdmin()">
+
+            👥 Étudiants
+
+        </button>
+
+        <button
+            id="logoutButton"
+            class="btn hidden"
+            onclick="logout()">
+
+            ⎋ Déconnexion
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     AUTHENTIFICATION
+===================================================== -->
+
+<section id="authSection" class="auth">
+
+    <h1 id="authTitle">
+        Connexion
+    </h1>
+
+    <p>
+        Accédez au programme complet de Physique Générale.
+    </p>
+
+    <div class="field">
+
+        <label>
+            Adresse e-mail
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            autocomplete="username">
+
+    </div>
+
+    <div class="field">
+
+        <label>
+            Mot de passe
+        </label>
+
+        <input
+            id="password"
+            type="password"
+            autocomplete="current-password">
+
+    </div>
+
+    <div
+        id="authMessage"
+        class="message">
+    </div>
+
+    <button
+        id="authButton"
+        class="auth-main-button"
+        onclick="authentication()">
+
+        Se connecter
+
+    </button>
+
+    <div class="toggle">
+
+        <span id="toggleText">
+            Vous n'avez pas encore de compte ?
+        </span>
+
+        <a
+            onclick="toggleAuth()"
+            id="toggleLink">
+
+            Créer un compte
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<section
+    id="appSection"
+    class="hidden">
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+
+        <h2>
+            ⚛️ Programme
+        </h2>
+
+        <div id="curriculum">
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="card">
+
+            <h1 id="lessonTitle">
+                Bienvenue sur Enack-Academy
+            </h1>
+
+            <div
+                id="lessonTag"
+                class="tag">
+            </div>
+
+            <div id="lessonContent">
+
+                <p>
+                    Sélectionnez une leçon dans
+                    le menu pour commencer.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMINISTRATION
+===================================================== -->
+
+<section
+    id="adminSection"
+    class="admin hidden">
+
+<div class="admin-card">
+
+    <h1>
+        👥 Tableau de bord administrateur
+    </h1>
+
+    <p style="color:var(--muted)">
+        Gestion des étudiants inscrits sur Enack-Academy.
+    </p>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <span class="stat-title">
+                Étudiants inscrits
+            </span>
+
+            <span
+                id="totalStudents"
+                class="stat-number">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="stat-title">
+                Actifs maintenant
+            </span>
+
+            <span
+                id="activeStudents"
+                class="stat-number">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="stat-title">
+                Dernière activité
+            </span>
+
+            <span
+                id="lastActivity"
+                class="stat-number"
+                style="font-size:16px">
+                —
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Nom
+                    </th>
+
+                    <th>
+                        Inscription
+                    </th>
+
+                    <th>
+                        Dernière activité
+                    </th>
+
+                    <th>
+                        État
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody
+                id="studentsTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   PROGRAMME DE PHYSIQUE
+===================================================== */
+
+const PROGRAM = [
+
+[
+"⚙️",
+"Mécanique",
+[
+["Cinématique",
+"\\vec v=\\frac{d\\vec r}{dt},\\ \\vec a=\\frac{d\\vec v}{dt}"],
+
+["Dynamique",
+"\\sum\\vec F=m\\vec a"],
+
+["Travail, énergie et puissance",
+"W=\\int\\vec F\\cdot d\\vec r,\\ P=\\frac{dW}{dt}"],
+
+["Quantité de mouvement",
+"\\vec p=m\\vec v"],
+
+["Gravitation",
+"F=G\\frac{m_1m_2}{r^2}"],
+
+["Projectiles et satellites",
+"v=\\sqrt{\\frac{GM}{r}}"],
+
+["Oscillations et pendules",
+"T=2\\pi\\sqrt{\\frac{L}{g}}"]
+]
+],
+
+
+[
+"🌡️",
+"Thermodynamique",
+[
+["Température et chaleur",
+"Q=mc\\Delta T"],
+
+["Gaz parfaits",
+"PV=nRT"],
+
+["Travail et énergie thermique",
+"W=-\\int P\\,dV"],
+
+["Lois de la thermodynamique",
+"\\Delta U=Q-W"],
+
+["Machines thermiques",
+"\\eta=1-\\frac{T_f}{T_c}"],
+
+["Changements d'état",
+"Q=mL"]
+]
+],
+
+
+[
+"⚡",
+"Électricité",
+[
+["Charge électrique",
+"F=k\\frac{q_1q_2}{r^2}"],
+
+["Champ électrique",
+"\\vec E=\\frac{\\vec F}{q}"],
+
+["Potentiel et tension",
+"U=V_A-V_B"],
+
+["Courant électrique",
+"I=\\frac{dQ}{dt}"],
+
+["Résistance et loi d'Ohm",
+"U=RI"],
+
+["Lois de Kirchhoff",
+"\\sum I=0,\\ \\sum U=0"],
+
+["Condensateurs",
+"Q=CU"],
+
+["Énergie et puissance électriques",
+"P=UI=RI^2"]
+]
+],
+
+
+[
+"🧲",
+"Magnétisme",
+[
+["Champ magnétique",
+"B=\\frac{\\mu_0 I}{2\\pi r}"],
+
+["Force magnétique",
+"F=qvB\\sin\\theta"],
+
+["Force de Lorentz",
+"\\vec F=q(\\vec E+\\vec v\\times\\vec B)"],
+
+["Force de Laplace",
+"\\vec F=I\\vec L\\times\\vec B"],
+
+["Champ créé par un courant",
+"\\oint\\vec B\\cdot d\\vec l=\\mu_0I"],
+
+["Induction électromagnétique",
+"e=-\\frac{d\\Phi}{dt}"],
+
+["Électroaimants",
+"B=\\mu_0nI"]
+]
+],
+
+
+[
+"🔌",
+"Électromagnétisme",
+[
+["Relations électricité-magnétisme",
+"\\nabla\\times\\vec E=-\\frac{\\partial\\vec B}{\\partial t}"],
+
+["Induction",
+"e=-L\\frac{di}{dt}"],
+
+["Flux magnétique",
+"\\Phi=BS\\cos\\theta"],
+
+["Lois de Faraday et Lenz",
+"e=-\\frac{d\\Phi}{dt}"],
+
+["Ondes électromagnétiques",
+"c=\\frac1{\\sqrt{\\mu_0\\varepsilon_0}}"],
+
+["Transformateurs",
+"\\frac{U_2}{U_1}=\\frac{N_2}{N_1}"]
+]
+],
+
+
+[
+"🔭",
+"Optique",
+[
+["Propagation de la lumière",
+"n=\\frac cv"],
+
+["Réflexion",
+"i=r"],
+
+["Réfraction",
+"n_1\\sin i_1=n_2\\sin i_2"],
+
+["Lentilles",
+"\\frac1f=\\frac1p+\\frac1{p'}"],
+
+["Miroirs",
+"\\frac1f=\\frac1s+\\frac1{s'}"],
+
+["Instruments optiques",
+"G=\\frac{f_{obj}}{f_{oc}}"],
+
+["Interférences et diffraction",
+"a\\sin\\theta=m\\lambda"]
+]
+],
+
+
+[
+"🌊",
+"Ondes et vibrations",
+[
+["Mouvement oscillatoire",
+"x=A\\cos(\\omega t+\\varphi)"],
+
+["Ondes mécaniques",
+"y=A\\cos(\\omega t-kx)"],
+
+["Fréquence et période",
+"f=\\frac1T"],
+
+["Longueur d'onde",
+"\\lambda=vT"],
+
+["Propagation des ondes",
+"v=\\lambda f"],
+
+["Résonance",
+"f_0=\\frac1{2\\pi\\sqrt{LC}}"],
+
+["Effet Doppler",
+"f'=f\\frac{v\\pm v_o}{v\\mp v_s}"]
+]
+],
+
+
+[
+"⚛️",
+"Physique moderne",
+[
+["Relativité",
+"E=mc^2"],
+
+["Physique quantique",
+"\\Delta x\\Delta p\\ge\\frac\\hbar2"],
+
+["Effet photoélectrique",
+"E_c=hf-W_0"],
+
+["Modèle atomique",
+"E_n=-\\frac{13.6}{n^2}\\ eV"],
+
+["Spectres",
+"\\Delta E=hf"],
+
+["Dualité onde-particule",
+"\\lambda=\\frac hp"]
+]
+],
+
+
+[
+"☢️",
+"Physique nucléaire",
+[
+["Noyau atomique",
+"{}^A_ZX"],
+
+["Radioactivité",
+"A=\\lambda N"],
+
+["Désintégration",
+"N(t)=N_0e^{-\\lambda t}"],
+
+["Demi-vie",
+"t_{1/2}=\\frac{\\ln2}{\\lambda}"],
+
+["Fission et fusion",
+"E=\\Delta mc^2"],
+
+["Énergie nucléaire",
+"E=\\Delta mc^2"]
+]
+],
+
+
+[
+"💻",
+"Physique appliquée / électronique",
+[
+["Semi-conducteurs",
+"n_i^2=np"],
+
+["Diodes",
+"I=I_s(e^{V/V_T}-1)"],
+
+["Transistors",
+"I_C=\\beta I_B"],
+
+["Circuits électroniques",
+"\\tau=RC"],
+
+["Capteurs",
+"S=\\frac{\\Delta s}{\\Delta m}"],
+
+["Signaux",
+"f_{ech}\\ge2f_{max}"],
+
+["Systèmes électriques et électroniques",
+"P=UI"]
+]
+]
+
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let signupMode = false;
+
+let heartbeatTimer = null;
+
+let adminTimer = null;
+
+
+/* =====================================================
+   UTILITAIRES
+===================================================== */
+
+function show(id){
+
+    document
+        .getElementById(id)
+        .classList
+        .remove("hidden");
+
+}
+
+
+function hide(id){
+
+    document
+        .getElementById(id)
+        .classList
+        .add("hidden");
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/[&<>"']/g, function(char){
+
+            const map = {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            };
+
+            return map[char];
+
+        });
+
+}
+
+
+/* =====================================================
+   CONNEXION / INSCRIPTION
+===================================================== */
+
+function toggleAuth(){
+
+    signupMode = !signupMode;
+
+    document.getElementById("authTitle")
+        .textContent =
+        signupMode
+        ? "Créer un compte"
+        : "Connexion";
+
+
+    document.getElementById("authButton")
+        .textContent =
+        signupMode
+        ? "Créer mon compte"
+        : "Se connecter";
+
+
+    document.getElementById("toggleText")
+        .textContent =
+        signupMode
+        ? "Vous avez déjà un compte ?"
+        : "Vous n'avez pas encore de compte ?";
+
+
+    document.getElementById("toggleLink")
+        .textContent =
+        signupMode
+        ? "Se connecter"
+        : "Créer un compte";
+
+
+    document.getElementById("authMessage")
+        .textContent = "";
+
+}
+
+
+async function authentication(){
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const message =
+        document
+        .getElementById("authMessage");
+
+
+    message.textContent = "";
+
+
+    if(!email || !password){
+
+        message.textContent =
+            "Remplissez tous les champs.";
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        message.textContent =
+            "Le mot de passe doit contenir au moins 6 caractères.";
+
+        return;
+
+    }
+
+
+    if(signupMode){
+
+        const {data,error} =
+            await supabaseClient.auth.signUp({
+
+                email:email,
+
+                password:password
+
+            });
+
+
+        if(error){
+
+            message.textContent =
+                error.message;
+
+            return;
+
+        }
+
+
+        message.style.color =
+            "var(--success)";
+
+        message.textContent =
+            "Compte créé. Vérifiez votre adresse e-mail si la confirmation est activée.";
+
+    }
+
+    else{
+
+        const {data,error} =
+            await supabaseClient.auth.signInWithPassword({
+
+                email:email,
+
+                password:password
+
+            });
+
+
+        if(error){
+
+            message.style.color =
+                "var(--danger)";
+
+            message.textContent =
+                error.message;
+
+            return;
+
+        }
+
+
+        await startApplication();
+
+    }
+
+}
+
+
+/* =====================================================
+   DÉMARRAGE APPLICATION
+===================================================== */
+
+async function startApplication(){
+
+    const {
+
+        data:{
+            user
+
+        }
+
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    hide("authSection");
+
+    show("appSection");
+
+    show("logoutButton");
+
+
+    if(
+        user.email &&
+        user.email.toLowerCase() ===
+        ADMIN_EMAIL.toLowerCase()
+    ){
+
+        show("studentsButton");
+
+    }
+
+
+    renderCurriculum();
+
+    await updateActivity(user.id);
+
+    startHeartbeat(user.id);
+
+}
+
+
+/* =====================================================
+   PROGRAMME
+===================================================== */
+
+function renderCurriculum(){
+
+    const container =
+        document.getElementById("curriculum");
+
+
+    container.innerHTML = "";
+
+
+    PROGRAM.forEach(function(chapter,index){
+
+        const chapterBox =
+            document.createElement("div");
+
+        chapterBox.className =
+            "chapter";
+
+
+        const title =
+            document.createElement("div");
+
+        title.innerHTML =
+            "<b>" +
+            chapter[0] +
+            " " +
+            chapter[1] +
+            "</b>";
+
+
+        const lessons =
+            document.createElement("div");
+
+        lessons.className =
+            "lesson-list";
+
+
+        chapter[2].forEach(function(lesson,indexLesson){
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "lesson";
+
+            item.textContent =
+                lesson[0];
+
+
+            item.onclick =
+                function(){
+
+                    openLesson(
+                        index,
+                        indexLesson
+                    );
+
+                };
+
+
+            lessons.appendChild(item);
+
+        });
+
+
+        title.onclick =
+            function(){
+
+                chapterBox
+                    .classList
+                    .toggle("open");
+
+            };
+
+
+        chapterBox.appendChild(title);
+
+        chapterBox.appendChild(lessons);
+
+        container.appendChild(chapterBox);
+
+    });
+
+}
+
+
+/* =====================================================
+   LEÇON
+===================================================== */
+
+function openLesson(chapterIndex,lessonIndex){
+
+    const chapter =
+        PROGRAM[chapterIndex];
+
+    const lesson =
+        chapter[2][lessonIndex];
+
+
+    document
+        .getElementById("lessonTitle")
+        .textContent =
+        lesson[0];
+
+
+    document
+        .getElementById("lessonTag")
+        .textContent =
+        chapter[0] +
+        " " +
+        chapter[1] +
+        " — Leçon " +
+        (lessonIndex+1);
+
+
+    document
+        .getElementById("lessonContent")
+        .innerHTML =
+
+        `
+        <p style="color:var(--muted)">
+            Formule clé
+        </p>
+
+        <div class="formula">
+            $$${lesson[1]}$$
+        </div>
+
+        <h3 style="margin:20px 0 10px">
+            Cours
+        </h3>
+
+        <p style="line-height:1.8">
+            Le contenu détaillé de cette leçon
+            peut être ajouté ici : explication,
+            exemples, exercices et corrections.
+        </p>
+        `;
+
+
+    if(window.renderMathInElement){
+
+        renderMathInElement(
+            document.getElementById("lessonContent"),
+            {
+                delimiters:[
+                    {
+                        left:"$$",
+                        right:"$$",
+                        display:true
+                    }
+                ],
+
+                throwOnError:false
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ACTIVITÉ ÉTUDIANT
+===================================================== */
+
+async function updateActivity(userId){
+
+    const {error} =
+        await supabaseClient
+        .from("profiles")
+        .update({
+
+            last_seen:
+                new Date().toISOString()
+
+        })
+        .eq(
+            "id",
+            userId
+        );
+
+
+    if(error){
+
+        console.error(
+            "Erreur activité :",
+            error
+        );
+
+    }
+
+}
+
+
+function startHeartbeat(userId){
+
+    clearInterval(
+        heartbeatTimer
+    );
+
+
+    heartbeatTimer =
+        setInterval(
+
+            function(){
+
+                updateActivity(
+                    userId
+                );
+
+            },
+
+            30000
+
+        );
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+async function openAdmin(){
+
+    const {
+
+        data:{
+            user
+
+        }
+
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    if(
+        user.email.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+    ){
+
+        alert(
+            "Accès administrateur refusé."
+        );
+
+        return;
+
+    }
+
+
+    hide("appSection");
+
+    show("adminSection");
+
+
+    await loadStudents();
+
+
+    clearInterval(
+        adminTimer
+    );
+
+
+    adminTimer =
+        setInterval(
+
+            loadStudents,
+
+            15000
+
+        );
+
+}
+
+
+/* =====================================================
+   LISTE DES ÉTUDIANTS
+===================================================== */
+
+async function loadStudents(){
+
+    const {
+
+        data,
+        error
+
+    } =
+    await supabaseClient
+        .from("profiles")
+        .select(
+            "id,email,full_name,created_at,last_seen"
+        )
+        .order(
+            "last_seen",
+            {
+                ascending:false
+            }
+        );
+
+
+    const table =
+        document.getElementById(
+            "studentsTable"
+        );
+
+
+    if(error){
+
+        table.innerHTML =
+
+            `
+            <tr>
+                <td colspan="5">
+                    Erreur :
+                    ${escapeHTML(error.message)}
+                </td>
+            </tr>
+            `;
+
+        return;
+
+    }
+
+
+    const students =
+        data || [];
+
+
+    document
+        .getElementById(
+            "totalStudents"
+        )
+        .textContent =
+        students.length;
+
+
+    const now =
+        Date.now();
+
+
+    const active =
+        students.filter(function(student){
+
+            if(!student.last_seen){
+
+                return false;
+
+            }
+
+
+            const difference =
+                now -
+                new Date(
+                    student.last_seen
+                ).getTime();
+
+
+            return difference < 90000;
+
+        });
+
+
+    document
+        .getElementById(
+            "activeStudents"
+        )
+        .textContent =
+        active.length;
+
+
+    if(
+        students.length &&
+        students[0].last_seen
+    ){
+
+        document
+            .getElementById(
+                "lastActivity"
+            )
+            .textContent =
+            new Date(
+                students[0].last_seen
+            ).toLocaleString();
+
+    }
+
+
+    table.innerHTML =
+        students
+        .map(function(student){
+
+            const isOnline =
+                student.last_seen &&
+                (
+                    now -
+                    new Date(
+                        student.last_seen
+                    ).getTime()
+                ) < 90000;
+
+
+            return `
+
+            <tr>
+
+                <td>
+                    ${escapeHTML(
+                        student.email
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        student.full_name ||
+                        "—"
+                    )}
+                </td>
+
+                <td>
+                    ${formatDate(
+                        student.created_at
+                    )}
+                </td>
+
+                <td>
+                    ${formatDate(
+                        student.last_seen
+                    )}
+                </td>
+
+                <td class="${
+                    isOnline
+                    ? "online"
+                    : "offline"
+                }">
+
+                    ${
+                        isOnline
+                        ? "● En ligne"
+                        : "○ Hors ligne"
+                    }
+
+                </td>
+
+            </tr>
+
+            `;
+
+        })
+        .join("");
+
+}
+
+
+function formatDate(date){
+
+    if(!date){
+
+        return "—";
+
+    }
+
+
+    return new Date(
+        date
+    ).toLocaleString();
+
+}
+
+
+/* =====================================================
+   DÉCONNEXION
+===================================================== */
+
+async function logout(){
+
+    clearInterval(
+        heartbeatTimer
+    );
+
+    clearInterval(
+        adminTimer
+    );
+
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   VÉRIFICATION SESSION AU CHARGEMENT
+===================================================== */
+
+async function checkSession(){
+
+    const {
+
+        data:{
+            session
+
+        }
+
+    } =
+    await supabaseClient
+        .auth
+        .getSession();
+
+
+    if(session){
+
+        await startApplication();
+
+    }
+
+}
+
+
+checkSession();
+
+
+/* =====================================================
+   SURVEILLANCE AUTHENTIFICATION
+===================================================== */
+
+supabaseClient
+    .auth
+    .onAuthStateChange(
+
+        function(event,session){
+
+            if(
+                event === "SIGNED_OUT"
+            ){
+
+                location.reload();
+
+            }
+
+        }
+
+    );
+
+</script>
+
+</body>
+</html>
+```
