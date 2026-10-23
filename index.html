@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -411,17 +410,13 @@ th{
 
 <script>
 
-const SUPABASE_URL = "TON_URL_SUPABASE";
+const SUPABASE_URL = "https://oxvirqfwrzmhbzdqxocw.supabase.co";
 
-const SUPABASE_ANON_KEY = "TA_CLE_ANON";
+const SUPABASE_ANON_KEY = "sb_publishable_sUtA1i06bv7Pxn3Ghhyhiw_OGP4uFs-";
 
-const ADMIN_EMAIL = "TON_EMAIL_ADMIN";
+const configured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 20;
 
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+const supabaseClient = configured ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 </script>
 
@@ -437,6 +432,8 @@ const supabaseClient =
     </div>
 
     <div class="header-buttons">
+
+        <button id="backButton" class="btn hidden" onclick="closeAdmin()">← Retour au cours</button>
 
         <button
             id="studentsButton"
@@ -474,6 +471,11 @@ const supabaseClient =
     <p>
         Accédez au programme complet de Physique Générale.
     </p>
+
+    <div class="field hidden" id="nameField">
+        <label>Nom complet</label>
+        <input id="fullName" type="text" autocomplete="name">
+    </div>
 
     <div class="field">
 
@@ -1078,10 +1080,24 @@ function toggleAuth(){
     document.getElementById("authMessage")
         .textContent = "";
 
+
+    document.getElementById("nameField").classList.toggle("hidden", !signupMode);
+
+    document.getElementById("password").autocomplete = signupMode ? "new-password" : "current-password";
+
 }
 
 
 async function authentication(){
+
+    if(!supabaseClient){
+
+        document.getElementById("authMessage").textContent = "Configuration manquante : renseignez vos clés Supabase.";
+
+        return;
+
+    }
+
 
     const email =
         document
@@ -1103,6 +1119,10 @@ async function authentication(){
 
 
     message.textContent = "";
+
+    message.style.color = "var(--danger)";
+
+    const nom = document.getElementById("fullName").value.trim();
 
 
     if(!email || !password){
@@ -1132,7 +1152,9 @@ async function authentication(){
 
                 email:email,
 
-                password:password
+                password:password,
+
+                options:{ data:{ full_name: nom } }
 
             });
 
@@ -1147,11 +1169,25 @@ async function authentication(){
         }
 
 
-        message.style.color =
-            "var(--success)";
+        if(data.user && data.user.identities && data.user.identities.length === 0){
 
-        message.textContent =
-            "Compte créé. Vérifiez votre adresse e-mail si la confirmation est activée.";
+            message.textContent = "Cet e-mail a déjà un compte. Connectez-vous.";
+
+            return;
+
+        }
+
+        if(data.session){
+
+            await startApplication();
+
+            return;
+
+        }
+
+        message.style.color = "var(--success)";
+
+        message.textContent = "Compte créé. Ouvrez le lien reçu par e-mail, puis connectez-vous.";
 
     }
 
@@ -1218,11 +1254,9 @@ async function startApplication(){
     show("logoutButton");
 
 
-    if(
-        user.email &&
-        user.email.toLowerCase() ===
-        ADMIN_EMAIL.toLowerCase()
-    ){
+    const adminCheck = await supabaseClient.rpc("is_admin");
+
+    if(adminCheck.data === true){
 
         show("studentsButton");
 
@@ -1485,10 +1519,9 @@ async function openAdmin(){
     }
 
 
-    if(
-        user.email.toLowerCase() !==
-        ADMIN_EMAIL.toLowerCase()
-    ){
+    const adminCheck = await supabaseClient.rpc("is_admin");
+
+    if(adminCheck.data !== true){
 
         alert(
             "Accès administrateur refusé."
@@ -1502,6 +1535,10 @@ async function openAdmin(){
     hide("appSection");
 
     show("adminSection");
+
+    show("backButton");
+
+    hide("studentsButton");
 
 
     await loadStudents();
@@ -1520,6 +1557,21 @@ async function openAdmin(){
             15000
 
         );
+
+}
+
+
+function closeAdmin(){
+
+    clearInterval(adminTimer);
+
+    hide("adminSection");
+
+    hide("backButton");
+
+    show("appSection");
+
+    show("studentsButton");
 
 }
 
@@ -1544,7 +1596,7 @@ async function loadStudents(){
         .order(
             "last_seen",
             {
-                ascending:false
+                ascending:false, nullsFirst:false
             }
         );
 
@@ -1772,14 +1824,25 @@ async function checkSession(){
 }
 
 
-checkSession();
+["email","password"].forEach(function(id){
+
+    document.getElementById(id).addEventListener("keydown", function(e){
+
+        if(e.key === "Enter") authentication();
+
+    });
+
+});
+
+
+if(supabaseClient) checkSession();
 
 
 /* =====================================================
    SURVEILLANCE AUTHENTIFICATION
 ===================================================== */
 
-supabaseClient
+if(supabaseClient) supabaseClient
     .auth
     .onAuthStateChange(
 
@@ -1801,4 +1864,3 @@ supabaseClient
 
 </body>
 </html>
-```
