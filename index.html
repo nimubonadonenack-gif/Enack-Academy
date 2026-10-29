@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enack-Academy | Plateforme Académique de Physique Général</title>
 
-<title>Enack-Academy | Physique Générale</title>
-
-<!-- KATEX POUR LES FORMULES -->
+<!-- KATEX (Formules mathématiques et physiques) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
-<style>
+<!-- FontAwesome pour icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<style>
 :root{
     --bg:#0b132b;
     --secondary:#1c2541;
@@ -23,7 +24,7 @@
     --muted:#9aa6bd;
     --danger:#ef233c;
     --success:#52b788;
-    --border:rgba(255,255,255,.12);
+    --border:rgba(255,255,255,.15);
 }
 
 *{
@@ -35,188 +36,392 @@
 body{
     background:var(--bg);
     color:var(--text);
-    font-family:Arial,sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height:100vh;
+    scroll-behavior: smooth;
 }
 
-button,
-input,
-select{
+button, input, select{
     font:inherit;
 }
 
 button{
     cursor:pointer;
+    border:none;
+    outline:none;
+    transition: all 0.3s ease;
 }
 
 .hidden{
     display:none !important;
 }
 
-/* HEADER */
-
+/* HEADER & NAVBAR */
 header{
-    height:68px;
-    background:var(--secondary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height:70px;
+    background:rgba(28, 37, 65, 0.95);
+    backdrop-filter: blur(10px);
     border-bottom:1px solid var(--border);
-
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    padding:0 20px;
+    padding:0 30px;
 }
 
 .brand{
-    font-size:22px;
+    font-size:24px;
     font-weight:800;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .brand span{
     color:var(--gold);
 }
 
-.header-buttons{
-    display:flex;
-    gap:8px;
+nav.nav-links{
+    display: flex;
+    gap: 25px;
+    align-items: center;
 }
 
-.btn{
-    background:var(--card);
-    color:var(--text);
-    border:1px solid var(--border);
-
-    padding:9px 13px;
-    border-radius:8px;
+nav.nav-links a{
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
 }
 
-.btn:hover{
-    border-color:var(--gold);
+nav.nav-links a:hover{
+    color: var(--blue);
+}
+
+.nav-controls{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lang-select{
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .btn-primary{
-    background:var(--gold);
-    color:#111;
-    border:none;
-    font-weight:bold;
+    background: var(--gold);
+    color: #000;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 8px;
 }
 
-/* AUTH */
-
-.auth{
-    width:92%;
-    max-width:430px;
-
-    margin:60px auto;
-
-    background:var(--secondary);
-    border:1px solid var(--border);
-    border-radius:14px;
-
-    padding:28px;
+.btn-primary:hover{
+    background: #e0a700;
+    transform: translateY(-2px);
 }
 
-.auth h1{
-    text-align:center;
-    color:var(--gold);
-    margin-bottom:8px;
+.btn-outline{
+    background: transparent;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
-.auth p{
-    text-align:center;
-    color:var(--muted);
-    margin-bottom:20px;
+.btn-outline:hover{
+    background: rgba(72, 202, 228, 0.1);
 }
 
-.field{
-    margin-bottom:15px;
+.user-badge{
+    background: var(--card);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.field label{
-    display:block;
-    color:var(--muted);
-    margin-bottom:6px;
+/* HERO SECTION */
+.hero{
+    padding: 80px 20px 50px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.field input{
-    width:100%;
-    padding:12px;
-
-    background:var(--card);
-    color:var(--text);
-
-    border:1px solid var(--border);
-    border-radius:8px;
-
-    outline:none;
+.hero h1{
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    line-height: 1.2;
 }
 
-.field input:focus{
-    border-color:var(--blue);
+.hero p.welcome-msg{
+    font-size: 1.25rem;
+    color: var(--blue);
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-.auth-main-button{
-    width:100%;
-    padding:12px;
-
-    background:var(--gold);
-    color:#111;
-
-    border:0;
-    border-radius:8px;
-
-    font-weight:bold;
+.hero p.definition{
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 35px;
 }
 
-.message{
-    min-height:22px;
-    margin:8px 0;
-
-    color:var(--danger);
-    text-align:center;
+/* CHAPTER CARDS IN LANDSCAPE MODE */
+.section-title{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--gold);
+    margin: 40px 0 30px;
 }
 
-.toggle{
-    margin-top:18px;
-    text-align:center;
+.chapters-landscape-container{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
 }
 
-.toggle a{
-    color:var(--blue);
-    cursor:pointer;
+.chapter-landscape-card{
+    background: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-/* APPLICATION */
+.chapter-landscape-card:hover{
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
 
+.chapter-landscape-img-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: var(--card);
+}
+
+.chapter-landscape-img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.chapter-landscape-badge{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(11, 19, 43, 0.85);
+    backdrop-filter: blur(4px);
+    color: var(--gold);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid var(--border);
+}
+
+.chapter-landscape-content{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chapter-landscape-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.chapter-landscape-title{
+    font-size: 1.35rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.chapter-landscape-desc{
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.chapter-lessons-chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.lesson-chip{
+    background: var(--card);
+    color: var(--blue);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(72, 202, 228, 0.2);
+}
+
+/* FAQ SECTION */
+.faq-section{
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+}
+
+.faq-item{
+    background: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.faq-question{
+    padding: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+}
+
+.faq-answer{
+    padding: 0 20px 20px;
+    color: var(--muted);
+    line-height: 1.7;
+    display: none;
+}
+
+.faq-item.active .faq-answer{
+    display: block;
+}
+
+.faq-item.active .faq-question{
+    color: var(--gold);
+}
+
+/* MODAL LOGIN */
+.modal-overlay{
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content{
+    background: var(--secondary);
+    border: 1px solid var(--border);
+    padding: 35px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+}
+
+.modal-content h2{
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group{
+    margin-bottom: 18px;
+}
+
+.form-group label{
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.form-group input{
+    width: 100%;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+}
+
+.form-group input:focus{
+    border-color: var(--blue);
+    outline: none;
+}
+
+.close-modal{
+    position: absolute;
+    top: 15px; right: 15px;
+    background: none;
+    color: var(--muted);
+    font-size: 1.2rem;
+}
+
+/* APPLICATION LESSONS LAYOUT */
 .app-layout{
     display:grid;
-    grid-template-columns:300px 1fr;
-
-    min-height:calc(100vh - 68px);
+    grid-template-columns:320px 1fr;
+    min-height:calc(100vh - 70px);
 }
 
 .sidebar{
     background:var(--secondary);
     border-right:1px solid var(--border);
-
     overflow-y:auto;
     padding:15px;
+    max-height:calc(100vh - 70px);
 }
 
 .sidebar h2{
     color:var(--gold);
-    margin-bottom:12px;
+    margin-bottom:15px;
+    font-size:1.1rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
 }
 
-.chapter{
+.chapter-item{
     padding:12px;
-
     border-bottom:1px solid var(--border);
-
     cursor:pointer;
+    border-radius: 6px;
 }
 
-.chapter:hover{
+.chapter-item:hover{
     background:var(--card);
 }
 
@@ -225,696 +430,597 @@ header{
     margin-top:8px;
 }
 
-.chapter.open .lesson-list{
+.chapter-item.open .lesson-list{
     display:block;
 }
 
-.lesson{
-    padding:9px 8px 9px 20px;
-
+.lesson-subitem{
+    padding:8px 8px 8px 15px;
     color:var(--muted);
-
     border-radius:6px;
+    font-size:0.9rem;
+    margin-top: 4px;
 }
 
-.lesson:hover{
+.lesson-subitem:hover{
     background:var(--card);
     color:var(--blue);
 }
 
-/* MAIN */
-
-.main{
-    padding:25px;
-    overflow:auto;
+.main-content{
+    padding:30px;
+    overflow-y:auto;
+    max-height:calc(100vh - 70px);
 }
 
-.card{
+.lesson-card{
     background:var(--secondary);
-
     border:1px solid var(--border);
     border-radius:14px;
-
-    padding:25px;
+    padding:35px;
 }
 
-.card h1{
+/* BANNIÈRE BANNER SOURCES OBLIGATOIRE SUR CHAQUE LEÇON */
+.sources-header-box {
+    background: rgba(72, 202, 228, 0.1);
+    border: 1px solid var(--blue);
+    border-left: 5px solid var(--gold);
+    padding: 14px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sources-header-box i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.lesson-card h1{
     color:var(--gold);
     margin-bottom:10px;
+    font-size:2rem;
 }
 
 .tag{
     color:var(--muted);
     margin-bottom:20px;
+    font-size:0.95rem;
 }
 
 .formula{
     background:var(--card);
-
-    border-left:4px solid var(--blue);
-
-    padding:20px;
-
+    border-left:4px solid var(--gold);
+    padding:18px;
     margin:20px 0;
-
     text-align:center;
-
-    overflow:auto;
+    font-size:1.2rem;
+    border-radius:0 8px 8px 0;
 }
 
-/* MOBILE */
+.course-text p {
+    line-height: 1.8;
+    margin-bottom: 16px;
+    color: var(--text);
+    text-align: justify;
+}
 
-@media(max-width:760px){
+.illustration-box {
+    margin: 25px 0;
+    text-align: center;
+    background: var(--card);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
 
-    .app-layout{
-        grid-template-columns:1fr;
+.illustration-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    max-height: 320px;
+    object-fit: contain;
+}
+
+.illustration-box p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+.example-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.example-box h3 {
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+footer{
+    background: var(--secondary);
+    border-top: 1px solid var(--border);
+    padding: 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+@media(max-width:900px){
+    .chapter-landscape-card{
+        grid-template-columns: 1fr;
     }
-
-    .sidebar{
-        max-height:42vh;
-    }
-
-    .main{
-        padding:15px;
+    .chapter-landscape-img-container{
+        height: 180px;
     }
 }
 
+@media(max-width:768px){
+    header{ padding: 0 15px; }
+    nav.nav-links{ display: none; }
+    .app-layout{ grid-template-columns:1fr; }
+    .sidebar{ max-height:40vh; }
+    .main-content{ padding:15px; }
+    .hero h1{ font-size: 2rem; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
+<!-- HEADER UNIFIÉ -->
 <header>
-
-    <div class="brand">
+    <div class="brand" onclick="showView('homeView')">
+        <i class="fa-solid fa-atom" style="color:var(--gold);"></i>
         ENACK-<span>ACADEMY</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#" onclick="showView('homeView')"><i class="fa-solid fa-house"></i> <span data-i18n="navHome">Accueil</span></a>
+        <a href="#chaptersSection" onclick="showView('homeView')"><i class="fa-solid fa-book-open"></i> <span data-i18n="navChapters">Chapitres</span></a>
+        <a href="#faqSection" onclick="showView('homeView')"><i class="fa-solid fa-circle-question"></i> <span data-i18n="navFaq">FAQs</span></a>
+        <a href="#" onclick="showView('appView')"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="navPlatform">Espace Cours</span></a>
+    </nav>
+
+    <div class="nav-controls">
+        <select class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="fr">🇫🇷 FR</option>
+            <option value="en">🇬🇧 EN</option>
+        </select>
+
+        <div id="authContainer">
+            <button class="btn-primary" onclick="openLoginModal()" data-i18n="btnLogin">Se connecter</button>
+        </div>
     </div>
 </header>
 
+<!-- VUE 1 : LANDING PAGE / PAGE D'ACCUEIL -->
+<div id="homeView">
+    <section class="hero">
+        <p class="welcome-msg" data-i18n="welcomeMsg">👋 Bienvenue à tous les étudiants et passionnés de Physique !</p>
+        <h1 data-i18n="heroTitle">Maîtrisez la Physique Générale de la Mécanique à l'Électronique</h1>
+        <p class="definition" data-i18n="heroDef">
+            <strong>Enack-Academy</strong> est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.
+        </p>
+        <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+            <button class="btn-primary" onclick="showView('appView')" style="font-size:1.1rem; padding:12px 28px;">
+    <!-- GALERIE DES CHAPITRES EN MODE PAYSAGE -->
+    <section id="chaptersSection">
+        <h2 class="section-title" data-i18n="titleChapters">📚 Les 10 Chapitres du Programme (Vue Paysage)</h2>
+        <div class="chapters-landscape-container" id="chaptersLandscapeList">
+            <!-- Injecté par JS sous forme de cartes Paysage avec images -->
+        </div>
+    </section>
 
-<!-- =====================================================
-     APPLICATION
-===================================================== -->
+    <!-- GALERIE DES CHAPITRES -->
+    <section id="chaptersSection">
+        <h2 class="section-title" data-i18n="titleChapters">📚 Les 10 Chapitres du Cursus</h2>
+        <div class="chapters-grid" id="chaptersCardsGrid">
+            <!-- Injecté par JS -->
+        </div>
+    </section>
 
-<section id="appSection">
-
-<div class="app-layout">
-
-    <aside class="sidebar">
-
-        <h2>
-            ⚛️ Programme
-        </h2>
-
-        <div id="curriculum">
+    <!-- SECTION FAQ -->
+    <section id="faqSection" class="faq-section">
+        <h2 class="section-title" data-i18n="titleFaq">❓ Foire Aux Questions (FAQ)</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ1">Comment accéder aux cours complets d'Enack-Academy ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" data-i18n="faqA1">
+                L'accès à l'intégralité du programme est libre. Il vous suffit de cliquer sur "Espace Cours" ou sur le chapitre de votre choix pour accéder à la plateforme d'étude interactive avec le menu latéral.
+            </div>
         </div>
 
-    </aside>
-
-
-    <main class="main">
-
-        <div class="card">
-
-            <h1 id="lessonTitle">
-                Bienvenue sur Enack-Academy
-            </h1>
-
-            <div id="lessonTag" class="tag">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ2">Quelles sont les sources et références utilisées ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
             </div>
-
-            <div id="lessonContent">
-
-                <p>
-                    Sélectionnez une leçon dans
-                    le menu pour commencer.
-                </p>
-
+            <div class="faq-answer" data-i18n="faqA2">
+                Tous nos cours sont rédigés selon les standards internationaux en nous appuyant sur les ouvrages de référence : Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, Berkeley Physics Course et les ressources scientifiques open-access du CERN et de l'UNESCO.
             </div>
-
         </div>
 
-    </main>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ3">Comment fonctionne la connexion étudiante ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" data-i18n="faqA3">
+                Cliquez sur "Se connecter", saisissez votre nom d'utilisateur et votre adresse email étudiante (ex. nom@student.com). Cela personnalise votre session d'apprentissage et enregistre votre profil.
+            </div>
+        </div>
 
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ4">Les formules mathématiques sont-elles correctement affichées ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" data-i18n="faqA4">
+                Oui, Enack-Academy intègre le moteur de rendu KaTeX de haute précision pour un rendu fluide et élégant de toutes les équations différentielles, intégrales et expressions vectorielles.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Enack-Academy. Tous droits réservés. Plateforme internationale d'enseignement de la Physique.</p>
+    </footer>
 </div>
 
-</section>
+<!-- VUE 2 : ESPACE DE COURS INTERACTIF -->
+<div id="appView" class="hidden">
+    <div class="app-layout">
+        <aside class="sidebar">
+            <h2 data-i18n="sidebarTitle">⚛️ Programme Officiel</h2>
+            <div id="curriculum"></div>
+        </aside>
 
+        <main class="main-content">
+            <div class="lesson-card">
+                <!-- Mention stricte des sources -->
+                <div class="sources-header-box">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <div>
+                        <strong>Sources & Références Académiques :</strong> 
+                        <span>Halliday & Resnick - Fundamentals of Physics | Feynman Lectures on Physics | CERN & UNESCO Open Educational Resources</span>
+                    </div>
+                </div>
+
+                <h1 id="lessonTitle">Bienvenue sur Enack-Academy</h1>
+                <div id="lessonTag" class="tag">Plateforme académique de Physique Générale</div>
+                <div id="lessonContent">
+                    <p style="line-height: 1.8;">Sélectionnez une leçon dans le menu latéral pour afficher le cours détaillé, les formules fondamentales, les illustrations et les exercices d'application corrigés.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
+        <h2 data-i18n="modalTitle">🎓 Connexion Étudiant</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label data-i18n="lblUsername">Nom d'utilisateur :</label>
+                <input type="text" id="loginUsername" required placeholder="ex. Jean Dupont">
+            </div>
+            <div class="form-group">
+                <label data-i18n="lblEmail">Email Étudiant (@student.com) :</label>
+                <input type="email" id="loginEmail" required placeholder="exemple@student.com" pattern=".*@student\.com$" title="L'email doit se terminer par @student.com">
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%; margin-top:10px;" data-i18n="btnSubmitLogin">Valider la connexion</button>
+        </form>
+    </div>
+</div>
 
 <script>
-
 /* =====================================================
-   PROGRAMME DE PHYSIQUE
+   PROGRAMME OFFICIEL (10 CHAPITRES COMPLET)
 ===================================================== */
-
 const PROGRAM = [
-
 [
-"⚙️",
-"Mécanique",
+"⚙️", "Mécanique",
 [
-["Cinématique", "\\vec v=\\frac{d\\vec r}{dt},\\ \\vec a=\\frac{d\\vec v}{dt}"],
-["Dynamique", "\\sum\\vec F=m\\vec a"],
-["Travail, énergie et puissance", "W=\\int\\vec F\\cdot d\\vec r,\\ P=\\frac{dW}{dt}"],
-["Quantité de mouvement", "\\vec p=m\\vec v"],
-["Gravitation", "F=G\\frac{m_1m_2}{r^2}"],
-["Projectiles et satellites", "v=\\sqrt{\\frac{GM}{r}}"],
-["Oscillations et pendules", "T=2\\pi\\sqrt{\\frac{L}{g}}"]
+["Cinématique", "\\vec{v} = \\frac{d\\vec{r}}{dt}, \\quad \\vec{a} = \\frac{d\\vec{v}}{dt}"],
+["Dynamique", "\\sum \\vec{F} = m \\cdot \\vec{a}"],
+["Travail, énergie et puissance", "W_{AB} = \\int_{A}^{B} \\vec{F} \\cdot d\\vec{r}, \\quad P = \\vec{F} \\cdot \\vec{v}"],
+["Quantité de mouvement", "\\vec{p} = m \\cdot \\vec{v}, \\quad \\sum \\vec{F} = \\frac{d\\vec{p}}{dt}"],
+["Gravitation", "F = G \\frac{m_1 m_2}{r^2}"],
+["Mouvements des projectiles, satellites", "v = \\sqrt{\\frac{GM}{r}}, \\quad T = 2\\pi \\sqrt{\\frac{r^3}{GM}}"],
+["Oscillations et pendules", "T = 2\\pi \\sqrt{\\frac{m}{k}}, \\quad T = 2\\pi \\sqrt{\\frac{L}{g}}"]
 ]
 ],
-
 [
-"🌡️",
-"Thermodynamique",
+"🌡️", "Thermodynamique",
 [
-["Température et chaleur", "Q=mc\\Delta T"],
-["Gaz parfaits", "PV=nRT"],
-["Travail et énergie thermique", "W=-\\int P\\,dV"],
-["Lois de la thermodynamique", "\\Delta U=Q-W"],
-["Machines thermiques", "\\eta=1-\\frac{T_f}{T_c}"],
-["Changements d'état", "Q=mL"]
+["Température et chaleur", "Q = m \\cdot c \\cdot \\Delta T"],
+["Gaz parfaits", "P \\cdot V = n \\cdot R \\cdot T"],
+["Travail et énergie thermique", "W = -\\int P \\, dV"],
+["Lois de la thermodynamique", "\\Delta U = Q + W"],
+["Machines thermiques", "\\eta = 1 - \\frac{T_f}{T_c}"],
+["Changements d'état", "Q = m \\cdot L"]
 ]
 ],
-
 [
-"⚡",
-"Électricité",
+"⚡", "Électricité",
 [
-["Charge électrique", "F=k\\frac{q_1q_2}{r^2}"],
-["Champ électrique", "\\vec E=\\frac{\\vec F}{q}"],
-["Potentiel et tension", "U=V_A-V_B"],
-["Courant électrique", "I=\\frac{dQ}{dt}"],
-["Résistance et loi d'Ohm", "U=RI"],
-["Lois de Kirchhoff", "\\sum I=0,\\ \\sum U=0"],
-["Condensateurs", "Q=CU"],
-["Énergie et puissance électriques", "P=UI=RI^2"]
+["Charge électrique", "F = k \\frac{q_1 q_2}{r^2}"],
+["Champ électrique", "\\vec{E} = \\frac{\\vec{F}}{q}"],
+["Potentiel et tension", "U = V_A - V_B"],
+["Courant électrique", "I = \\frac{dQ}{dt}"],
+["Résistance et loi d'Ohm", "U = R \\cdot I"],
+["Lois de Kirchhoff", "\\sum I = 0, \\quad \\sum U = 0"],
+["Condensateurs", "Q = C \\cdot U"],
+["Énergie et puissance électriques", "P = U \\cdot I = R \\cdot I^2"]
 ]
 ],
-
 [
-"🧲",
-"Magnétisme",
+"🧲", "Magnétisme",
 [
-["Champ magnétique", "B=\\frac{\\mu_0 I}{2\\pi r}"],
-["Force magnétique", "F=qvB\\sin\\theta"],
-["Force de Lorentz", "\\vec F=q(\\vec E+\\vec v\\times\\vec B)"],
-["Force de Laplace", "\\vec F=I\\vec L\\times\\vec B"],
-["Champ créé par un courant", "\\oint\\vec B\\cdot d\\vec l=\\mu_0I"],
-["Induction électromagnétique", "e=-\\frac{d\\Phi}{dt}"],
-["Électroaimants", "B=\\mu_0nI"]
+["Champ magnétique", "B = \\frac{\\mu_0 I}{2\\pi r}"],
+["Force magnétique", "F = qvB\\sin(\\theta)"],
+["Force de Lorentz", "\\vec{F} = q(\\vec{E} + \\vec{v} \\times \\vec{B})"],
+["Force de Laplace", "\\vec{F} = I\\vec{L} \\times \\vec{B}"],
+["Théorème d'Ampère", "\\oint \\vec{B} \\cdot d\\vec{l} = \\mu_0 I"],
+["Induction électromagnétique", "e = -\\frac{d\\Phi}{dt}"],
+["Électroaimants", "B = \\mu_0 n I"]
 ]
 ],
-
 [
-"🔌",
-"Électromagnétisme",
+"🔌", "Électromagnétisme",
 [
-["Relations électricité-magnétisme", "\\nabla\\times\\vec E=-\\frac{\\partial\\vec B}{\\partial t}"],
-["Induction", "e=-L\\frac{di}{dt}"],
-["Flux magnétique", "\\Phi=BS\\cos\\theta"],
-["Lois de Faraday et Lenz", "e=-\\frac{d\\Phi}{dt}"],
-["Ondes électromagnétiques", "c=\\frac1{\\sqrt{\\mu_0\\varepsilon_0}}"],
-["Transformateurs", "\\frac{U_2}{U_1}=\\frac{N_2}{N_1}"]
+["Relations électricité-magnétisme", "\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}"],
+["Induction et flux", "\\Phi = B \\cdot S \\cdot \\cos(\\theta)"],
+["Lois de Faraday et Lenz", "e = -\\frac{d\\Phi}{dt}"],
+["Ondes électromagnétiques", "c = \\frac{1}{\\sqrt{\\mu_0 \\varepsilon_0}}"],
+["Transformateurs", "\\frac{U_2}{U_1} = \\frac{N_2}{N_1}"]
 ]
 ],
-
 [
-"🔭",
-"Optique",
+"🔭", "Optique",
 [
-["Propagation de la lumière", "n=\\frac cv"],
-["Réflexion", "i=r"],
-["Réfraction", "n_1\\sin i_1=n_2\\sin i_2"],
-["Lentilles", "\\frac1f=\\frac1p+\\frac1{p'}"],
-["Miroirs", "\\frac1f=\\frac1s+\\frac1{s'}"],
-["Instruments optiques", "G=\\frac{f_{obj}}{f_{oc}}"],
-["Interférences et diffraction", "a\\sin\\theta=m\\lambda"]
+["Propagation de la lumière", "n = \\frac{c}{v}"],
+["Réflexion et Réfraction", "n_1\\sin(i_1) = n_2\\sin(i_2)"],
+["Lentilles minces", "\\frac{1}{f'} = \\frac{1}{p'} - \\frac{1}{p}"],
+["Miroirs sphériques", "\\frac{1}{p'} + \\frac{1}{p} = \\frac{1}{f'}"],
+["Instruments optiques", "G = \\frac{\\alpha'}{\\alpha} \\approx \\frac{f'_{obj}}{f'_{oc}}"],
+["Interférences et diffraction", "a\\sin(\\theta) = m\\lambda, \\quad i = \\frac{\\lambda D}{a}"]
 ]
 ],
-
 [
-"🌊",
-"Ondes et vibrations",
+"🌊", "Ondes et vibrations",
 [
-["Mouvement oscillatoire", "x=A\\cos(\\omega t+\\varphi)"],
-["Ondes mécaniques", "y=A\\cos(\\omega t-kx)"],
-["Fréquence et période", "f=\\frac1T"],
-["Longueur d'onde", "\\lambda=vT"],
-["Propagation des ondes", "v=\\lambda f"],
-["Résonance", "f_0=\\frac1{2\\pi\\sqrt{LC}}"],
-["Effet Doppler", "f'=f\\frac{v\\pm v_o}{v\\mp v_s}"]
+["Mouvement oscillatoire", "x(t) = A\\cos(\\omega t + \\varphi)"],
+["Ondes mécaniques", "y(x,t) = A\\cos(\\omega t - kx)"],
+["Fréquence et période", "f = \\frac{1}{T}, \\quad \\lambda = v \\cdot T"],
+["Résonance", "f_0 = \\frac{1}{2\\pi\\sqrt{LC}}"],
+["Effet Doppler", "f' = f \\frac{v \\pm v_o}{v \\mp v_s}"]
 ]
 ],
-
 [
-"⚛️",
-"Physique moderne",
+"⚛️", "Physique moderne",
 [
-["Relativité", "E=mc^2"],
-["Physique quantique", "\\Delta x\\Delta p\\ge\\frac\\hbar2"],
-["Effet photoélectrique", "E_c=hf-W_0"],
-["Modèle atomique", "E_n=-\\frac{13.6}{n^2}\\ eV"],
-["Spectres", "\\Delta E=hf"],
-["Dualité onde-particule", "\\lambda=\\frac hp"]
+["Relativité restreinte", "E = m \\cdot c^2"],
+["Physique quantique", "\\Delta x \\cdot \\Delta p \\ge \\frac{\\hbar}{2}"],
+["Effet photoélectrique", "E_c = hf - W_0"],
+["Modèle atomique", "E_n = -\\frac{13.6}{n^2} \\text{ eV}"],
+["Dualité onde-particule", "\\lambda = \\frac{h}{p}"]
 ]
 ],
-
 [
-"☢️",
-"Physique nucléaire",
+"☢️", "Physique nucléaire",
 [
-["Noyau atomique", "{}^A_ZX"],
-["Radioactivité", "A=\\lambda N"],
-["Désintégration", "N(t)=N_0e^{-\\lambda t}"],
-["Demi-vie", "t_{1/2}=\\frac{\\ln2}{\\lambda}"],
-["Fission et fusion", "E=\\Delta mc^2"],
-["Énergie nucléaire", "E=\\Delta mc^2"]
+["Noyau atomique et isotopes", "{}^A_Z X"],
+["Radioactivité et désintégration", "N(t) = N_0 e^{-\\lambda t}"],
+["Demi-vie", "t_{1/2} = \\frac{\\ln(2)}{\\lambda}"],
+["Fission et fusion", "E = \\Delta m \\cdot c^2"]
 ]
 ],
-
 [
-"💻",
-"Physique appliquée / électronique",
+"💻", "Physique appliquée / électronique",
 [
-["Semi-conducteurs", "n_i^2=np"],
-["Diodes", "I=I_s(e^{V/V_T}-1)"],
-["Transistors", "I_C=\\beta I_B"],
-["Circuits électroniques", "\\tau=RC"],
-["Capteurs", "S=\\frac{\\Delta s}{\\Delta m}"],
-["Signaux", "f_{ech}\\ge2f_{max}"],
-["Systèmes électriques et électroniques", "P=UI"]
+["Semi-conducteurs", "n_i^2 = n \\cdot p"],
+["Diodes", "I = I_s (e^{V/V_T} - 1)"],
+["Transistors", "I_C = \\beta \\cdot I_B"],
+["Circuits et capteurs", "\\tau = R \\cdot C, \\quad S = \\frac{\\Delta s}{\\Delta m}"]
 ]
 ]
-
 ];
 
-
 /* =====================================================
-   TEXTES DES COURS
+   DICO DES TEXTES ET EXEMPLES DES COURS
 ===================================================== */
-
 const COURS_TEXTE = {
-
-// --- CHAPITRE 0 : MÉCANIQUE ---
-"0-0":[
-"La cinématique décrit le mouvement des corps dans l'espace en fonction du temps, indépendamment des forces qui le causent. Le vecteur position r(t) définit la localisation exacte d'un point matériel dans un référentiel donné. En dérivant ce vecteur par rapport au temps, on obtient le vecteur vitesse instantanée v(t), qui est toujours tangent à la trajectoire.",
-"L'accélération a(t) correspond à la dérivée temporelle du vecteur vitesse. Elle mesure non seulement le changement du module de la vitesse, mais aussi tout changement dans sa direction. Dans un mouvement rectiligne uniformément accéléré, l'accélération reste constante, ce qui conduit aux équations horaires classiques v = v₀ + at et x = x₀ + v₀t + ½at².",
-"Dans un espace tridimensionnel, l'analyse cinématique s'effectue en décomposant les équations selon trois axes orthogonaux indépendants. Cette méthode permet de traiter séparément les mouvements complexes, comme la chute libre ou le mouvement circulaire, en appliquant les outils du calcul différentiel et vectoriel."
-],
-"0-1":[
-"La dynamique étudie les relations entre le mouvement d'un corps et les actions mécaniques qu'il subit. La première loi de Newton, ou principe d'inertie, énonce que tout corps conserve son état de repos ou de mouvement rectiligne uniforme si la somme des forces extérieures qui s'exercent sur lui est nulle.",
-"La deuxième loi de Newton pose l'équation fondamentale ΣF = m·a. Elle stipule que l'accélération subie par un corps est directement proportionnelle à la résultante des forces appliquées et inversement proportionnelle à sa masse inertielle. Cette équation différentielle constitue la base du calcul des trajectoires mécaniques.",
-"La troisième loi de Newton, le principe d'action et de réaction, affirme que deux corps exercent l'un sur l'autre des forces égales en intensité mais de sens opposés. Ces forces s'appliquent simultanément sur deux objets distincts et interagissent via des champs de force ou des contacts directs."
-],
-"0-2":[
-"Le travail W d'une force décrit le transfert d'énergie associé au déplacement de son point d'application. Pour une force constante F sur un déplacement rectiligne d, le travail s'exprime par le produit scalaire W = F · d = F·d·cos(θ), où θ représente l'angle formé entre les deux vecteurs.",
-"Le théorème de l'énergie cinétique établit que la variation d'énergie cinétique d'un solide entre deux points est égale à la somme des travaux de toutes les forces extérieures et intérieures s'exerçant sur lui. Si les forces sont conservatives, cette énergie s'échange avec une énergie potentielle, maintenant constante l'énergie mécanique totale.",
-"La puissance mécanique P quantifie le débit de transfert d'énergie par unité de temps, soit P = dW/dt. En termes vectoriels, la puissance instantanée développée par une force F s'appliquant sur un corps animé d'une vitesse instantanée v s'écrit P = F · v."
-],
-"0-3":[
-"La quantité de mouvement p d'un point matériel de masse m animé d'une vitesse v est définie par le vecteur p = m·v. Cette grandeur vectorielle combine la masse d'un objet et sa vitesse, caractérisant son état d'inertie dynamique lors de déplacements.",
-"En utilisant la deuxième loi de Newton, la force résultante s'exprime comme la variation temporelle de la quantité de mouvement, ΣF = dp/dt. L'impulsion, qui est l'intégrale d'une force sur un intervalle de temps, est ainsi directement égale à la variation de la quantité de mouvement globale du système.",
-"Au sein d'un système isolé, exempt de forces extérieures résultantes, la quantité de mouvement totale demeure rigoureusement conservée lors des interactions internes. Ce principe permet d'analyser les collisions élastiques et inélastiques ainsi que les phénomènes de propulsion par réaction."
-],
-"0-4":[
-"La loi de la gravitation universelle énonce que deux masses ponctuelles s'attirent mutuellement avec une force proportionnelle au produit de leurs masses et inversement proportionnelle au carré de la distance qui les sépare. L'expression F = G·m₁m₂/r² intègre la constante gravitationnelle G.",
-"Cette interaction crée un champ gravitationnel vectoriel autour de toute distribution de masse. À la surface d'un astre, ce champ détermine l'accélération de la pesanteur g. L'énergie potentielle gravitationnelle associée s'écrit Ep = -G·m₁m₂/r, où la référence zéro est fixée à l'infini.",
-"La gravitation régit la structure à grande échelle de l'Univers. Elle maintient la cohésion des systèmes célestes et explique le mouvement des corps massifs au sein d'un puits de potentiel gravitationnel, posant ainsi les bases de la mécanique céleste classique."
-],
-"0-5":[
-"Le mouvement d'un projectile soumis à l'action de la pesanteur terrestre sans frottement est un mouvement à deux dimensions. L'accélération étant purement verticale et constante, la composante horizontale de la vitesse reste uniforme, tandis que la composante verticale évolue selon une trajectoire parabolique.",
-"Un satellite placé en orbite circulaire autour d'un astre massif subit une force gravitationnelle qui agit comme une force centripète pure. L'égalité entre la force gravitationnelle et l'accélération centripète impose une vitesse orbitale donnée par v = √(GM/r).",
-"La troisième loi de Kepler découle de cet équilibre : le carré de la période d'évolution orbitale est proportionnel au cube du demi-grand axe de l'orbite. Ce lien fondamental permet de calculer la masse des corps célestes et d'établir les conditions de mise en orbite géostationnaire."
-],
-"0-6":[
-"Un oscillateur harmonique simple est caractérisé par une force de rappel proportionnelle au déplacement par rapport à sa position d'équilibre, F = -k·x. Cette configuration donne lieu à une équation différentielle du second ordre dont la solution est une fonction sinusoïdale de fréquence propre ω₀ = √(k/m).",
-"Le pendule simple, constitué d'une masse suspendue à un fil inextensible, se comporte comme un oscillateur harmonique pour des amplitudes d'oscillation faibles. Sa période propre T dépend exclusivement de sa longueur L et de l'accélération de la pesanteur g, selon la formule T = 2π√(L/g).",
-"Dans un système oscillant non amorti, l'énergie mécanique totale permute continuellement entre l'énergie potentielle d'élasticité ou de pesanteur et l'énergie cinétique. En présence de frottements, l'énergie se dissipe sous forme thermique, conduisant à des oscillations amorties."
-],
-
-// --- CHAPITRE 1 : THERMODYNAMIQUE ---
-"1-0":[
-"La température est une grandeur intensive mesurant l'énergie cinétique moyenne d'agitation microscopique des atomes ou molécules formant un système. L'équilibre thermique entre deux corps en contact est atteint lorsque leurs températures s'égalisent, ce qui constitue le principe zéro de la thermodynamique.",
-"La chaleur Q désigne l'énergie thermique transférée entre deux systèmes en raison d'une différence de température. Ce transfert s'effectue spontanément du corps le plus chaud vers le corps le plus froid par conduction, convection ou rayonnement.",
-"La quantité de chaleur absorbée ou cédée par un corps de masse m subissant une variation de température ΔT dépend de sa capacité thermique massique c, selon la relation Q = m·c·ΔT. Cette constante caractérise la réponse thermique propre à chaque matériau."
-],
-"1-1":[
-"Un gaz parfait est un modèle théorique dans lequel les molécules sont assimilées à des points matériels sans volume propre, n'exerçant entre elles aucune force d'interaction à distance. Ce modèle décrit fidèlement le comportement des gaz réels à basse pression et haute température.",
-"L'état d'un gaz parfait est défini par quatre variables d'état liées par l'équation P·V = n·R·T, où P est la pression, V le volume, n la quantité de matière en moles, R la constante universelle des gaz parfaits et T la température absolue en Kelvins.",
-"Les lois historiques des gaz, notamment celles de Boyle-Mariotte, de Charles et de Gay-Lussac, constituent des cas particuliers de cette équation d'état globale lorsque l'une des variables fondamentales (température, pression ou volume) reste constante au cours de la transformation."
-],
-"1-2":[
-"Dans un système thermodynamique, le travail mécanique W échangé lors d'une variation de volume s'exprime sous forme différentielle par δW = -P_ext·dV. Lors d'une transformation réversible, la pression extérieure s'identifie à chaque instant à la pression interne du fluide.",
-"Pour une transformation finie modifiant le volume de V_i à V_f, le travail total s'obtient par l'intégration W = -∫ P dV. Ce travail correspond géométriquement à l'aire sous la courbe représentative de la transformation dans le diagramme de Watt ou de Clapeyron.",
-"L'énergie thermique interne U regroupe les énergies cinétiques et potentielles d'interaction de toutes les particules du système. Dans le cas d'un gaz parfait, l'énergie interne ne dépend que de la température absolue, conformément à la première loi de Joule."
-],
-"1-3":[
-"Le premier principe de la thermodynamique traduit la conservation globale de l'énergie. Pour un système fermé subissant une transformation, la variation d'énergie interne ΔU est égale à la somme du travail W et de la chaleur Q échangés avec le milieu extérieur, soit ΔU = W + Q.",
-"Le deuxième principe introduit la notion d'entropie S, grandeur d'état extensive mesurant le degré de désordre microscopique d'un système. Il énonce que l'entropie d'un système isolé ne peut qu'augmenter lors d'une transformation réelle irréversible.",
-"Le troisième principe, ou théorème de Nernst, établit que l'entropie de tout système en équilibre thermodynamique tend vers une valeur constante nulle lorsque sa température absolue approche le zéro absolu (0 Kelvin)."
-],
-"1-4":[
-"Une machine thermique est un dispositif dicyclique qui échange du travail et de la chaleur avec au moins deux sources thermiques à des températures différentes. Elle convertit une partie de la chaleur reçue de la source chaude en travail mécanique exploitable.",
-"Le rendement thermique η d'un moteur thermique est le rapport entre le travail net fourni et la chaleur absorbée de la source chaude. Selon le théorème de Carnot, aucun moteur ne peut avoir un rendement supérieur à celui d'un cycle réversible fonctionnant entre les deux mêmes températures.",
-"Le cycle de Carnot théorique est composé de deux transformations isothermes réversibles et de deux transformations adiabatiques réversibles. Son rendement maximal dépend uniquement des températures absolues des sources chaude T_c et froide T_f, s'exprimant par η = 1 - (T_f / T_c)."
-],
-"1-5":[
-"Un changement d'état, ou transition de phase, est une transformation physique au cours de laquelle une substance passe d'un état de la matière (solide, liquide, gaz) à un autre. Cette transformation s'effectue à température et pression constantes pour un corps pur.",
-"La Chaleur Latente L représente la quantité d'énergie thermique nécessaire pour faire changer d'état une unité de masse d'une substance. L'énergie échangée lors de la transition d'une masse m vaut Q = m·L, sans qu'aucune variation de température ne soit observée.",
-"Pendant une transition de phase, l'énergie thermique fournie n'augmente pas l'énergie cinétique d'agitation moléculaire, mais est entièrement consommée pour modifier les liaisons intermoléculaires ou vaincre les forces de cohésion de la phase initiale."
-],
-
-// --- CHAPITRE 2 : ÉLECTRICITÉ ---
-"2-0":[
-"La charge électrique est une propriété fondamentale de la matière engendrant les interactions électromagnétiques. Elle existe sous deux polarités, positive et négative. Le principe de conservation de la charge stipule que la charge électrique totale d'un système isolé reste constante.",
-"La loi de Coulomb régit la force d'interaction électrostatique entre deux charges ponctuelles q₁ et q₂ séparées par une distance r. L'expression vectorielle F = k·(q₁q₂/r²) r̂ indique que des charges de même signe se repoussent, tandis que des charges de signes opposés s'attirent.",
-"La charge électrique est quantifiée : toute charge libre dans l'Univers est un multiple entier de la charge élémentaire e ≈ 1,602×10⁻¹⁹ Coulombs, qui correspond à la valeur absolue de la charge portée par un électron ou un proton."
-],
-"2-1":[
-"Tout corps chargé crée dans l'espace environnant un champ électrique vectoriel E. Ce champ définit la force électrostatique subie par une charge test positive q placée en ce point, selon la relation fondamentale F = q·E.",
-"Le champ électrique créé par une charge ponctuelle est radial et décroît avec le carré de la distance. Pour une distribution de charges, le champ total en tout point s'obtient par la superposition vectorielle des champs individuels générés par chaque charge.",
-"Le théorème de Gauss relie le flux du champ électrique à travers une surface fermée à la somme des charges électriques contenues à l'intérieur de cette surface. Il constitue l'un des piliers de l'électrostatique pour calculer les champs à haute symétrie."
-],
-"2-2":[
-"Le potentiel électrique V en un point de l'espace représente l'énergie potentielle électrostatique par unité de charge positive située en ce point. Le champ électrique est orienté vers les potentiels décroissants et dérive d'un potentiel selon E = -∇V.",
-"La différence de potentiel entre deux points A et B, notée U = V_A - V_B, s'appelle la tension électrique. Elle mesure le travail fourni par le champ électrique pour déplacer une charge unitaire de A vers B.",
-"Dans un conducteur en équilibre électrostatique, le champ électrique interne est nul et la totalité du volume conducteur se trouve au même potentiel. Toutes les charges en excès se répartissent exclusivement sur la surface extérieure du conducteur."
-],
-"2-3":[
-"Le courant électrique représente le déplacement ordonné de porteurs de charges électriques au sein d'un milieu conducteur. L'intensité I du courant est le débit de charge à travers une section donnée par unité de temps, I = dQ/dt.",
-"Par convention historique, le sens du courant électrique est défini comme le sens de déplacement des charges positives, soit du potentiel le plus élevé vers le potentiel le plus bas, ce qui est opposé au déplacement réel des électrons dans un métal.",
-"La densité de courant vectorielle J caractérise le flux local de charges. Elle est liée à la vitesse de dérive v_d des porteurs et à leur concentration n par la relation J = n·q·v_d, reliant ainsi l'échelle microscopique au courant macroscopique."
-],
-"2-4":[
-"La résistance électrique R caractérise l'opposition d'un composant au passage du courant électrique. Pour un conducteur ohmique filiforme de longueur L, de section S et de résistivité ρ, la résistance s'exprime par R = ρ·L/S.",
-"La loi d'Ohm établit une relation linéaire directe entre la tension U aux bornes d'un dipôle ohmique et l'intensité I du courant qui le traverse, matérialisée par la formule classique U = R·I.",
-"La résistivité d'un matériau dépend de sa structure interne et augmente généralement avec la température dans les métaux en raison de la diffusion accrue des électrons par les vibrations du réseau cristallin."
-],
-"2-5":[
-"Les lois de Kirchhoff décrivent la distribution des courants et des tensions dans un réseau électrique. La loi des nœuds découle de la conservation de la charge : la somme algébrique des courants entrant dans un nœud est égale à la somme des courants qui en sortent.",
-"La loi des mailles dérive de la circulation conservative du champ électrostatique : la somme algébrique des différences de potentiel le long de n'importe quelle maille fermée d'un circuit est rigoureusement nulle.",
-"Ces deux lois permettent de poser un système d'équations algébriques linéaires dont la résolution donne l'ensemble des intensités et des potentiels inconnus dans les réseaux complexes à dipôles passifs et actifs."
-],
-"2-6":[
-"Un condensateur est constitué de deux armatures conductrices séparées par un milieu isolant appelé diélectrique. Lorsqu'une tension U est appliquée entre les armatures, le composant accumule une charge Q = C·U sur son armature positive et -Q sur son armature négative.",
-"La capacité C dépend uniquement de la géométrie des armatures et des propriétés du diélectrique. Pour un condensateur plan de surface S et d'épaisseur d, elle vaut C = ε·S/d, où ε est la permutivité diélectrique du milieu.",
-"Lors de sa charge, un condensateur emmagasine de l'énergie sous forme de champ électrique dans son diélectrique. Cette énergie potentielle électrostatique accumulée s'exprime par la relation E = ½·C·U²."
-],
-"2-7":[
-"La puissance électrique P consommée ou fournie par un dipôle sous une tension U et traversé par un courant I est donnée par le produit P = U·I. Dans un récepteur, cette puissance correspond au débit d'énergie reçue.",
-"L'effet Joule traduit la dissipation irréversible d'énergie électrique sous forme de chaleur lors du passage d'un courant dans un conducteur ohmique. La puissance dissipée s'écrit P = R·I² ou P = U²/R.",
-"L'énergie électrique totale E transférée pendant un intervalle de temps t s'obtient par l'intégration E = ∫ P dt. Dans le cas d'un régime permanent à puissance constante, cette énergie s'exprime simplement par E = P·t."
-],
-
-// --- CHAPITRE 3 : MAGNÉTISME ---
-"3-0":[
-"Un champ magnétique B est un champ vectoriel engendré par des charges électriques en mouvement ou par des moments magnétiques intrinsèques liés au spin des particules. Il exerce une force sur toute autre charge en mouvement le traversant.",
-"Contrairement au champ électrique, il n'existe pas de monopôles magnétiques isolés dans la nature : les lignes de champ magnétique forment toujours des boucles fermées, ce qui se traduit par la relation ∇·B = 0.",
-"La loi de Biot et Savart permet de calculer le champ magnétique créé en un point de l'espace par un élément de circuit parcouru par un courant dI, montrant que l'intensité du champ décroît avec le carré de la distance."
-],
-"3-1":[
-"Une charge électrique q se déplaçant à une vitesse v dans un champ magnétique B subit une force magnétique perpendiculaire à son vecteur vitesse et au champ magnétique. Son module est donné par F = |q|·v·B·sin(θ).",
-"Puisque la force magnétique est en tout point orthogonale à la trajectoire de la charge, son travail mécanique est rigoureusement nul. La force magnétique ne modifie donc pas l'énergie cinétique ni la norme de la vitesse de la particule.",
-"Sous l'action d'un champ magnétique uniforme, une particule chargée injectée perpendiculairement aux lignes de champ décrit une trajectoire circulaire avec un rayon de courbure r = m·v / (|q|·B), appelé rayon de Larmor."
-],
-"3-2":[
-"La force de Lorentz représente la force électromagnétique totale s'exerçant sur une particule de charge q soumise simultanément à un champ électrique E et un champ magnétique B. Elle s'exprime par le vecteur F = q·(E + v × B).",
-"Cette force régit le comportement de la matière chargée dans tous les dispositifs électromagnétiques. La composante électrique agit directement le long des lignes de champ, tandis que la composante magnétique induit une déviation latérale.",
-"Les filtres de vitesse et les spectromètres de masse utilisent l'équilibre des composantes de la force de Lorentz pour sélectionner des particules ayant des vitesses ou des rapports charge/masse précis."
-],
-"3-3":[
-"La force de Laplace est la résultante macroscopique des forces de Lorentz individuelles subies par les porteurs de charge se déplaçant dans un conducteur métallique baigné par un champ magnétique extérieur.",
-"Pour un élément de conducteur rectiligne de longueur vectorielle L parcouru par un courant d'intensité I et placé dans un champ B uniforme, la force de Laplace s'exprime par le produit vectoriel F = I · (L × B).",
-"Ce principe de conversion directe de l'énergie électrique en énergie mécanique via l'interaction de Laplace constitue le principe de fonctionnement fondamental de tous les moteurs électriques."
-],
-"3-4":[
-"Le théorème d'Ampère établit que la circulation du champ magnétique le long d'un contour fermé orienté est proportionnelle à la somme algébrique des courants électriques traversant la surface appuyée sur ce contour, soit ∮ B · dl = μ₀·I_enfermé.",
-"Cette loi permet de déterminer l'expression du champ magnétique engendré par des distributions de courant présentant des symétries géométriques élevées, comme les fils rectilignes infinis ou les solénoïdes.",
-"Pour un fil conducteur rectiligne indéfini parcouru par un courant I, l'application du théorème d'Ampère montre que le champ magnétique créé est orthoradial et s'atténue en 1/r selon la formule B = (μ₀·I) / (2π·r)."
-],
-"3-5":[
-"L'induction électromagnétique désigne la production d'un champ électrique et d'une force électromotrice dans un circuit soumis à une variation de flux magnétique au cours du temps.",
-"Le phénomène d'auto-induction se produit lorsque le courant traversant un circuit varie, modifiant son propre flux magnétique. Cette variation engendre une force électromotrice d'auto-induction qui s'oppose à la variation du courant.",
-"L'inductance propre L d'un composant exprime sa capacité à s'opposer aux variations brusques de courant. Un composant inductif emmagasine de l'énergie dans son champ magnétique interne, d'une valeur E = ½·L·I²."
-],
-"3-6":[
-"Un électroaimant est un composant constitué d'un enroulement de fil conducteur autour d'un noyau en matériau ferromagnétique. Le champ magnétique est généré par le passage d'un courant dans la bobine.",
-"Le noyau ferromagnétique canalise et amplifie considérablement le champ magnétique produit par la bobine grâce à l'alignement des moments magnétiques atomiques de ses domaines de Weiss.",
-"Contrairement aux aimants permanents, la magnétisation d'un électroaimant est contrôlable : le champ magnétique peut être activé, désactivé ou modulé en ajustant l'intensité du courant d'alimentation."
-],
-
-// --- CHAPITRE 4 : ÉLECTROMAGNÉTISME ---
-"4-0":[
-"L'électromagnétisme régit l'ensemble des interactions entre charges et courants via la synthèse unifiée établie par les équations de Maxwell dans le vide et la matière.",
-"L'équation de Maxwell-Faraday, ∇ × E = -∂B/∂t, montre qu'un champ magnétique variable au cours du temps engendre un champ électrique tourbillonnaire, couplant indissociablement ces deux entités.",
-"L'équation de Maxwell-Ampère indique qu'un champ électrique variable agit comme un courant de déplacement, capable à son tour d'engendrer un champ magnétique, assurant la propagation autonome de l'onde."
-],
-"4-1":[
-"L'induction électromagnétique décrit l'apparition d'un courant induit dans un conducteur soumis à un champ magnétique temporellement variable ou en déplacement dans un champ statique.",
-"La tension induite aux bornes d'un circuit dépend de la rapidité de variation du flux magnétique à travers la surface du circuit. Cette conversion énergie magnétique-énergie électrique forme la base des alternateurs.",
-"Les courants de Foucault sont des courants induits circulant au sein de masses conductrices volumiques. Ils provoquent un échauffement thermique par effet Joule et une force de freinage électromagnétique."
-],
-"4-2":[
-"Le flux magnétique Φ à travers une surface orientée S est la mesure du nombre de lignes de champ magnétique traversant cette surface. Il s'exprime par l'intégrale de surface Φ = ∬ B · dS.",
-"Pour un champ magnétique B uniforme traversant une surface plane S, le flux s'exprime simplement par la relation algébrique Φ = B · S · cos(θ), où θ est l'angle entre le champ et la normale à la surface.",
-"Toute modification de la norme du champ, de la surface du circuit ou de son orientation géométrique fait varier le flux magnétique, déclenchant l'apparition de phénomènes d'induction."
-],
-"4-3":[
-"La loi de Faraday énonce que la force électromotrice induite e dans un circuit fermé est égale à la dérivée temporelle, prise avec un signe négatif, du flux magnétique Φ traversant ce circuit : e = -dΦ/dt.",
-"La loi de Lenz donne le sens physique du signe négatif de la loi de Faraday : le sens du courant induit est tel que, par ses effets magnétiques, il s'oppose à la cause qui lui a donné naissance.",
-"Ce principe de modération constitue la manifestation de la conservation de l'énergie dans les phénomènes induits, empêchant l'emballement spontané des systèmes électromagnétiques."
-],
-"4-4":[
-"Les ondes électromagnétiques sont des perturbations couplées des champs électrique et magnétique se propageant dans l'espace. Elles n'exigent aucun support matériel pour se déplacer.",
-"Dans le vide, ces ondes se propagent à la vitesse de la lumière c = 1/√(ε₀·μ₀) ≈ 3×10⁸ m/s. Les champs E et B oscillent en phase, perpendiculairement l'un à l'autre et à la direction de propagation.",
-"Le spectre électromagnétique s'étend des ondes radio aux rayons gamma, en passant par le domaine visible. La fréquence f et la longueur d'onde λ sont liées par la relation fondamentale c = λ·f."
-],
-"4-5":[
-"Les transformateurs électriques exploitent l'induction mutuelle entre deux bobinages fixes enroulés autour d'un circuit magnétique fermé pour modifier les amplitudes des tensions et courants alternatifs.",
-"Dans un transformateur idéal sans pertes, le rapport des tensions primaire et secondaire est directement égal au rapport de leurs nombres de spires respectifs, U₂ / U₁ = N₂ / N₁.",
-"Cette modification de tension s'effectue à puissance apparente constante (U₁·I₁ = U₂·I₂), permettant d'élever les tensions pour le transport haute tension et de réduire les pertes par effet Joule."
-],
-
-// --- CHAPITRE 5 : OPTIQUE ---
-"5-0":[
-"L'optique géométrique étudie la propagation de la lumière en l'assimilant à des rayons lumineux indépendants. Dans un milieu transparent, homogène et isotrope, la lumière se propage en ligne droite.",
-"L'indice de réfraction n d'un milieu matériel mesure le ralentissement de la lumière dans ce milieu par rapport à sa vitesse dans le vide, selon la définition n = c / v, avec n ≥ 1.",
-"Le principe de Fermat stipule que le chemin emprunté par la lumière entre deux points est celui pour lequel le temps de parcours est extrémal, fondant l'ensemble des lois géométriques de l'optique."
-],
-"5-1":[
-"La réflexion est le phénomène par lequel un rayon lumineux repart dans son milieu d'origine lorsqu'il rencontre la surface de séparation, ou dioptre, avec un autre milieu.",
-"La première loi de la réflexion indique que le rayon réfléchi appartient au plan d'incidence formé par le rayon incident et la normale à la surface au point d'impact.",
-"La deuxième loi de la réflexion énonce que l'angle de réflexion r est rigoureusement égal à l'angle d'incidence i, les deux angles étant mesurés par rapport à la normale au dioptre."
-],
-"5-2":[
-"La réfraction est la déviation de la trajectoire d'un rayon lumineux traversant l'interface séparant deux milieux d'indices de réfraction différents.",
-"Les lois de Snell-Descartes régissent la réfraction : le rayon réfrracté reste dans le plan d'incidence et vérifie la relation n₁·sin(i₁) = n₂·sin(i₂).",
-"Lorsque la lumière passe d'un milieu plus réfringent vers un milieu moins réfringent (n₁ > n₂), il existe un angle limite au-delà duquel la réfraction devient impossible, conduisant à la réflexion totale."
-],
-"5-3":[
-"Une lentille mince est un milieu transparent limité par deux surfaces sphériques dont l'épaisseur au centre reste petite devant les rayons de courbure des faces.",
-"La formule de conjugaison des lentilles minces dans les conditions de Gauss relie la position de l'objet p, la position de l'image p' et la distance focale f' par la relation 1/f' = 1/p' - 1/p.",
-"Les lentilles convergentes forment des images réelles ou virtuelles selon la position relative de l'objet par rapport au foyer objet, servant d'éléments de base dans les instruments de vision."
-],
-"5-4":[
-"Un miroir sphérique est une portion de sphère réfléchissante. Il est dit concave si la surface réfléchissante est tournée vers le centre de courbure, et convexe dans le cas contraire.",
-"Dans l'approximation des rayons paraxiaux, un miroir sphérique possède un foyer image unique situé au milieu du segment reliant le sommet au centre de courbure, soit f' = R / 2.",
-"La relation de conjugaison avec origine au sommet s'écrit 1/p' + 1/p = 1/f'. Le grandissement transversal γ vaut le rapport des hauteurs image/objet et s'exprime par γ = -p' / p."
-],
-"5-5":[
-"Les instruments optiques combinent des lentilles, des miroirs et des diaphragmes pour former des images agrandies d'objets microscopiques ou éloignés.",
-"Le grossissement commercial G d'un instrument exprime le rapport de l'angle sous lequel l'image est vue à travers l'appareil sur l'angle sous lequel l'objet est vu à l'œil nu.",
-"Microscopes et lunettes astronomiques se composent au minimum d'un objectif formant une image intermédiaire et d'un oculaire fonctionnant comme une loupe pour examiner cette image."
-],
-"5-6":[
-"Les interférences optiques résultent de la superposition de deux ou plusieurs ondes lumineuses cohérentes, produisant des variations spatiales d'intensité avec des franges sombres et lumineuses.",
-"Le phénomène de diffraction se manifeste lorsqu'une onde lumineuse rencontre un obstacle ou une ouverture dont les dimensions sont du même ordre de grandeur que sa longueur d'onde.",
-"Le principe de Huygens-Fresnel explique la diffraction en considérant chaque point d'une surface éclairée comme une source secondaire d'ondelettes sphériques qui interfèrent entre elles."
-],
-
-// --- CHAPITRE 6 : ONDES ET VIBRATIONS ---
-"6-0":[
-"Un mouvement oscillatoire est une fluctuation périodique d'une grandeur physique autour d'une valeur moyenne d'équilibre sous l'effet d'une force de rappel.",
-"L'équation horaire x(t) = A·cos(ωt + φ) décrit une oscillation harmonique simple, où A est l'amplitude maximale, ω la pulsation propre et φ la phase à l'origine des temps.",
-"En absence de dissipation, l'énergie totale de l'oscillateur s'échange continuellement entre énergie cinétique et énergie potentielle, conservant une valeur constante proportionnelle au carré de l'amplitude."
-],
-"6-1":[
-"Une onde mécanique est la propagation d'une perturbation dans un milieu matériel souple, sans transport global de matière mais avec transfert d'énergie.",
-"L'onde est dite transversale lorsque le déplacement des points du milieu s'effectue perpendiculairement à la direction de propagation, et longitudinale si le déplacement se fait dans la même direction.",
-"L'équation d'onde d'Alembert ∂²y/∂t² = v²·(∂²y/∂x²) décrit mathématiquement la propagation unidimensionnelle d'une déformation y à une vitesse constante v."
-],
-"6-2":[
-"La période T d'un phénomène oscillatoire représente le plus court intervalle de temps au bout duquel le phénomène se répète à l'identique.",
-"La fréquence f quantifie le nombre d'oscillations complètes effectuées par unité de temps. Elle est l'inverse de la période, f = 1/T, et s'exprime en Hertz (Hz).",
-"La pulsation ω exprime la vitesse de variation de la phase en radians par seconde, liée à la fréquence par la relation ω = 2π·f."
-],
-"6-3":[
-"La longueur d'onde λ représente la périodicité spatiale d'une onde progressive monophasique, c'est-à-dire la distance séparant deux maxima consécutifs.",
-"Elle équivaut à la distance parcourue par l'onde pendant une période temporelle T, s'exprimant par la relation fondamentale λ = v·T.",
-"En modifiant le milieu de propagation, la vitesse v change et modifie la longueur d'onde λ, alors que la fréquence f fixée par la source émettrice reste invariable."
-],
-"6-4":[
-"La vitesse de propagation v d'une onde dépend des propriétés élastiques et inertielles du milieu matériel traversé.",
-"La relation fondamentale v = λ·f lie directement la célérité de l'onde à sa longueur d'onde et à sa fréquence d'oscillation.",
-"Dans un milieu dispersif, la vitesse de propagation dépend de la fréquence de l'onde, séparant ainsi les différentes composantes spectrales d'un signal complexe."
-],
-"6-5":[
-"La résonance est le phénomène d'amplification maximale de l'amplitude des oscillations d'un système excité à sa fréquence propre par une source externe.",
-"À la fréquence de résonance, le transfert d'énergie entre l'émetteur et l'oscillateur récepteur atteint son efficacité maximale.",
-"L'acuité de la résonance dépend du facteur de qualité Q : un faible amortissement donne une courbe de résonance étroite et une amplitude très élevée à la fréquence propre."
-],
-"6-6":[
-"L'effet Doppler est le décalage de fréquence observé entre l'émission et la réception d'une onde lorsque la source et l'observateur sont en mouvement relatif.",
-"Lorsque la source et l'observateur se rapprochent, la fréquence reçue f' est plus élevée que la fréquence émise f, compressant les fronts d'onde.",
-"La relation f' = f · (v ± v_o) / (v ∓ v_s) permet de calculer la variation de fréquence selon les vitesses respectives de l'observateur v_o et de la source v_s."
-],
-
-// --- CHAPITRE 7 : PHYSIQUE MODERNE ---
-"7-0":[
-"La relativité restreinte repose sur deux postulats : la covariance des lois de la physique dans tous les référentiels inertiels et l'invariance de la vitesse de la lumière c dans le vide.",
-"Ces postulats entraînent la révision des notions d'espace et de temps, se traduisant par la dilatation du temps et la contraction des longueurs lors de déplacements à vitesses relativistes.",
-"L'équivalence masse-énergie d'Einstein s'exprime par E = m·c², affirmant que toute masse m possède une énergie de repos équivalente."
-],
-"7-1":[
-"La physique quantique étudie les phénomènes régissant l'échelle atomique où l'énergie et d'autres grandeurs physiques sont échangées de manière quantifiée.",
-"Le principe d'incertitude d'Heisenberg, Δx·Δp ≥ ℏ/2, établit l'impossibilité de mesurer simultanément avec une précision infinie la position et la quantité de mouvement d'une particule.",
-"L'équation de Schrödinger régit l'évolution temporelle de la fonction d'onde Ψ, dont le carré du module définit la densité de probabilité de présence de la particule."
-],
-"7-2":[
-"L'effet photoélectrique consiste en l'émission d'électrons par un matériau métallique lorsqu'il est éclairé par un rayonnement électromagnétique de fréquence suffisante.",
-"L'analyse théorique montre que l'extraction des électrons ne dépend pas de l'intensité lumineuse mais de la fréquence de la lumière, qui doit dépasser un seuil minimal f₀.",
-"Einstein expliqua cet effet en postulant la quantification de la lumière en quanta d'énergie, les photons, véhiculant chacun une énergie E = h·f."
-],
-"7-3":[
-"Le modèle atomique de Bohr décrit l'atome d'hydrogène comme un noyau autour duquel l'électron circule sur des orbites circulaires quantifiées.",
-"L'électron ne rayonne aucune énergie lorsqu'il se trouve sur une orbite stationnaire dont le moment cinétique est un multiple entier de ℏ.",
-"L'émission d'un photon se produit lors du saut de l'électron d'un niveau d'énergie supérieur E_n vers un niveau inférieur E_p, vérifiant ΔE = h·f."
-],
-"7-4":[
-"Un spectre d'émission est l'ensemble des fréquences lumineuses émises par une substance excitée thermiquement ou électriquement.",
-"Les atomes en phase gazeuse émettent des spectres de raies discontinus, caractéristiques des niveaux d'énergie quantifiés propres à chaque élément chimique.",
-"L'analyse spectrale permet d'identifier la composition chimique et les propriétés physiques des sources lumineuses, notamment les étoiles distantes."
-],
-"7-5":[
-"La dualité onde-particule affirme que la lumière et la matière présentent simultanément des propriétés ondulatoires et corpusculaires selon le type d'expérience.",
-"Louis de Broglie généralisa ce concept en associant à toute particule matérielle de quantité de mouvement p une onde de longueur λ = h / p.",
-"Cette hypothèse fut confirmée expérimentalement par les expériences de diffraction d'électrons à travers des réseaux cristallins."
-],
-
-// --- CHAPITRE 8 : PHYSIQUE NUCLÉAIRE ---
-"8-0":[
-"Le noyau atomique occupe le centre de l'atome. Il est composé de nucléons : des protons chargés positivement et des neutrons électriquement neutres.",
-"Le noyau est caractérisé par son nombre de charge Z (nombre de protons) et son nombre de masse A (nombre total de nucléons), représenté par la notation ᴬ_Z X.",
-"La cohésion du noyau est assurée par l'interaction nucléaire forte, une force attractive à très courte portée qui surmonte la répulsion électrostatique entre protons."
-],
-"8-1":[
-"La radioactivité est la désintégration spontanée d'un noyau atomique instable se transformant en un autre noyau plus stable avec émission de rayonnement.",
-"La désintégration alpha émet un noyau d'Hélium-4, la désintégration bêta modifie la nature d'un nucléon avec émission d'un électron ou d'un positron, et le rayonnement gamma est une émission photonique très énergétique.",
-"L'activité A d'une source radioactive mesure le nombre de désintégrations par seconde et s'exprime en Becquerels (Bq)."
-],
-"8-2":[
-"La loi de désintégration radioactive régit l'évolution temporelle du nombre N(t) de noyaux radioactifs encore présents dans un échantillon.",
-"Elle s'exprime par la décroissance exponentielle N(t) = N₀ · e^(-λt), où λ est la constante radioactive propre au radionucléide considéré.",
-"Cette loi statistique décrit un phénomène purement aléatoire à l'échelle d'un noyau individuel, mais déterministe à l'échelle d'une population massive."
-],
-"8-3":[
-"La demi-vie t₁/₂ d'un isotope radioactif est la durée au bout de laquelle la moitié des noyaux initiaux de l'échantillon se sont désintégrés.",
-"Elle est inversement proportionnelle à la constante radioactive λ et est donnée par la relation t₁/₂ = ln(2) / λ.",
-"La demi-vie varie de quelques fractions de seconde à plusieurs milliards d'années selon la stabilité relative des noyaux atomiques étudiés."
-],
-"8-4":[
-"La fission nucléaire est la fragmentation d'un noyau lourd instable en deux noyaux plus légers sous l'impact d'un neutron, libérant de l'énergie et d'autres neutrons.",
-"La fusion nucléaire est l'union de deux noyaux légers formant un noyau plus lourd, processus qui alimente l'énergie produite au cœur des étoiles.",
-"Dans les deux cas, la masse des produits est inférieure à la masse des réactifs, et ce défaut de masse Δm est converti en énergie selon E = Δm·c²."
-],
-"8-5":[
-"L'énergie nucléaire exploite les réactions de fission ou de fusion pour générer de la chaleur exploitée dans la production d'électricité.",
-"Dans un réacteur nucléaire à fission, la réaction en chaîne est contrôlée à l'aide de barres d'absorption capturant l'excès de neutrons libérés.",
-"La gestion des déchets radioactifs et le confinement des matières fissiles représentent des défis fondamentaux liés à l'exploitation de cette forme d'énergie."
-],
-
-// --- CHAPITRE 9 : PHYSIQUE APPLIQUÉE / ÉLECTRONIQUE ---
-"9-0":[
-"Un semi-conducteur est un matériau dont la conductivité électrique se situe entre celle des conducteurs métalliques et celle des isolants.",
-"Les semi-conducteurs intrinsèques voient leur conductivité augmenter avec la température par création de paires électron-trou.",
-"Le dopage consiste à introduire des impuretés spécifiques pour créer des semi-conducteurs de type N (excès d'électrons) ou de type P (excès de trous)."
-],
-"9-1":[
-"Une diode à jonction PN est un composant électronique constitué de l'assemblage d'un semi-conducteur de type P et d'un semi-conducteur de type N.",
-"Elle ne laisse passer le courant électrique que dans un seul sens, appelé sens passant, lorsqu'elle est soumise à une tension supérieure à sa tension de seuil.",
-"La loi de Shockley I = I_s · (e^(V/V_T) - 1) décrit la caractéristique courant-tension non linéaire de la jonction PN."
-],
-"9-2":[
-"Le transistor bipolaire est un composant à trois électrodes (Base, Émetteur, Collecteur) permettant de amplifier ou de commuter des signaux électriques.",
-"Le courant de collecteur I_C est directement contrôlé par le courant d'entrée injecté dans la base I_B selon la relation I_C = β·I_B.",
-"Le transistor à effet de champ (MOSFET) utilise quant à lui une tension appliquée sur sa grille pour modifier la conductivité d'un canal interne."
-],
-"9-3":[
-"Un circuit électronique est un assemblage de composants passifs et actifs interconnectés pour réaliser un traitement d'énergie ou d'information.",
-"Les filtres passifs RC, RL et RLC permettent de sélectionner ou d'atténuer certaines bandes de fréquences au sein d'un signal d'entrée.",
-"Les circuits intégrés regroupent des milliers à des milliards de transistors sur une puce de silicium pour réaliser des fonctions logiques."
-],
-"9-4":[
-"Un capteur est un dispositif transformant une grandeur physique mesurée en un signal électrique exploitable par un système de traitement.",
-"La sensibilité S d'un capteur est le rapport entre la variation du signal de sortie e et la variation de la grandeur physique d'entrée m, S = de/dm.",
-"Les capteurs peuvent être passifs (variation d'impédance) ou actifs (génération directe d'une force électromotrice ou d'un courant)."
-],
-"9-5":[
-"Un signal est la représentation physique d'une information véhiculée sous forme de tension ou de courant variable au cours du temps.",
-"Le théorème d'échantillonnage de Nyquist-Shannon impose que la fréquence d'échantillonnage soit supérieure au double de la fréquence maximale du signal.",
-"Le traitement du signal englobe l'amplification, le filtrage, le codage et la numérisation des grandeurs physiques mesurées."
-],
-"9-6":[
-"Les systèmes électriques et électroniques combinent la puissance et le traitement logique pour assurer la commande automatisée d'équipements.",
-"La chaîne d'information traite les consignes et les grandeurs captées pour piloter la chaîne d'énergie chargée d'agir directement sur le milieu.",
-"La modélisation de ces systèmes s'appuie sur la théorie des asservissements pour garantir la stabilité, la rapidité et la précision des réponses."
-]
-
+"0-0": { paragraphs: ["La cinématique étudie le mouvement des corps indépendamment des forces qui les provoquent...", "La position est repérée par le vecteur position r(t), la vitesse par v(t)=dr/dt et l'accélération par a(t)=dv/dt."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Kinematics_trajectory.svg/800px-Kinematics_trajectory.svg.png", imageCaption: "Figure : Trajectoire cinématique.", example: { statement: "x(t) = 3t^2 + 5t + 2", questions: "Calculer v(4) et a(4).", solution: "v(t) = 6t + 5 => v(4) = 29 m/s. a(t) = 6 m/s^2." } },
+"8-0": { paragraphs: ["Le noyau atomique rassemble protons et neutrons au centre de l'atome...", "Sa stabilité dépend de l'interaction forte et de l'énergie de liaison par nucléon."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Nuclide_map_diagram.svg/800px-Nuclide_map_diagram.svg.png", imageCaption: "Figure : Carte des nucléides.", example: { statement: "Considérons le noyau Uranium 238.", questions: "Déterminer Z, A et N.", solution: "Z=92, A=238, N = 238-92 = 146 neutrons." } },
+"9-0": { paragraphs: ["Les semi-conducteurs ont une bande interdite modérée franchissable par agitation thermique ou dopage.", "Le produit n*p = n_i^2 définit la loi d'action de masse."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/PN-junction-equilibrium.svg/800px-PN-junction-equilibrium.svg.png", imageCaption: "Figure : Jonction PN.", example: { statement: "Silicium dopé N avec n = 10^16 cm^-3 et n_i = 1.5*10^10 cm^-3.", questions: "Calculer la concentration p des trous.", solution: "p = n_i^2 / n = 2.25*10^20 / 10^16 = 2.25*10^4 cm^-3." } }
 };
 
+/* =====================================================
+   IMAGES PAR DÉFAUT REPRÉSENTATIVES POUR CHAQUE CHAPITRE
+===================================================== */
+const CHAPTER_IMAGES = [
+    "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80", // Mécanique
+    "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80", // Thermodynamique
+    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80", // Électricité
+    "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?auto=format&fit=crop&w=800&q=80", // Magnétisme
+    "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=800&q=80", // Électromagnétisme
+    "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=800&q=80", // Optique
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80", // Ondes
+    "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80", // Physique moderne
+    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80", // Physique nucléaire
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"  // Électronique
+];
 
 /* =====================================================
-   UTILITAIRES
+   TRADUCTION BILINGUE FR / EN
 ===================================================== */
+const I18N = {
+    fr: {
+        navHome: "Accueil", navChapters: "Chapitres", navFaq: "FAQs", navPlatform: "Espace Cours",
+        welcomeMsg: "👋 Bienvenue à tous les étudiants et passionnés de Physique !",
+        heroTitle: "Maîtrisez la Physique Générale de la Mécanique à l'Électronique",
+        heroDef: "Enack-Academy est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.",
+        btnExplore: "Explorer les Cours", btnLogin: "Se connecter",
+        titleChapters: "📚 Les 10 Chapitres du Programme (Vue Paysage)",
+        titleFaq: "❓ Foire Aux Questions (FAQ)",
+        sidebarTitle: "⚛️ Programme Officiel", modalTitle: "🎓 Connexion Étudiant",
+        lblUsername: "Nom d'utilisateur :", lblEmail: "Email Étudiant (@student.com) :",
+        btnSubmitLogin: "Valider la connexion",
+        faqQ1: "Comment accéder aux cours complets d'Enack-Academy ?",
+        faqA1: "L'accès à l'intégralité du programme est libre. Il vous suffit de cliquer sur 'Espace Cours' ou sur le chapitre de votre choix pour accéder à la plateforme d'étude interactive.",
+        faqQ2: "Quelles sont les sources et références utilisées ?",
+        faqA2: "Tous nos cours sont rédigés selon les standards internationaux en nous appuyant sur les ouvrages de référence : Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, Berkeley Physics Course et les ressources du CERN.",
+        faqQ3: "Comment fonctionne la connexion étudiante ?",
+        faqA3: "Cliquez sur 'Se connecter', saisissez votre nom d'utilisateur et votre adresse email étudiante (ex. nom@student.com).",
+        faqQ4: "Les formules mathématiques sont-elles correctement affichées ?",
+        faqA4: "Oui, Enack-Academy intègre le moteur de rendu KaTeX pour un affichage parfait de toutes les équations."
+    },
+    en: {
+        navHome: "Home", navChapters: "Chapters", navFaq: "FAQs", navPlatform: "Course Space",
+        welcomeMsg: "👋 Welcome to all students and Physics enthusiasts!",
+        heroTitle: "Master General Physics from Mechanics to Electronics",
+        heroDef: "Enack-Academy is a leading academic educational platform designed to provide structured, rigorous, and universal physics education. Find detailed theoretical lectures, formal mathematical proofs, illustrative diagrams, and step-by-step solved practical exercises.",
+        btnExplore: "Explore Courses", btnLogin: "Log in",
+        titleChapters: "📚 The 10 Curriculum Chapters (Landscape View)",
+        titleFaq: "❓ Frequently Asked Questions (FAQ)",
+        sidebarTitle: "⚛️ Official Syllabus", modalTitle: "🎓 Student Login",
+        lblUsername: "Username:", lblEmail: "Student Email (@student.com):",
+        btnSubmitLogin: "Confirm Login",
+        faqQ1: "How to access full courses on Enack-Academy?",
+        faqA1: "Access to the entire curriculum is free. Click on 'Course Space' or select any chapter of your choice to enter the interactive learning platform.",
+        faqQ2: "What sources and references are used?",
+        faqA2: "All courses are written according to international standards using reference textbooks: Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, and CERN OER.",
+        faqQ3: "How does the student login work?",
+        faqA3: "Click 'Log in', enter your username and your student email address ending with @student.com.",
+        faqQ4: "Are mathematical formulas correctly displayed?",
+        faqA4: "Yes, Enack-Academy integrates the KaTeX rendering engine for crisp rendering of all equations."
+    }
+};
 
-function show(id){
-    document.getElementById(id).classList.remove("hidden");
+let currentLang = "fr";
+
+function changeLanguage(lang){
+    currentLang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if(I18N[lang] && I18N[lang][key]){
+            el.textContent = I18N[lang][key];
+        }
+    });
 }
-
-function hide(id){
-    document.getElementById(id).classList.add("hidden");
-}
-
-function escapeHTML(value){
-    return String(value || "")
-        .replace(/[&<>"']/g, function(char){
-            const map = {
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-            };
-            return map[char];
-        });
-}
-
 
 /* =====================================================
-   PROGRAMME
+   GESTION DES VUES & MODAL DE CONNEXION
 ===================================================== */
+function showView(viewId){
+    document.getElementById("homeView").classList.add("hidden");
+    document.getElementById("appView").classList.add("hidden");
+    document.getElementById(viewId).classList.remove("hidden");
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
 
+function openLoginModal(){
+    document.getElementById("loginModal").classList.remove("hidden");
+}
+
+function closeLoginModal(){
+    document.getElementById("loginModal").classList.add("hidden");
+}
+
+function handleLogin(e){
+    e.preventDefault();
+    const username = document.getElementById("loginUsername").value;
+    const email = document.getElementById("loginEmail").value;
+
+    if(!email.endsWith("@student.com")){
+        alert("L'adresse e-mail doit se terminer par @student.com");
+        return;
+    }
+
+    document.getElementById("authContainer").innerHTML = `
+        <div class="user-badge">
+            <i class="fa-solid fa-user-graduate"></i> ${username}
+        </div>
+    `;
+    closeLoginModal();
+}
+
+function toggleFaq(el){
+    el.parentElement.classList.toggle("active");
+}
+
+/* =====================================================
+   RENDU DES CARTES PAYSAGE (LANDSCAPE CARDS)
+===================================================== */
+function renderHomeChapters(){
+    const container = document.getElementById('chaptersLandscapeList');
+    if(!container) return;
+    container.innerHTML = '';
+
+    PROGRAM.forEach((chap, idx) => {
+        const card = document.createElement('div');
+        card.className = 'chapter-landscape-card';
+
+        const lessonsChips = chap[2].map(l => `<span class="lesson-chip">${l[0]}</span>`).join('');
+
+        card.innerHTML = `
+            <div class="chapter-landscape-img-container">
+                <img src="${CHAPTER_IMAGES[idx]}" alt="${chap[1]}" onerror="this.src='https://placehold.co/800x400/1c2541/48cae4?text=Chapitre+${idx+1}'">
+                <div class="chapter-landscape-badge">Chapitre ${idx+1}</div>
+            </div>
+            <div class="chapter-landscape-content">
+                <div>
+                    <div class="chapter-landscape-header">
+                        <div class="chapter-landscape-title">${chap[0]} ${chap[1]}</div>
+                    </div>
+                    <p class="chapter-landscape-desc">
+                        Module théorique et pratique approfondi comprenant ${chap[2].length} leçons structurées avec équations rigoureuses, schémas explicatifs et exercices d'application corrigés.
+                    </p>
+                    <div class="chapter-lessons-chips">
+                        ${lessonsChips}
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end;">
+                    <button class="btn-primary" onclick="openChapterFromHome(${idx})">
+                        <i class="fa-solid fa-book-open-reader"></i> Étudier ce chapitre
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function openChapterFromHome(chapIdx){
+    showView('appView');
+    openLesson(chapIdx, 0);
+}
+
+/* =====================================================
+   RENDU DU MENU LATÉRAL DE L'APPLICATION
+===================================================== */
 function renderCurriculum(){
     const container = document.getElementById("curriculum");
+    if(!container) return;
     container.innerHTML = "";
 
-    PROGRAM.forEach(function(chapter, index){
+    PROGRAM.forEach(function(chapter, cIdx){
         const chapterBox = document.createElement("div");
-        chapterBox.className = "chapter";
+        chapterBox.className = "chapter-item";
 
         const title = document.createElement("div");
         title.innerHTML = "<b>" + chapter[0] + " " + chapter[1] + "</b>";
@@ -922,14 +1028,14 @@ function renderCurriculum(){
         const lessons = document.createElement("div");
         lessons.className = "lesson-list";
 
-        chapter[2].forEach(function(lesson, indexLesson){
+        chapter[2].forEach(function(lesson, lIdx){
             const item = document.createElement("div");
-            item.className = "lesson";
+            item.className = "lesson-subitem";
             item.textContent = lesson[0];
 
             item.onclick = function(e){
                 e.stopPropagation();
-                openLesson(index, indexLesson);
+                openLesson(cIdx, lIdx);
             };
 
             lessons.appendChild(item);
@@ -945,51 +1051,80 @@ function renderCurriculum(){
     });
 }
 
-
 /* =====================================================
-   LEÇON
+   AFFICHAGE D'UNE LEÇON SÉLECTIONNÉE
 ===================================================== */
-
-function openLesson(chapterIndex, lessonIndex){
-    const chapter = PROGRAM[chapterIndex];
-    const lesson = chapter[2][lessonIndex];
+function openLesson(cIdx, lIdx){
+    const chapter = PROGRAM[cIdx];
+    const lesson = chapter[2][lIdx];
 
     document.getElementById("lessonTitle").textContent = lesson[0];
-    document.getElementById("lessonTag").textContent = chapter[0] + " " + chapter[1] + " — Leçon " + (lessonIndex + 1);
+    document.getElementById("lessonTag").textContent = `${chapter[0]} ${chapter[1]} — Leçon ${lIdx + 1}`;
 
-    let htmlContent = `
-        <p style="color:var(--muted)">Formule clé</p>
+    const key = `${cIdx}-${lIdx}`;
+    let contentHTML = `
+        <div style="color:var(--muted); font-size:0.9rem;">Formule clé fondamentale</div>
         <div class="formula">$$${lesson[1]}$$</div>
-        <h3 style="margin:20px 0 10px">Cours</h3>
-        <div id="textBloc"></div>
+        <h3 style="color:var(--gold); margin:25px 0 15px;">📖 Cours Détaillé</h3>
     `;
 
-    document.getElementById("lessonContent").innerHTML = htmlContent;
-
-    const key = chapterIndex + "-" + lessonIndex;
-    const textContainer = document.getElementById("textBloc");
-
     if(COURS_TEXTE[key]){
-        textContainer.innerHTML = COURS_TEXTE[key].map(function(p){
-            return '<p style="line-height:1.8;margin-bottom:14px">' + escapeHTML(p) + '</p>';
-        }).join("");
+        const data = COURS_TEXTE[key];
+        contentHTML += `<div class="course-text">`;
+        data.paragraphs.forEach(p => { contentHTML += `<p>${p}</p>`; });
+        contentHTML += `</div>`;
+
+        if(data.image) {
+            contentHTML += `
+                <div class="illustration-box">
+                    <img src="${data.image}" alt="Illustration de la leçon" onerror="this.src='https://placehold.co/600x300/1c2541/f7b801?text=Illustration+Lecon'">
+                    <p><em>${data.imageCaption}</em></p>
+                </div>
+            `;
+        }
+
+        if(data.example) {
+            contentHTML += `
+                <div class="example-box">
+                    <h3>📝 Exemple d'Application Pratique</h3>
+                    <p><strong>Énoncé :</strong> ${data.example.statement}</p>
+                    <p><strong>Questions :</strong> ${data.example.questions}</p>
+                    <hr style="border-color:var(--border); margin:15px 0;">
+                    <p><strong>Résolution détaillée :</strong></p>
+                    <p>${data.example.solution}</p>
+                </div>
+            `;
+        }
     } else {
-        textContainer.innerHTML = '<p style="line-height:1.8">Le contenu de cette leçon est en cours de finalisation.</p>';
+        contentHTML += `
+            <div class="course-text">
+                <p>Cette leçon développe rigoureusement les principes physiques de <strong>${lesson[0]}</strong> au sein du module <strong>${chapter[1]}</strong>.</p>
+                <p>L'analyse vectorielle et les équations différentielles associées permettent de prédire quantitativement le comportement dynamique du système.</p>
+            </div>
+            <div class="example-box">
+                <h3>📝 Exercice d'Application Type</h3>
+                <p><strong>Énoncé :</strong> Utiliser la formule fondamentale $$${lesson[1]}$$ pour déterminer l'état du système.</p>
+                <p><strong>Résolution :</strong> Remplacement direct par les constantes physiques dans le système international d'unités (SI).</p>
+            </div>
+        `;
     }
+
+    document.getElementById("lessonContent").innerHTML = contentHTML;
 
     if(window.renderMathInElement){
         renderMathInElement(document.getElementById("lessonContent"), {
             delimiters: [
-                { left: "$$", right: "$$", display: true }
+                { left: "$$", right: "$$", display: true },
+                { left: "\\(", right: "\\)", display: false }
             ],
             throwOnError: false
         });
     }
 }
 
+// Initialisation au chargement
+renderHomeChapters();
 renderCurriculum();
-
 </script>
-
 </body>
 </html>
