@@ -1,19 +1,38 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enack-Academy | Plateforme Académique de Physique Général</title>
 
-<!-- KATEX (Formules mathématiques et physiques) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<title>Enack-Academy | Plateforme Académique de Physique Générale</title>
 
-<!-- FontAwesome pour icônes -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- =========================================================
+     KATEX
+========================================================= -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js">
+</script>
+
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js">
+</script>
+
+<!-- =========================================================
+     FONTAWESOME
+========================================================= -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root{
     --bg:#0b132b;
     --secondary:#1c2541;
@@ -27,21 +46,30 @@
     --border:rgba(255,255,255,.15);
 }
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:var(--bg);
     color:var(--text);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
     min-height:100vh;
-    scroll-behavior: smooth;
 }
 
-button, input, select{
+button,
+input,
+select{
     font:inherit;
 }
 
@@ -49,380 +77,376 @@ button{
     cursor:pointer;
     border:none;
     outline:none;
-    transition: all 0.3s ease;
 }
 
 .hidden{
     display:none !important;
 }
 
-/* HEADER & NAVBAR */
+/* =========================================================
+   HEADER
+========================================================= */
+
 header{
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position:sticky;
+    top:0;
+    z-index:1000;
     height:70px;
-    background:rgba(28, 37, 65, 0.95);
-    backdrop-filter: blur(10px);
+    background:rgba(28,37,65,.95);
+    backdrop-filter:blur(10px);
     border-bottom:1px solid var(--border);
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     padding:0 30px;
 }
 
 .brand{
     font-size:24px;
     font-weight:800;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+    color:var(--text);
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    cursor:pointer;
 }
 
 .brand span{
     color:var(--gold);
 }
 
-nav.nav-links{
-    display: flex;
-    gap: 25px;
-    align-items: center;
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
 }
 
-nav.nav-links a{
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.3s;
+.nav-links a{
+    color:var(--text);
+    text-decoration:none;
+    font-weight:500;
+    font-size:.95rem;
+    transition:color .3s;
 }
 
-nav.nav-links a:hover{
-    color: var(--blue);
+.nav-links a:hover{
+    color:var(--blue);
 }
 
 .nav-controls{
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
 .lang-select{
-    background: var(--card);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
 .btn-primary{
-    background: var(--gold);
-    color: #000;
-    font-weight: 700;
-    padding: 8px 18px;
-    border-radius: 8px;
+    background:var(--gold);
+    color:#000;
+    font-weight:700;
+    padding:8px 18px;
+    border-radius:8px;
+    transition:all .3s ease;
 }
 
 .btn-primary:hover{
-    background: #e0a700;
-    transform: translateY(-2px);
+    background:#e0a700;
+    transform:translateY(-2px);
 }
 
 .btn-outline{
-    background: transparent;
-    color: var(--blue);
-    border: 1px solid var(--blue);
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 600;
+    background:transparent;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    padding:8px 18px;
+    border-radius:8px;
+    font-weight:600;
+    transition:all .3s ease;
 }
 
 .btn-outline:hover{
-    background: rgba(72, 202, 228, 0.1);
+    background:rgba(72,202,228,.1);
 }
 
 .user-badge{
-    background: var(--card);
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    background:var(--card);
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-weight:600;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-/* HERO SECTION */
+/* =========================================================
+   HERO
+========================================================= */
+
 .hero{
-    padding: 80px 20px 50px;
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
+    padding:80px 20px 50px;
+    text-align:center;
+    max-width:1000px;
+    margin:0 auto;
 }
 
 .hero h1{
-    font-size: 3rem;
-    color: var(--gold);
-    margin-bottom: 20px;
-    line-height: 1.2;
+    font-size:3rem;
+    color:var(--gold);
+    margin-bottom:20px;
+    line-height:1.2;
 }
 
-.hero p.welcome-msg{
-    font-size: 1.25rem;
-    color: var(--blue);
-    margin-bottom: 15px;
-    font-weight: 600;
+.hero .welcome-msg{
+    font-size:1.25rem;
+    color:var(--blue);
+    margin-bottom:15px;
+    font-weight:600;
 }
 
-.hero p.definition{
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 35px;
+.hero .definition{
+    font-size:1.05rem;
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:35px;
 }
 
-/* CHAPTER CARDS IN LANDSCAPE MODE */
+/* =========================================================
+   CHAPTERS
+========================================================= */
+
 .section-title{
-    text-align: center;
-    font-size: 2rem;
-    color: var(--gold);
-    margin: 40px 0 30px;
+    text-align:center;
+    font-size:2rem;
+    color:var(--gold);
+    margin:40px 0 30px;
 }
 
 .chapters-landscape-container{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+    max-width:1100px;
+    margin:0 auto;
+
+    padding:0 20px 60px;
 }
 
 .chapter-landscape-card{
-    background: var(--secondary);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    background:var(--secondary);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+
+    display:grid;
+    grid-template-columns:320px 1fr;
+
+    transition:
+        transform .3s,
+        border-color .3s,
+        box-shadow .3s;
 }
 
 .chapter-landscape-card:hover{
-    transform: translateY(-4px);
-    border-color: var(--gold);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transform:translateY(-4px);
+    border-color:var(--gold);
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
 .chapter-landscape-img-container{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 200px;
-    background: var(--card);
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:200px;
+    background:var(--card);
 }
 
 .chapter-landscape-img-container img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .chapter-landscape-badge{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: rgba(11, 19, 43, 0.85);
-    backdrop-filter: blur(4px);
-    color: var(--gold);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border: 1px solid var(--border);
+    position:absolute;
+    top:15px;
+    left:15px;
+
+    background:rgba(11,19,43,.85);
+    backdrop-filter:blur(4px);
+
+    color:var(--gold);
+    padding:6px 12px;
+    border-radius:20px;
+
+    font-size:.85rem;
+    font-weight:700;
+
+    border:1px solid var(--border);
 }
 
 .chapter-landscape-content{
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .chapter-landscape-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:10px;
 }
 
 .chapter-landscape-title{
-    font-size: 1.35rem;
-    color: var(--text);
-    font-weight: 700;
+    font-size:1.35rem;
+    color:var(--text);
+    font-weight:700;
 }
 
 .chapter-landscape-desc{
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 18px;
+    color:var(--muted);
+    font-size:.95rem;
+    line-height:1.6;
+    margin-bottom:18px;
 }
 
 .chapter-lessons-chips{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
 }
 
 .lesson-chip{
-    background: var(--card);
-    color: var(--blue);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(72, 202, 228, 0.2);
+    background:var(--card);
+    color:var(--blue);
+
+    padding:4px 10px;
+    border-radius:6px;
+
+    font-size:.8rem;
+
+    border:1px solid rgba(72,202,228,.2);
 }
 
-/* FAQ SECTION */
+/* =========================================================
+   FAQ
+========================================================= */
+
 .faq-section{
-    max-width: 900px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
+    max-width:900px;
+    margin:0 auto 80px;
+    padding:0 20px;
 }
 
 .faq-item{
-    background: var(--secondary);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 15px;
-    overflow: hidden;
+    background:var(--secondary);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:15px;
+    overflow:hidden;
 }
 
 .faq-question{
-    padding: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text);
+    padding:20px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:var(--text);
 }
 
 .faq-answer{
-    padding: 0 20px 20px;
-    color: var(--muted);
-    line-height: 1.7;
-    display: none;
+    padding:0 20px 20px;
+
+    color:var(--muted);
+    line-height:1.7;
+
+    display:none;
 }
 
 .faq-item.active .faq-answer{
-    display: block;
+    display:block;
 }
 
 .faq-item.active .faq-question{
-    color: var(--gold);
+    color:var(--gold);
 }
 
-/* MODAL LOGIN */
-.modal-overlay{
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
+/* =========================================================
+   APPLICATION
+========================================================= */
 
-.modal-content{
-    background: var(--secondary);
-    border: 1px solid var(--border);
-    padding: 35px;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 420px;
-    position: relative;
-}
-
-.modal-content h2{
-    color: var(--gold);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.form-group{
-    margin-bottom: 18px;
-}
-
-.form-group label{
-    display: block;
-    margin-bottom: 8px;
-    color: var(--muted);
-    font-size: 0.9rem;
-}
-
-.form-group input{
-    width: 100%;
-    padding: 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-}
-
-.form-group input:focus{
-    border-color: var(--blue);
-    outline: none;
-}
-
-.close-modal{
-    position: absolute;
-    top: 15px; right: 15px;
-    background: none;
-    color: var(--muted);
-    font-size: 1.2rem;
-}
-
-/* APPLICATION LESSONS LAYOUT */
 .app-layout{
     display:grid;
     grid-template-columns:320px 1fr;
+
     min-height:calc(100vh - 70px);
 }
 
 .sidebar{
     background:var(--secondary);
     border-right:1px solid var(--border);
+
     overflow-y:auto;
+
     padding:15px;
+
     max-height:calc(100vh - 70px);
 }
 
 .sidebar h2{
     color:var(--gold);
     margin-bottom:15px;
+
     font-size:1.1rem;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
+
+    padding-bottom:10px;
+
+    border-bottom:1px solid var(--border);
 }
 
 .chapter-item{
     padding:12px;
+
     border-bottom:1px solid var(--border);
+
     cursor:pointer;
-    border-radius: 6px;
+
+    border-radius:6px;
 }
 
 .chapter-item:hover{
     background:var(--card);
+}
+
+.chapter-item.open{
+    background:rgba(32,44,79,.45);
 }
 
 .lesson-list{
@@ -436,10 +460,16 @@ nav.nav-links a:hover{
 
 .lesson-subitem{
     padding:8px 8px 8px 15px;
+
     color:var(--muted);
+
     border-radius:6px;
-    font-size:0.9rem;
-    margin-top: 4px;
+
+    font-size:.9rem;
+
+    margin-top:4px;
+
+    cursor:pointer;
 }
 
 .lesson-subitem:hover{
@@ -449,35 +479,22 @@ nav.nav-links a:hover{
 
 .main-content{
     padding:30px;
+
     overflow-y:auto;
+
     max-height:calc(100vh - 70px);
 }
 
 .lesson-card{
     background:var(--secondary);
+
     border:1px solid var(--border);
+
     border-radius:14px;
+
     padding:35px;
-}
 
-/* BANNIÈRE BANNER SOURCES OBLIGATOIRE SUR CHAQUE LEÇON */
-.sources-header-box {
-    background: rgba(72, 202, 228, 0.1);
-    border: 1px solid var(--blue);
-    border-left: 5px solid var(--gold);
-    padding: 14px 20px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    font-size: 0.9rem;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.sources-header-box i {
-    color: var(--gold);
-    font-size: 1.3rem;
+    min-height:500px;
 }
 
 .lesson-card h1{
@@ -489,642 +506,2528 @@ nav.nav-links a:hover{
 .tag{
     color:var(--muted);
     margin-bottom:20px;
-    font-size:0.95rem;
+    font-size:.95rem;
 }
+
+/* =========================================================
+   SOURCES
+========================================================= */
+
+.sources-header-box{
+    background:rgba(72,202,228,.1);
+
+    border:1px solid var(--blue);
+
+    border-left:5px solid var(--gold);
+
+    padding:14px 20px;
+
+    border-radius:8px;
+
+    margin-bottom:25px;
+
+    font-size:.9rem;
+
+    color:var(--text);
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.sources-header-box i{
+    color:var(--gold);
+    font-size:1.3rem;
+}
+
+/* =========================================================
+   FORMULE
+========================================================= */
 
 .formula{
     background:var(--card);
+
     border-left:4px solid var(--gold);
+
     padding:18px;
+
     margin:20px 0;
+
     text-align:center;
+
     font-size:1.2rem;
+
     border-radius:0 8px 8px 0;
+
+    overflow-x:auto;
 }
 
-.course-text p {
-    line-height: 1.8;
-    margin-bottom: 16px;
-    color: var(--text);
-    text-align: justify;
+.katex-display{
+    overflow-x:auto;
+    overflow-y:hidden;
 }
 
-.illustration-box {
-    margin: 25px 0;
-    text-align: center;
-    background: var(--card);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
+/* =========================================================
+   COURS
+========================================================= */
+
+.course-text p{
+    line-height:1.8;
+
+    margin-bottom:16px;
+
+    color:var(--text);
+
+    text-align:justify;
 }
 
-.illustration-box img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    max-height: 320px;
-    object-fit: contain;
+.illustration-box{
+    margin:25px 0;
+
+    text-align:center;
+
+    background:var(--card);
+
+    padding:15px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
 }
 
-.illustration-box p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-top: 8px;
+.illustration-box img{
+    max-width:100%;
+    height:auto;
+
+    max-height:320px;
+
+    border-radius:6px;
+
+    object-fit:contain;
 }
 
-.example-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 25px;
-    margin-top: 30px;
+.illustration-box p{
+    font-size:.85rem;
+
+    color:var(--muted);
+
+    margin-top:8px;
 }
 
-.example-box h3 {
-    color: var(--gold);
-    margin-bottom: 12px;
+.example-box{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:25px;
+
+    margin-top:30px;
 }
+
+.example-box h3{
+    color:var(--gold);
+    margin-bottom:12px;
+}
+
+.example-box p{
+    line-height:1.7;
+    margin-bottom:10px;
+}
+
+.lesson-placeholder{
+    margin-top:25px;
+
+    padding:20px;
+
+    background:rgba(247,184,1,.08);
+
+    border:1px solid rgba(247,184,1,.35);
+
+    border-radius:10px;
+
+    color:var(--muted);
+
+    line-height:1.8;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.8);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:2000;
+
+    padding:20px;
+}
+
+.modal-content{
+    background:var(--secondary);
+
+    border:1px solid var(--border);
+
+    padding:35px;
+
+    border-radius:16px;
+
+    width:100%;
+    max-width:420px;
+
+    position:relative;
+}
+
+.modal-content h2{
+    color:var(--gold);
+
+    margin-bottom:20px;
+
+    text-align:center;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--muted);
+
+    font-size:.9rem;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:12px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    color:var(--text);
+}
+
+.form-group input:focus{
+    border-color:var(--blue);
+    outline:none;
+}
+
+.close-modal{
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    background:none;
+
+    color:var(--muted);
+
+    font-size:1.2rem;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
-    background: var(--secondary);
-    border-top: 1px solid var(--border);
-    padding: 30px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.9rem;
+    background:var(--secondary);
+
+    border-top:1px solid var(--border);
+
+    padding:30px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:.9rem;
 }
 
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media(max-width:900px){
+
     .chapter-landscape-card{
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
     }
+
     .chapter-landscape-img-container{
-        height: 180px;
+        height:180px;
     }
+
 }
 
 @media(max-width:768px){
-    header{ padding: 0 15px; }
-    nav.nav-links{ display: none; }
-    .app-layout{ grid-template-columns:1fr; }
-    .sidebar{ max-height:40vh; }
-    .main-content{ padding:15px; }
-    .hero h1{ font-size: 2rem; }
+
+    header{
+        padding:0 15px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .app-layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        max-height:40vh;
+    }
+
+    .main-content{
+        padding:15px;
+    }
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .lesson-card{
+        padding:20px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER UNIFIÉ -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header>
+
     <div class="brand" onclick="showView('homeView')">
-        <i class="fa-solid fa-atom" style="color:var(--gold);"></i>
+
+        <i class="fa-solid fa-atom"
+           style="color:var(--gold);">
+        </i>
+
         ENACK-<span>ACADEMY</span>
+
     </div>
 
     <nav class="nav-links">
-        <a href="#" onclick="showView('homeView')"><i class="fa-solid fa-house"></i> <span data-i18n="navHome">Accueil</span></a>
-        <a href="#chaptersSection" onclick="showView('homeView')"><i class="fa-solid fa-book-open"></i> <span data-i18n="navChapters">Chapitres</span></a>
-        <a href="#faqSection" onclick="showView('homeView')"><i class="fa-solid fa-circle-question"></i> <span data-i18n="navFaq">FAQs</span></a>
-        <a href="#" onclick="showView('appView')"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="navPlatform">Espace Cours</span></a>
+
+        <a href="#"
+           onclick="showView('homeView'); return false;">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span data-i18n="navHome">
+                Accueil
+            </span>
+
+        </a>
+
+        <a href="#chaptersSection"
+           onclick="showView('homeView');">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            <span data-i18n="navChapters">
+                Chapitres
+            </span>
+
+        </a>
+
+        <a href="#faqSection"
+           onclick="showView('homeView');">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+            <span data-i18n="navFaq">
+                FAQs
+            </span>
+
+        </a>
+
+        <a href="#"
+           onclick="showView('appView'); return false;">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <span data-i18n="navPlatform">
+                Espace Cours
+            </span>
+
+        </a>
+
     </nav>
 
     <div class="nav-controls">
-        <select class="lang-select" onchange="changeLanguage(this.value)">
-            <option value="fr">🇫🇷 FR</option>
-            <option value="en">🇬🇧 EN</option>
+
+        <select class="lang-select"
+                onchange="changeLanguage(this.value)"
+                aria-label="Language">
+
+            <option value="fr">
+                🇫🇷 FR
+            </option>
+
+            <option value="en">
+                🇬🇧 EN
+            </option>
+
         </select>
 
         <div id="authContainer">
-            <button class="btn-primary" onclick="openLoginModal()" data-i18n="btnLogin">Se connecter</button>
+
+            <button class="btn-primary"
+                    onclick="openLoginModal()"
+                    data-i18n="btnLogin">
+
+                Se connecter
+
+            </button>
+
         </div>
+
     </div>
+
 </header>
 
-<!-- VUE 1 : LANDING PAGE / PAGE D'ACCUEIL -->
+
+<!-- =========================================================
+     HOME VIEW
+========================================================= -->
+
 <div id="homeView">
+
     <section class="hero">
-        <p class="welcome-msg" data-i18n="welcomeMsg">👋 Bienvenue à tous les étudiants et passionnés de Physique !</p>
-        <h1 data-i18n="heroTitle">Maîtrisez la Physique Générale de la Mécanique à l'Électronique</h1>
-        <p class="definition" data-i18n="heroDef">
-            <strong>Enack-Academy</strong> est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.
+
+        <p class="welcome-msg"
+           data-i18n="welcomeMsg">
+
+            👋 Bienvenue à tous les étudiants et passionnés de Physique !
+
         </p>
-        <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
-            <button class="btn-primary" onclick="showView('appView')" style="font-size:1.1rem; padding:12px 28px;">
-    <!-- GALERIE DES CHAPITRES EN MODE PAYSAGE -->
-    <section id="chaptersSection">
-        <h2 class="section-title" data-i18n="titleChapters">📚 Les 10 Chapitres du Programme (Vue Paysage)</h2>
-        <div class="chapters-landscape-container" id="chaptersLandscapeList">
-            <!-- Injecté par JS sous forme de cartes Paysage avec images -->
+
+        <h1 data-i18n="heroTitle">
+
+            Maîtrisez la Physique Générale de la Mécanique à l'Électronique
+
+        </h1>
+
+        <p class="definition"
+           data-i18n="heroDef">
+
+            <strong>Enack-Academy</strong> est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.
+
+        </p>
+
+        <div style="
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            flex-wrap:wrap;
+        ">
+
+            <button class="btn-primary"
+                    onclick="showView('appView')"
+                    style="
+                        font-size:1.1rem;
+                        padding:12px 28px;
+                    ">
+
+                <i class="fa-solid fa-book-open-reader"></i>
+
+                <span data-i18n="btnExplore">
+                    Explorer les Cours
+                </span>
+
+            </button>
+
         </div>
+
     </section>
 
-    <!-- GALERIE DES CHAPITRES -->
+
+    <!-- =====================================================
+         CHAPTER GALLERY
+    ====================================================== -->
+
     <section id="chaptersSection">
-        <h2 class="section-title" data-i18n="titleChapters">📚 Les 10 Chapitres du Cursus</h2>
-        <div class="chapters-grid" id="chaptersCardsGrid">
-            <!-- Injecté par JS -->
+
+        <h2 class="section-title"
+            data-i18n="titleChapters">
+
+            📚 Les 10 Chapitres du Programme (Vue Paysage)
+
+        </h2>
+
+        <div class="chapters-landscape-container"
+             id="chaptersLandscapeList">
+
         </div>
+
     </section>
 
-    <!-- SECTION FAQ -->
-    <section id="faqSection" class="faq-section">
-        <h2 class="section-title" data-i18n="titleFaq">❓ Foire Aux Questions (FAQ)</h2>
-        
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+
+    <section id="faqSection"
+             class="faq-section">
+
+        <h2 class="section-title"
+            data-i18n="titleFaq">
+
+            ❓ Foire Aux Questions (FAQ)
+
+        </h2>
+
+
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span data-i18n="faqQ1">Comment accéder aux cours complets d'Enack-Academy ?</span>
+
+            <div class="faq-question"
+                 onclick="toggleFaq(this)">
+
+                <span data-i18n="faqQ1">
+
+                    Comment accéder aux cours complets d'Enack-Academy ?
+
+                </span>
+
                 <i class="fa-solid fa-chevron-down"></i>
+
             </div>
-            <div class="faq-answer" data-i18n="faqA1">
+
+            <div class="faq-answer"
+                 data-i18n="faqA1">
+
                 L'accès à l'intégralité du programme est libre. Il vous suffit de cliquer sur "Espace Cours" ou sur le chapitre de votre choix pour accéder à la plateforme d'étude interactive avec le menu latéral.
+
             </div>
+
         </div>
 
+
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span data-i18n="faqQ2">Quelles sont les sources et références utilisées ?</span>
+
+            <div class="faq-question"
+                 onclick="toggleFaq(this)">
+
+                <span data-i18n="faqQ2">
+
+                    Quelles sont les sources et références utilisées ?
+
+                </span>
+
                 <i class="fa-solid fa-chevron-down"></i>
+
             </div>
-            <div class="faq-answer" data-i18n="faqA2">
+
+            <div class="faq-answer"
+                 data-i18n="faqA2">
+
                 Tous nos cours sont rédigés selon les standards internationaux en nous appuyant sur les ouvrages de référence : Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, Berkeley Physics Course et les ressources scientifiques open-access du CERN et de l'UNESCO.
+
             </div>
+
         </div>
 
+
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span data-i18n="faqQ3">Comment fonctionne la connexion étudiante ?</span>
+
+            <div class="faq-question"
+                 onclick="toggleFaq(this)">
+
+                <span data-i18n="faqQ3">
+
+                    Comment fonctionne la connexion étudiante ?
+
+                </span>
+
                 <i class="fa-solid fa-chevron-down"></i>
+
             </div>
-            <div class="faq-answer" data-i18n="faqA3">
+
+            <div class="faq-answer"
+                 data-i18n="faqA3">
+
                 Cliquez sur "Se connecter", saisissez votre nom d'utilisateur et votre adresse email étudiante (ex. nom@student.com). Cela personnalise votre session d'apprentissage et enregistre votre profil.
+
             </div>
+
         </div>
 
+
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span data-i18n="faqQ4">Les formules mathématiques sont-elles correctement affichées ?</span>
+
+            <div class="faq-question"
+                 onclick="toggleFaq(this)">
+
+                <span data-i18n="faqQ4">
+
+                    Les formules mathématiques sont-elles correctement affichées ?
+
+                </span>
+
                 <i class="fa-solid fa-chevron-down"></i>
+
             </div>
-            <div class="faq-answer" data-i18n="faqA4">
+
+            <div class="faq-answer"
+                 data-i18n="faqA4">
+
                 Oui, Enack-Academy intègre le moteur de rendu KaTeX de haute précision pour un rendu fluide et élégant de toutes les équations différentielles, intégrales et expressions vectorielles.
+
             </div>
+
         </div>
+
     </section>
+
 
     <footer>
-        <p>&copy; 2026 Enack-Academy. Tous droits réservés. Plateforme internationale d'enseignement de la Physique.</p>
+
+        <p>
+            &copy; 2026 Enack-Academy.
+            Tous droits réservés.
+            Plateforme internationale d'enseignement de la Physique.
+        </p>
+
     </footer>
+
 </div>
 
-<!-- VUE 2 : ESPACE DE COURS INTERACTIF -->
-<div id="appView" class="hidden">
+
+<!-- =========================================================
+     COURSE VIEW
+========================================================= -->
+
+<div id="appView"
+     class="hidden">
+
     <div class="app-layout">
+
+        <!-- SIDEBAR -->
+
         <aside class="sidebar">
-            <h2 data-i18n="sidebarTitle">⚛️ Programme Officiel</h2>
+
+            <h2 data-i18n="sidebarTitle">
+
+                ⚛️ Programme Officiel
+
+            </h2>
+
             <div id="curriculum"></div>
+
         </aside>
 
+
+        <!-- MAIN -->
+
         <main class="main-content">
+
             <div class="lesson-card">
-                <!-- Mention stricte des sources -->
+
+
+                <!-- SOURCES -->
+
                 <div class="sources-header-box">
+
                     <i class="fa-solid fa-building-columns"></i>
+
                     <div>
-                        <strong>Sources & Références Académiques :</strong> 
-                        <span>Halliday & Resnick - Fundamentals of Physics | Feynman Lectures on Physics | CERN & UNESCO Open Educational Resources</span>
+
+                        <strong data-i18n="sourcesTitle">
+                            Sources & Références Académiques :
+                        </strong>
+
+                        <span data-i18n="sourcesText">
+
+                            Halliday & Resnick - Fundamentals of Physics |
+                            Feynman Lectures on Physics |
+                            CERN & UNESCO Open Educational Resources
+
+                        </span>
+
                     </div>
+
                 </div>
 
-                <h1 id="lessonTitle">Bienvenue sur Enack-Academy</h1>
-                <div id="lessonTag" class="tag">Plateforme académique de Physique Générale</div>
+
+                <h1 id="lessonTitle">
+
+                    Bienvenue sur Enack-Academy
+
+                </h1>
+
+
+                <div id="lessonTag"
+                     class="tag">
+
+                    Plateforme académique de Physique Générale
+
+                </div>
+
+
                 <div id="lessonContent">
-                    <p style="line-height: 1.8;">Sélectionnez une leçon dans le menu latéral pour afficher le cours détaillé, les formules fondamentales, les illustrations et les exercices d'application corrigés.</p>
+
+                    <p style="line-height:1.8;">
+
+                        Sélectionnez une leçon dans le menu latéral pour afficher le cours détaillé, les formules fondamentales, les illustrations et les exercices d'application corrigés.
+
+                    </p>
+
                 </div>
+
             </div>
+
         </main>
+
     </div>
+
 </div>
 
-<!-- MODAL LOGIN -->
-<div id="loginModal" class="modal-overlay hidden">
+
+<!-- =========================================================
+     LOGIN MODAL
+========================================================= -->
+
+<div id="loginModal"
+     class="modal-overlay hidden">
+
     <div class="modal-content">
-        <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
-        <h2 data-i18n="modalTitle">🎓 Connexion Étudiant</h2>
+
+        <button class="close-modal"
+                onclick="closeLoginModal()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <h2 data-i18n="modalTitle">
+
+            🎓 Connexion Étudiant
+
+        </h2>
+
         <form onsubmit="handleLogin(event)">
+
             <div class="form-group">
-                <label data-i18n="lblUsername">Nom d'utilisateur :</label>
-                <input type="text" id="loginUsername" required placeholder="ex. Jean Dupont">
+
+                <label data-i18n="lblUsername">
+
+                    Nom d'utilisateur :
+
+                </label>
+
+                <input type="text"
+                       id="loginUsername"
+                       required
+                       placeholder="ex. Jean Dupont">
+
             </div>
+
+
             <div class="form-group">
-                <label data-i18n="lblEmail">Email Étudiant (@student.com) :</label>
-                <input type="email" id="loginEmail" required placeholder="exemple@student.com" pattern=".*@student\.com$" title="L'email doit se terminer par @student.com">
+
+                <label data-i18n="lblEmail">
+
+                    Email Étudiant (@student.com) :
+
+                </label>
+
+                <input type="email"
+                       id="loginEmail"
+                       required
+                       placeholder="exemple@student.com"
+                       pattern=".*@student\.com$"
+                       title="L'email doit se terminer par @student.com">
+
             </div>
-            <button type="submit" class="btn-primary" style="width:100%; margin-top:10px;" data-i18n="btnSubmitLogin">Valider la connexion</button>
+
+
+            <button type="submit"
+                    class="btn-primary"
+                    style="
+                        width:100%;
+                        margin-top:10px;
+                    "
+                    data-i18n="btnSubmitLogin">
+
+                Valider la connexion
+
+            </button>
+
         </form>
+
     </div>
+
 </div>
+
 
 <script>
-/* =====================================================
-   PROGRAMME OFFICIEL (10 CHAPITRES COMPLET)
-===================================================== */
+
+/* =========================================================
+   PROGRAMME OFFICIEL
+   TES DONNÉES CONSERVÉES
+========================================================= */
+
 const PROGRAM = [
-[
-"⚙️", "Mécanique",
-[
-["Cinématique", "\\vec{v} = \\frac{d\\vec{r}}{dt}, \\quad \\vec{a} = \\frac{d\\vec{v}}{dt}"],
-["Dynamique", "\\sum \\vec{F} = m \\cdot \\vec{a}"],
-["Travail, énergie et puissance", "W_{AB} = \\int_{A}^{B} \\vec{F} \\cdot d\\vec{r}, \\quad P = \\vec{F} \\cdot \\vec{v}"],
-["Quantité de mouvement", "\\vec{p} = m \\cdot \\vec{v}, \\quad \\sum \\vec{F} = \\frac{d\\vec{p}}{dt}"],
-["Gravitation", "F = G \\frac{m_1 m_2}{r^2}"],
-["Mouvements des projectiles, satellites", "v = \\sqrt{\\frac{GM}{r}}, \\quad T = 2\\pi \\sqrt{\\frac{r^3}{GM}}"],
-["Oscillations et pendules", "T = 2\\pi \\sqrt{\\frac{m}{k}}, \\quad T = 2\\pi \\sqrt{\\frac{L}{g}}"]
-]
-],
-[
-"🌡️", "Thermodynamique",
-[
-["Température et chaleur", "Q = m \\cdot c \\cdot \\Delta T"],
-["Gaz parfaits", "P \\cdot V = n \\cdot R \\cdot T"],
-["Travail et énergie thermique", "W = -\\int P \\, dV"],
-["Lois de la thermodynamique", "\\Delta U = Q + W"],
-["Machines thermiques", "\\eta = 1 - \\frac{T_f}{T_c}"],
-["Changements d'état", "Q = m \\cdot L"]
-]
-],
-[
-"⚡", "Électricité",
-[
-["Charge électrique", "F = k \\frac{q_1 q_2}{r^2}"],
-["Champ électrique", "\\vec{E} = \\frac{\\vec{F}}{q}"],
-["Potentiel et tension", "U = V_A - V_B"],
-["Courant électrique", "I = \\frac{dQ}{dt}"],
-["Résistance et loi d'Ohm", "U = R \\cdot I"],
-["Lois de Kirchhoff", "\\sum I = 0, \\quad \\sum U = 0"],
-["Condensateurs", "Q = C \\cdot U"],
-["Énergie et puissance électriques", "P = U \\cdot I = R \\cdot I^2"]
-]
-],
-[
-"🧲", "Magnétisme",
-[
-["Champ magnétique", "B = \\frac{\\mu_0 I}{2\\pi r}"],
-["Force magnétique", "F = qvB\\sin(\\theta)"],
-["Force de Lorentz", "\\vec{F} = q(\\vec{E} + \\vec{v} \\times \\vec{B})"],
-["Force de Laplace", "\\vec{F} = I\\vec{L} \\times \\vec{B}"],
-["Théorème d'Ampère", "\\oint \\vec{B} \\cdot d\\vec{l} = \\mu_0 I"],
-["Induction électromagnétique", "e = -\\frac{d\\Phi}{dt}"],
-["Électroaimants", "B = \\mu_0 n I"]
-]
-],
-[
-"🔌", "Électromagnétisme",
-[
-["Relations électricité-magnétisme", "\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}"],
-["Induction et flux", "\\Phi = B \\cdot S \\cdot \\cos(\\theta)"],
-["Lois de Faraday et Lenz", "e = -\\frac{d\\Phi}{dt}"],
-["Ondes électromagnétiques", "c = \\frac{1}{\\sqrt{\\mu_0 \\varepsilon_0}}"],
-["Transformateurs", "\\frac{U_2}{U_1} = \\frac{N_2}{N_1}"]
-]
-],
-[
-"🔭", "Optique",
-[
-["Propagation de la lumière", "n = \\frac{c}{v}"],
-["Réflexion et Réfraction", "n_1\\sin(i_1) = n_2\\sin(i_2)"],
-["Lentilles minces", "\\frac{1}{f'} = \\frac{1}{p'} - \\frac{1}{p}"],
-["Miroirs sphériques", "\\frac{1}{p'} + \\frac{1}{p} = \\frac{1}{f'}"],
-["Instruments optiques", "G = \\frac{\\alpha'}{\\alpha} \\approx \\frac{f'_{obj}}{f'_{oc}}"],
-["Interférences et diffraction", "a\\sin(\\theta) = m\\lambda, \\quad i = \\frac{\\lambda D}{a}"]
-]
-],
-[
-"🌊", "Ondes et vibrations",
-[
-["Mouvement oscillatoire", "x(t) = A\\cos(\\omega t + \\varphi)"],
-["Ondes mécaniques", "y(x,t) = A\\cos(\\omega t - kx)"],
-["Fréquence et période", "f = \\frac{1}{T}, \\quad \\lambda = v \\cdot T"],
-["Résonance", "f_0 = \\frac{1}{2\\pi\\sqrt{LC}}"],
-["Effet Doppler", "f' = f \\frac{v \\pm v_o}{v \\mp v_s}"]
-]
-],
-[
-"⚛️", "Physique moderne",
-[
-["Relativité restreinte", "E = m \\cdot c^2"],
-["Physique quantique", "\\Delta x \\cdot \\Delta p \\ge \\frac{\\hbar}{2}"],
-["Effet photoélectrique", "E_c = hf - W_0"],
-["Modèle atomique", "E_n = -\\frac{13.6}{n^2} \\text{ eV}"],
-["Dualité onde-particule", "\\lambda = \\frac{h}{p}"]
-]
-],
-[
-"☢️", "Physique nucléaire",
-[
-["Noyau atomique et isotopes", "{}^A_Z X"],
-["Radioactivité et désintégration", "N(t) = N_0 e^{-\\lambda t}"],
-["Demi-vie", "t_{1/2} = \\frac{\\ln(2)}{\\lambda}"],
-["Fission et fusion", "E = \\Delta m \\cdot c^2"]
-]
-],
-[
-"💻", "Physique appliquée / électronique",
-[
-["Semi-conducteurs", "n_i^2 = n \\cdot p"],
-["Diodes", "I = I_s (e^{V/V_T} - 1)"],
-["Transistors", "I_C = \\beta \\cdot I_B"],
-["Circuits et capteurs", "\\tau = R \\cdot C, \\quad S = \\frac{\\Delta s}{\\Delta m}"]
-]
-]
+
+    [
+        "⚙️",
+        "Mécanique",
+        [
+
+            [
+                "Cinématique",
+                String.raw`\vec{v} = \frac{d\vec{r}}{dt}, \quad \vec{a} = \frac{d\vec{v}}{dt}`
+            ],
+
+            [
+                "Dynamique",
+                String.raw`\sum \vec{F} = m \cdot \vec{a}`
+            ],
+
+            [
+                "Travail, énergie et puissance",
+                String.raw`W_{AB} = \int_{A}^{B} \vec{F} \cdot d\vec{r}, \quad P = \vec{F} \cdot \vec{v}`
+            ],
+
+            [
+                "Quantité de mouvement",
+                String.raw`\vec{p} = m \cdot \vec{v}, \quad \sum \vec{F} = \frac{d\vec{p}}{dt}`
+            ],
+
+            [
+                "Gravitation",
+                String.raw`F = G \frac{m_1 m_2}{r^2}`
+            ],
+
+            [
+                "Mouvements des projectiles, satellites",
+                String.raw`v = \sqrt{\frac{GM}{r}}, \quad T = 2\pi \sqrt{\frac{r^3}{GM}}`
+            ],
+
+            [
+                "Oscillations et pendules",
+                String.raw`T = 2\pi \sqrt{\frac{m}{k}}, \quad T = 2\pi \sqrt{\frac{L}{g}}`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "🌡️",
+        "Thermodynamique",
+        [
+
+            [
+                "Température et chaleur",
+                String.raw`Q = m \cdot c \cdot \Delta T`
+            ],
+
+            [
+                "Gaz parfaits",
+                String.raw`P \cdot V = n \cdot R \cdot T`
+            ],
+
+            [
+                "Travail et énergie thermique",
+                String.raw`W = -\int P \, dV`
+            ],
+
+            [
+                "Lois de la thermodynamique",
+                String.raw`\Delta U = Q + W`
+            ],
+
+            [
+                "Machines thermiques",
+                String.raw`\eta = 1 - \frac{T_f}{T_c}`
+            ],
+
+            [
+                "Changements d'état",
+                String.raw`Q = m \cdot L`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "⚡",
+        "Électricité",
+        [
+
+            [
+                "Charge électrique",
+                String.raw`F = k \frac{q_1 q_2}{r^2}`
+            ],
+
+            [
+                "Champ électrique",
+                String.raw`\vec{E} = \frac{\vec{F}}{q}`
+            ],
+
+            [
+                "Potentiel et tension",
+                String.raw`U = V_A - V_B`
+            ],
+
+            [
+                "Courant électrique",
+                String.raw`I = \frac{dQ}{dt}`
+            ],
+
+            [
+                "Résistance et loi d'Ohm",
+                String.raw`U = R \cdot I`
+            ],
+
+            [
+                "Lois de Kirchhoff",
+                String.raw`\sum I = 0, \quad \sum U = 0`
+            ],
+
+            [
+                "Condensateurs",
+                String.raw`Q = C \cdot U`
+            ],
+
+            [
+                "Énergie et puissance électriques",
+                String.raw`P = U \cdot I = R \cdot I^2`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "🧲",
+        "Magnétisme",
+        [
+
+            [
+                "Champ magnétique",
+                String.raw`B = \frac{\mu_0 I}{2\pi r}`
+            ],
+
+            [
+                "Force magnétique",
+                String.raw`F = qvB\sin(\theta)`
+            ],
+
+            [
+                "Force de Lorentz",
+                String.raw`\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})`
+            ],
+
+            [
+                "Force de Laplace",
+                String.raw`\vec{F} = I\vec{L} \times \vec{B}`
+            ],
+
+            [
+                "Théorème d'Ampère",
+                String.raw`\oint \vec{B} \cdot d\vec{l} = \mu_0 I`
+            ],
+
+            [
+                "Induction électromagnétique",
+                String.raw`e = -\frac{d\Phi}{dt}`
+            ],
+
+            [
+                "Électroaimants",
+                String.raw`B = \mu_0 n I`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "🔌",
+        "Électromagnétisme",
+        [
+
+            [
+                "Relations électricité-magnétisme",
+                String.raw`\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}`
+            ],
+
+            [
+                "Induction et flux",
+                String.raw`\Phi = B \cdot S \cdot \cos(\theta)`
+            ],
+
+            [
+                "Lois de Faraday et Lenz",
+                String.raw`e = -\frac{d\Phi}{dt}`
+            ],
+
+            [
+                "Ondes électromagnétiques",
+                String.raw`c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}`
+            ],
+
+            [
+                "Transformateurs",
+                String.raw`\frac{U_2}{U_1} = \frac{N_2}{N_1}`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "🔭",
+        "Optique",
+        [
+
+            [
+                "Propagation de la lumière",
+                String.raw`n = \frac{c}{v}`
+            ],
+
+            [
+                "Réflexion et Réfraction",
+                String.raw`n_1\sin(i_1) = n_2\sin(i_2)`
+            ],
+
+            [
+                "Lentilles minces",
+                String.raw`\frac{1}{f'} = \frac{1}{p'} - \frac{1}{p}`
+            ],
+
+            [
+                "Miroirs sphériques",
+                String.raw`\frac{1}{p'} + \frac{1}{p} = \frac{1}{f'}`
+            ],
+
+            [
+                "Instruments optiques",
+                String.raw`G = \frac{\alpha'}{\alpha} \approx \frac{f'_{obj}}{f'_{oc}}`
+            ],
+
+            [
+                "Interférences et diffraction",
+                String.raw`a\sin(\theta) = m\lambda, \quad i = \frac{\lambda D}{a}`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "🌊",
+        "Ondes et vibrations",
+        [
+
+            [
+                "Mouvement oscillatoire",
+                String.raw`x(t) = A\cos(\omega t + \varphi)`
+            ],
+
+            [
+                "Ondes mécaniques",
+                String.raw`y(x,t) = A\cos(\omega t - kx)`
+            ],
+
+            [
+                "Fréquence et période",
+                String.raw`f = \frac{1}{T}, \quad \lambda = v \cdot T`
+            ],
+
+            [
+                "Résonance",
+                String.raw`f_0 = \frac{1}{2\pi\sqrt{LC}}`
+            ],
+
+            [
+                "Effet Doppler",
+                String.raw`f' = f \frac{v \pm v_o}{v \mp v_s}`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "⚛️",
+        "Physique moderne",
+        [
+
+            [
+                "Relativité restreinte",
+                String.raw`E = m \cdot c^2`
+            ],
+
+            [
+                "Physique quantique",
+                String.raw`\Delta x \cdot \Delta p \ge \frac{\hbar}{2}`
+            ],
+
+            [
+                "Effet photoélectrique",
+                String.raw`E_c = hf - W_0`
+            ],
+
+            [
+                "Modèle atomique",
+                String.raw`E_n = -\frac{13.6}{n^2}\text{ eV}`
+            ],
+
+            [
+                "Dualité onde-particule",
+                String.raw`\lambda = \frac{h}{p}`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "☢️",
+        "Physique nucléaire",
+        [
+
+            [
+                "Noyau atomique et isotopes",
+                String.raw`{}^A_Z X`
+            ],
+
+            [
+                "Radioactivité et désintégration",
+                String.raw`N(t) = N_0 e^{-\lambda t}`
+            ],
+
+            [
+                "Demi-vie",
+                String.raw`t_{1/2} = \frac{\ln(2)}{\lambda}`
+            ],
+
+            [
+                "Fission et fusion",
+                String.raw`E = \Delta m \cdot c^2`
+            ]
+
+        ]
+    ],
+
+
+    [
+        "💻",
+        "Physique appliquée / électronique",
+        [
+
+            [
+                "Semi-conducteurs",
+                String.raw`n_i^2 = n \cdot p`
+            ],
+
+            [
+                "Diodes",
+                String.raw`I = I_s(e^{V/V_T} - 1)`
+            ],
+
+            [
+                "Transistors",
+                String.raw`I_C = \beta \cdot I_B`
+            ],
+
+            [
+                "Circuits et capteurs",
+                String.raw`\tau = R \cdot C, \quad S = \frac{\Delta s}{\Delta m}`
+            ]
+
+        ]
+    ]
+
 ];
 
-/* =====================================================
-   DICO DES TEXTES ET EXEMPLES DES COURS
-===================================================== */
+
+/* =========================================================
+   CONTENUS DÉTAILLÉS
+   TES DONNÉES CONSERVÉES
+========================================================= */
+
 const COURS_TEXTE = {
-"0-0": { paragraphs: ["La cinématique étudie le mouvement des corps indépendamment des forces qui les provoquent...", "La position est repérée par le vecteur position r(t), la vitesse par v(t)=dr/dt et l'accélération par a(t)=dv/dt."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Kinematics_trajectory.svg/800px-Kinematics_trajectory.svg.png", imageCaption: "Figure : Trajectoire cinématique.", example: { statement: "x(t) = 3t^2 + 5t + 2", questions: "Calculer v(4) et a(4).", solution: "v(t) = 6t + 5 => v(4) = 29 m/s. a(t) = 6 m/s^2." } },
-"8-0": { paragraphs: ["Le noyau atomique rassemble protons et neutrons au centre de l'atome...", "Sa stabilité dépend de l'interaction forte et de l'énergie de liaison par nucléon."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Nuclide_map_diagram.svg/800px-Nuclide_map_diagram.svg.png", imageCaption: "Figure : Carte des nucléides.", example: { statement: "Considérons le noyau Uranium 238.", questions: "Déterminer Z, A et N.", solution: "Z=92, A=238, N = 238-92 = 146 neutrons." } },
-"9-0": { paragraphs: ["Les semi-conducteurs ont une bande interdite modérée franchissable par agitation thermique ou dopage.", "Le produit n*p = n_i^2 définit la loi d'action de masse."], image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/PN-junction-equilibrium.svg/800px-PN-junction-equilibrium.svg.png", imageCaption: "Figure : Jonction PN.", example: { statement: "Silicium dopé N avec n = 10^16 cm^-3 et n_i = 1.5*10^10 cm^-3.", questions: "Calculer la concentration p des trous.", solution: "p = n_i^2 / n = 2.25*10^20 / 10^16 = 2.25*10^4 cm^-3." } }
+
+    "0-0": {
+
+        paragraphs:[
+            "La cinématique étudie le mouvement des corps indépendamment des forces qui les provoquent.",
+            "La position est repérée par le vecteur position r(t), la vitesse par v(t)=dr/dt et l'accélération par a(t)=dv/dt."
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Kinematics_trajectory.svg/800px-Kinematics_trajectory.svg.png",
+
+        imageCaption:
+        "Figure : Trajectoire cinématique.",
+
+        example:{
+
+            statement:
+            String.raw`x(t) = 3t^2 + 5t + 2`,
+
+            questions:
+            "Calculer v(4) et a(4).",
+
+            solution:
+            String.raw`v(t) = 6t + 5 \Rightarrow v(4) = 29\ \text{m/s}. a(t) = 6\ \text{m/s}^2.`
+
+        }
+
+    },
+
+
+    "8-0": {
+
+        paragraphs:[
+            "Le noyau atomique rassemble protons et neutrons au centre de l'atome.",
+            "Sa stabilité dépend de l'interaction forte et de l'énergie de liaison par nucléon."
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Nuclide_map_diagram.svg/800px-Nuclide_map_diagram.svg.png",
+
+        imageCaption:
+        "Figure : Carte des nucléides.",
+
+        example:{
+
+            statement:
+            "Considérons le noyau Uranium 238.",
+
+            questions:
+            "Déterminer Z, A et N.",
+
+            solution:
+            "Z=92, A=238, N = 238-92 = 146 neutrons."
+
+        }
+
+    },
+
+
+    "9-0": {
+
+        paragraphs:[
+            "Les semi-conducteurs ont une bande interdite modérée franchissable par agitation thermique ou dopage.",
+            String.raw`Le produit n*p = n_i^2 définit la loi d'action de masse.`
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/PN-junction-equilibrium.svg/800px-PN-junction-equilibrium.svg.png",
+
+        imageCaption:
+        "Figure : Jonction PN.",
+
+        example:{
+
+            statement:
+            "Silicium dopé N avec n = 10^16 cm^-3 et n_i = 1.5*10^10 cm^-3.",
+
+            questions:
+            "Calculer la concentration p des trous.",
+
+            solution:
+            String.raw`p = n_i^2 / n = 2.25*10^20 / 10^16 = 2.25*10^4 cm^-3.`
+
+        }
+
+    },
+
+
+    /* =====================================================
+       VERSION PLUS DÉTAILLÉE FOURNIE DANS TON PREMIER CODE
+    ====================================================== */
+
+    "9-1":{
+
+        paragraphs:[
+            "Une diode est un dipôle non linéaire polarisé qui laisse passer le courant dans un seul sens.",
+            String.raw`Son équation caractéristique est \(I = I_s (e^{V/V_T} - 1)\).`,
+            String.raw`En polarisation directe, la diode conduit dès que la tension dépasse le seuil (\(\approx 0,6\,\text{V}\) pour le silicium).`,
+            "En polarisation inverse, elle se comporte comme un interrupteur ouvert avec un très faible courant de fuite.",
+            "La diode Zener fonctionne en régime de claquage inverse pour stabiliser les tensions.",
+            "Elles sont indispensables pour le redressement et la protection des circuits."
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Diode_iv_curve.svg/800px-Diode_iv_curve.svg.png",
+
+        imageCaption:
+        "Figure : Caractéristique courant-tension d'une diode.",
+
+        example:{
+
+            statement:
+            String.raw`Une diode au silicium (\(V_d = 0,7\,\text{V}\)) est en série avec \(R = 930\,\Omega\) pour \(I = 10\,\text{mA}\).`,
+
+            questions:
+            String.raw`Quelle est la tension d'alimentation \(E\) ?`,
+
+            solution:
+            String.raw`\(E = V_d + R \cdot I = 0,7 + (930 \times 0,010) = 10,0\,\text{Volts}\).`
+
+        }
+
+    },
+
+
+    "9-2":{
+
+        paragraphs:[
+            "Le transistor bipolaire est un composant actif à trois broches (émetteur, base, collecteur) assurant l'amplification ou la commutation.",
+            String.raw`Un faible courant de base \(I_B\) pilote un fort courant de collecteur \(I_C\) selon le gain \(I_C = \beta \cdot I_B\).`,
+            "Il fonctionne en régime bloqué, saturé ou linéaire (actif).",
+            "Les transistors MOSFET utilisent un champ électrique de grille pour commander le canal de conduction.",
+            "Ils constituent la brique fondamentale des microprocesseurs et des circuits logiques.",
+            "Leur miniaturisation extraordinaire a rendu possible l'ère numérique actuelle."
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/BJT_NPN_symbol.svg/800px-BJT_NPN_symbol.svg.png",
+
+        imageCaption:
+        "Figure : Symbole et broches d'un transistor bipolaire NPN.",
+
+        example:{
+
+            statement:
+            String.raw`Un transistor a un gain \(\beta = 150\) et un courant de base \(I_B = 40\,\mu\text{A}\).`,
+
+            questions:
+            String.raw`1. Calculer \(I_C\). 2. Calculer \(I_E\).`,
+
+            solution:
+            String.raw`1. \(I_C = 150 \times 40\,\mu\text{A} = 6\,\text{mA}\).<br>2. \(I_E = I_C + I_B = 6,04\,\text{mA}\).`
+
+        }
+
+    },
+
+
+    "9-3":{
+
+        paragraphs:[
+            "Les régimes transitoires décrivent l'évolution dynamique des circuits comportant des résistors, condensateurs ou bobines.",
+            String.raw`La constante de temps \(\tau = R \cdot C\) caractérise la rapidité de charge d'un circuit RC.`,
+            "Les filtres passifs sélectionnent ou atténuent des bandes de fréquences spécifiques.",
+            "Un capteur convertit une grandeur physique non électrique en un signal électrique exploitable.",
+            String.raw`La sensibilité \(S = \frac{\Delta s}{\Delta m}\) quantifie les performances métrologiques du capteur.`,
+            "Capteurs et circuits associés sont omniprésents dans l'automatisation et l'Internet des Objets (IoT)."
+        ],
+
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/RC_charging_curve.svg/800px-RC_charging_curve.svg.png",
+
+        imageCaption:
+        "Figure : Courbe de charge transitoire d'un circuit RC.",
+
+        example:{
+
+            statement:
+            String.raw`Un circuit RC a \(R = 10\,\text{k}\Omega\) et \(C = 47\,\mu\text{F}\).`,
+
+            questions:
+            String.raw`1. Calculer \(\tau\). 2. Calculer la durée du régime transitoire \(5\tau\).`,
+
+            solution:
+            String.raw`1. \(\tau = 10^4 \times (47 \times 10^{-6}) = 0,47\,\text{s}\).<br>2. \(t = 5 \times 0,47 = 2,35\,\text{secondes}\).`
+
+        }
+
+    }
+
 };
 
-/* =====================================================
-   IMAGES PAR DÉFAUT REPRÉSENTATIVES POUR CHAQUE CHAPITRE
-===================================================== */
+
+/* =========================================================
+   IMAGES DES CHAPITRES
+========================================================= */
+
 const CHAPTER_IMAGES = [
-    "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80", // Mécanique
-    "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80", // Thermodynamique
-    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80", // Électricité
-    "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?auto=format&fit=crop&w=800&q=80", // Magnétisme
-    "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=800&q=80", // Électromagnétisme
-    "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=800&q=80", // Optique
-    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80", // Ondes
-    "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80", // Physique moderne
-    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80", // Physique nucléaire
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"  // Électronique
+
+    "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+
 ];
 
-/* =====================================================
-   TRADUCTION BILINGUE FR / EN
-===================================================== */
+
+/* =========================================================
+   TRADUCTIONS
+========================================================= */
+
 const I18N = {
-    fr: {
-        navHome: "Accueil", navChapters: "Chapitres", navFaq: "FAQs", navPlatform: "Espace Cours",
-        welcomeMsg: "👋 Bienvenue à tous les étudiants et passionnés de Physique !",
-        heroTitle: "Maîtrisez la Physique Générale de la Mécanique à l'Électronique",
-        heroDef: "Enack-Academy est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.",
-        btnExplore: "Explorer les Cours", btnLogin: "Se connecter",
-        titleChapters: "📚 Les 10 Chapitres du Programme (Vue Paysage)",
-        titleFaq: "❓ Foire Aux Questions (FAQ)",
-        sidebarTitle: "⚛️ Programme Officiel", modalTitle: "🎓 Connexion Étudiant",
-        lblUsername: "Nom d'utilisateur :", lblEmail: "Email Étudiant (@student.com) :",
-        btnSubmitLogin: "Valider la connexion",
-        faqQ1: "Comment accéder aux cours complets d'Enack-Academy ?",
-        faqA1: "L'accès à l'intégralité du programme est libre. Il vous suffit de cliquer sur 'Espace Cours' ou sur le chapitre de votre choix pour accéder à la plateforme d'étude interactive.",
-        faqQ2: "Quelles sont les sources et références utilisées ?",
-        faqA2: "Tous nos cours sont rédigés selon les standards internationaux en nous appuyant sur les ouvrages de référence : Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, Berkeley Physics Course et les ressources du CERN.",
-        faqQ3: "Comment fonctionne la connexion étudiante ?",
-        faqA3: "Cliquez sur 'Se connecter', saisissez votre nom d'utilisateur et votre adresse email étudiante (ex. nom@student.com).",
-        faqQ4: "Les formules mathématiques sont-elles correctement affichées ?",
-        faqA4: "Oui, Enack-Academy intègre le moteur de rendu KaTeX pour un affichage parfait de toutes les équations."
+
+    fr:{
+
+        navHome:"Accueil",
+        navChapters:"Chapitres",
+        navFaq:"FAQs",
+        navPlatform:"Espace Cours",
+
+        welcomeMsg:
+        "👋 Bienvenue à tous les étudiants et passionnés de Physique !",
+
+        heroTitle:
+        "Maîtrisez la Physique Générale de la Mécanique à l'Électronique",
+
+        heroDef:
+        "Enack-Academy est une plateforme éducative académique de référence conçue pour offrir un enseignement structuré, rigoureux et universel. Retrouvez des cours théoriques détaillés, des démonstrations mathématiques formelles, des figures d'illustration et des exercices pratiques résolus pas à pas.",
+
+        btnExplore:"Explorer les Cours",
+
+        btnLogin:"Se connecter",
+
+        titleChapters:
+        "📚 Les 10 Chapitres du Programme (Vue Paysage)",
+
+        titleFaq:
+        "❓ Foire Aux Questions (FAQ)",
+
+        sidebarTitle:
+        "⚛️ Programme Officiel",
+
+        modalTitle:
+        "🎓 Connexion Étudiant",
+
+        lblUsername:
+        "Nom d'utilisateur :",
+
+        lblEmail:
+        "Email Étudiant (@student.com) :",
+
+        btnSubmitLogin:
+        "Valider la connexion",
+
+        sourcesTitle:
+        "Sources & Références Académiques :",
+
+        sourcesText:
+        "Halliday & Resnick - Fundamentals of Physics | Feynman Lectures on Physics | CERN & UNESCO Open Educational Resources",
+
+        faqQ1:
+        "Comment accéder aux cours complets d'Enack-Academy ?",
+
+        faqA1:
+        "L'accès à l'intégralité du programme est libre. Il vous suffit de cliquer sur « Espace Cours » ou sur le chapitre de votre choix pour accéder à la plateforme d'étude interactive.",
+
+        faqQ2:
+        "Quelles sont les sources et références utilisées ?",
+
+        faqA2:
+        "Tous nos cours sont rédigés selon les standards internationaux en nous appuyant sur les ouvrages de référence : Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, Berkeley Physics Course et les ressources du CERN.",
+
+        faqQ3:
+        "Comment fonctionne la connexion étudiante ?",
+
+        faqA3:
+        "Cliquez sur « Se connecter », saisissez votre nom d'utilisateur et votre adresse email étudiante (ex. nom@student.com).",
+
+        faqQ4:
+        "Les formules mathématiques sont-elles correctement affichées ?",
+
+        faqA4:
+        "Oui, Enack-Academy intègre le moteur de rendu KaTeX pour un affichage précis des équations."
+
     },
-    en: {
-        navHome: "Home", navChapters: "Chapters", navFaq: "FAQs", navPlatform: "Course Space",
-        welcomeMsg: "👋 Welcome to all students and Physics enthusiasts!",
-        heroTitle: "Master General Physics from Mechanics to Electronics",
-        heroDef: "Enack-Academy is a leading academic educational platform designed to provide structured, rigorous, and universal physics education. Find detailed theoretical lectures, formal mathematical proofs, illustrative diagrams, and step-by-step solved practical exercises.",
-        btnExplore: "Explore Courses", btnLogin: "Log in",
-        titleChapters: "📚 The 10 Curriculum Chapters (Landscape View)",
-        titleFaq: "❓ Frequently Asked Questions (FAQ)",
-        sidebarTitle: "⚛️ Official Syllabus", modalTitle: "🎓 Student Login",
-        lblUsername: "Username:", lblEmail: "Student Email (@student.com):",
-        btnSubmitLogin: "Confirm Login",
-        faqQ1: "How to access full courses on Enack-Academy?",
-        faqA1: "Access to the entire curriculum is free. Click on 'Course Space' or select any chapter of your choice to enter the interactive learning platform.",
-        faqQ2: "What sources and references are used?",
-        faqA2: "All courses are written according to international standards using reference textbooks: Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, and CERN OER.",
-        faqQ3: "How does the student login work?",
-        faqA3: "Click 'Log in', enter your username and your student email address ending with @student.com.",
-        faqQ4: "Are mathematical formulas correctly displayed?",
-        faqA4: "Yes, Enack-Academy integrates the KaTeX rendering engine for crisp rendering of all equations."
+
+
+    en:{
+
+        navHome:"Home",
+        navChapters:"Chapters",
+        navFaq:"FAQs",
+        navPlatform:"Course Space",
+
+        welcomeMsg:
+        "👋 Welcome to all students and Physics enthusiasts!",
+
+        heroTitle:
+        "Master General Physics from Mechanics to Electronics",
+
+        heroDef:
+        "Enack-Academy is a leading academic educational platform designed to provide structured, rigorous, and universal physics education. Find detailed theoretical lectures, formal mathematical proofs, illustrative diagrams, and step-by-step solved practical exercises.",
+
+        btnExplore:
+        "Explore Courses",
+
+        btnLogin:
+        "Log in",
+
+        titleChapters:
+        "📚 The 10 Curriculum Chapters (Landscape View)",
+
+        titleFaq:
+        "❓ Frequently Asked Questions (FAQ)",
+
+        sidebarTitle:
+        "⚛️ Official Syllabus",
+
+        modalTitle:
+        "🎓 Student Login",
+
+        lblUsername:
+        "Username:",
+
+        lblEmail:
+        "Student Email (@student.com):",
+
+        btnSubmitLogin:
+        "Confirm Login",
+
+        sourcesTitle:
+        "Academic Sources & References:",
+
+        sourcesText:
+        "Halliday & Resnick - Fundamentals of Physics | Feynman Lectures on Physics | CERN & UNESCO Open Educational Resources",
+
+        faqQ1:
+        "How to access full courses on Enack-Academy?",
+
+        faqA1:
+        "Access to the entire curriculum is free. Click on 'Course Space' or select any chapter of your choice to enter the interactive learning platform.",
+
+        faqQ2:
+        "What sources and references are used?",
+
+        faqA2:
+        "All courses are written according to international standards using reference textbooks: Halliday & Resnick (Fundamentals of Physics), The Feynman Lectures on Physics, and CERN OER.",
+
+        faqQ3:
+        "How does the student login work?",
+
+        faqA3:
+        "Click 'Log in', enter your username and your student email address ending with @student.com.",
+
+        faqQ4:
+        "Are mathematical formulas correctly displayed?",
+
+        faqA4:
+        "Yes, Enack-Academy integrates the KaTeX rendering engine for accurate equation rendering."
+
     }
+
 };
+
 
 let currentLang = "fr";
 
+
+/* =========================================================
+   CHANGEMENT DE LANGUE
+========================================================= */
+
 function changeLanguage(lang){
+
     currentLang = lang;
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if(I18N[lang] && I18N[lang][key]){
-            el.textContent = I18N[lang][key];
-        }
-    });
+
+    document.documentElement.lang = lang;
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(function(el){
+
+            const key = el.getAttribute("data-i18n");
+
+            if(
+                I18N[lang] &&
+                I18N[lang][key] !== undefined
+            ){
+
+                /*
+                 * textContent est volontairement utilisé
+                 * pour éviter de casser le HTML.
+                 */
+                el.textContent = I18N[lang][key];
+
+            }
+
+        });
+
+    /*
+     * Re-render les cartes afin que leurs informations
+     * dynamiques soient également adaptées.
+     */
+    renderHomeChapters();
+
 }
 
-/* =====================================================
-   GESTION DES VUES & MODAL DE CONNEXION
-===================================================== */
+
+/* =========================================================
+   AFFICHAGE DES VUES
+========================================================= */
+
 function showView(viewId){
-    document.getElementById("homeView").classList.add("hidden");
-    document.getElementById("appView").classList.add("hidden");
-    document.getElementById(viewId).classList.remove("hidden");
-    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    const home =
+        document.getElementById("homeView");
+
+    const app =
+        document.getElementById("appView");
+
+    home.classList.add("hidden");
+
+    app.classList.add("hidden");
+
+    const target =
+        document.getElementById(viewId);
+
+    if(target){
+
+        target.classList.remove("hidden");
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
 }
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 function openLoginModal(){
-    document.getElementById("loginModal").classList.remove("hidden");
+
+    document
+        .getElementById("loginModal")
+        .classList.remove("hidden");
+
 }
 
 function closeLoginModal(){
-    document.getElementById("loginModal").classList.add("hidden");
+
+    document
+        .getElementById("loginModal")
+        .classList.add("hidden");
+
 }
 
 function handleLogin(e){
-    e.preventDefault();
-    const username = document.getElementById("loginUsername").value;
-    const email = document.getElementById("loginEmail").value;
 
-    if(!email.endsWith("@student.com")){
-        alert("L'adresse e-mail doit se terminer par @student.com");
+    e.preventDefault();
+
+    const username =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim();
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    if(!email.toLowerCase().endsWith("@student.com")){
+
+        alert(
+            currentLang === "fr"
+            ?
+            "L'adresse e-mail doit se terminer par @student.com"
+            :
+            "The email address must end with @student.com"
+        );
+
         return;
+
     }
 
-    document.getElementById("authContainer").innerHTML = `
-        <div class="user-badge">
-            <i class="fa-solid fa-user-graduate"></i> ${username}
-        </div>
-    `;
+    document
+        .getElementById("authContainer")
+        .innerHTML = `
+
+            <div class="user-badge">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                ${escapeHTML(username)}
+
+            </div>
+
+        `;
+
     closeLoginModal();
+
 }
+
+
+/* =========================================================
+   SÉCURITÉ HTML POUR LE NOM UTILISATEUR
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
 
 function toggleFaq(el){
-    el.parentElement.classList.toggle("active");
+
+    el
+        .parentElement
+        .classList
+        .toggle("active");
+
 }
 
-/* =====================================================
-   RENDU DES CARTES PAYSAGE (LANDSCAPE CARDS)
-===================================================== */
+
+/* =========================================================
+   CARTES DES CHAPITRES
+========================================================= */
+
 function renderHomeChapters(){
-    const container = document.getElementById('chaptersLandscapeList');
+
+    const container =
+        document.getElementById(
+            "chaptersLandscapeList"
+        );
+
     if(!container) return;
-    container.innerHTML = '';
 
-    PROGRAM.forEach((chap, idx) => {
-        const card = document.createElement('div');
-        card.className = 'chapter-landscape-card';
-
-        const lessonsChips = chap[2].map(l => `<span class="lesson-chip">${l[0]}</span>`).join('');
-
-        card.innerHTML = `
-            <div class="chapter-landscape-img-container">
-                <img src="${CHAPTER_IMAGES[idx]}" alt="${chap[1]}" onerror="this.src='https://placehold.co/800x400/1c2541/48cae4?text=Chapitre+${idx+1}'">
-                <div class="chapter-landscape-badge">Chapitre ${idx+1}</div>
-            </div>
-            <div class="chapter-landscape-content">
-                <div>
-                    <div class="chapter-landscape-header">
-                        <div class="chapter-landscape-title">${chap[0]} ${chap[1]}</div>
-                    </div>
-                    <p class="chapter-landscape-desc">
-                        Module théorique et pratique approfondi comprenant ${chap[2].length} leçons structurées avec équations rigoureuses, schémas explicatifs et exercices d'application corrigés.
-                    </p>
-                    <div class="chapter-lessons-chips">
-                        ${lessonsChips}
-                    </div>
-                </div>
-                <div style="display:flex; justify-content:flex-end;">
-                    <button class="btn-primary" onclick="openChapterFromHome(${idx})">
-                        <i class="fa-solid fa-book-open-reader"></i> Étudier ce chapitre
-                    </button>
-                </div>
-            </div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-function openChapterFromHome(chapIdx){
-    showView('appView');
-    openLesson(chapIdx, 0);
-}
-
-/* =====================================================
-   RENDU DU MENU LATÉRAL DE L'APPLICATION
-===================================================== */
-function renderCurriculum(){
-    const container = document.getElementById("curriculum");
-    if(!container) return;
     container.innerHTML = "";
 
-    PROGRAM.forEach(function(chapter, cIdx){
-        const chapterBox = document.createElement("div");
-        chapterBox.className = "chapter-item";
+    PROGRAM.forEach(function(chap,idx){
 
-        const title = document.createElement("div");
-        title.innerHTML = "<b>" + chapter[0] + " " + chapter[1] + "</b>";
+        const card =
+            document.createElement("div");
 
-        const lessons = document.createElement("div");
-        lessons.className = "lesson-list";
+        card.className =
+            "chapter-landscape-card";
 
-        chapter[2].forEach(function(lesson, lIdx){
-            const item = document.createElement("div");
-            item.className = "lesson-subitem";
-            item.textContent = lesson[0];
 
-            item.onclick = function(e){
-                e.stopPropagation();
-                openLesson(cIdx, lIdx);
-            };
+        const lessonsChips =
+            chap[2]
+            .map(function(lesson){
+
+                return `
+
+                    <span class="lesson-chip">
+
+                        ${escapeHTML(lesson[0])}
+
+                    </span>
+
+                `;
+
+            })
+            .join("");
+
+
+        const description =
+            currentLang === "fr"
+
+            ?
+
+            `Module théorique et pratique approfondi comprenant ${chap[2].length} leçons structurées avec équations rigoureuses, schémas explicatifs et exercices d'application corrigés.`
+
+            :
+
+            `Advanced theoretical and practical module containing ${chap[2].length} structured lessons with rigorous equations, explanatory diagrams and solved application exercises.`;
+
+
+        const studyText =
+            currentLang === "fr"
+            ?
+            "Étudier ce chapitre"
+            :
+            "Study this chapter";
+
+
+        const chapterText =
+            currentLang === "fr"
+            ?
+            "Chapitre"
+            :
+            "Chapter";
+
+
+        card.innerHTML = `
+
+            <div class="chapter-landscape-img-container">
+
+                <img
+                    src="${CHAPTER_IMAGES[idx]}"
+                    alt="${escapeHTML(chap[1])}"
+                    onerror="
+                        this.src='https://placehold.co/800x400/1c2541/48cae4?text=Chapitre+${idx+1}'
+                    "
+                >
+
+                <div class="chapter-landscape-badge">
+
+                    ${chapterText} ${idx+1}
+
+                </div>
+
+            </div>
+
+
+            <div class="chapter-landscape-content">
+
+                <div>
+
+                    <div class="chapter-landscape-header">
+
+                        <div class="chapter-landscape-title">
+
+                            ${chap[0]} ${escapeHTML(chap[1])}
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="chapter-landscape-desc">
+
+                        ${description}
+
+                    </p>
+
+
+                    <div class="chapter-lessons-chips">
+
+                        ${lessonsChips}
+
+                    </div>
+
+                </div>
+
+
+                <div style="
+                    display:flex;
+                    justify-content:flex-end;
+                ">
+
+                    <button
+                        class="btn-primary"
+                        onclick="openChapterFromHome(${idx})">
+
+                        <i class="fa-solid fa-book-open-reader"></i>
+
+                        ${studyText}
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   OUVRIR CHAPITRE DEPUIS ACCUEIL
+========================================================= */
+
+function openChapterFromHome(chapIdx){
+
+    showView("appView");
+
+    openLesson(chapIdx,0);
+
+}
+
+
+/* =========================================================
+   MENU LATÉRAL
+========================================================= */
+
+function renderCurriculum(){
+
+    const container =
+        document.getElementById("curriculum");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+
+    PROGRAM.forEach(function(chapter,cIdx){
+
+        const chapterBox =
+            document.createElement("div");
+
+        chapterBox.className =
+            "chapter-item";
+
+
+        const title =
+            document.createElement("div");
+
+        title.innerHTML = `
+
+            <b>
+                ${chapter[0]} ${escapeHTML(chapter[1])}
+            </b>
+
+        `;
+
+
+        const lessons =
+            document.createElement("div");
+
+        lessons.className =
+            "lesson-list";
+
+
+        chapter[2].forEach(function(lesson,lIdx){
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "lesson-subitem";
+
+            item.textContent =
+                lesson[0];
+
+
+            item.onclick =
+                function(e){
+
+                    e.stopPropagation();
+
+                    openLesson(cIdx,lIdx);
+
+                };
+
 
             lessons.appendChild(item);
+
         });
 
-        title.onclick = function(){
-            chapterBox.classList.toggle("open");
-        };
+
+        title.onclick =
+            function(){
+
+                chapterBox
+                    .classList
+                    .toggle("open");
+
+            };
+
 
         chapterBox.appendChild(title);
+
         chapterBox.appendChild(lessons);
+
         container.appendChild(chapterBox);
+
     });
+
 }
 
-/* =====================================================
-   AFFICHAGE D'UNE LEÇON SÉLECTIONNÉE
-===================================================== */
-function openLesson(cIdx, lIdx){
-    const chapter = PROGRAM[cIdx];
-    const lesson = chapter[2][lIdx];
 
-    document.getElementById("lessonTitle").textContent = lesson[0];
-    document.getElementById("lessonTag").textContent = `${chapter[0]} ${chapter[1]} — Leçon ${lIdx + 1}`;
+/* =========================================================
+   RENDU KATEX
+========================================================= */
 
-    const key = `${cIdx}-${lIdx}`;
+function renderMath(){
+
+    const element =
+        document.getElementById(
+            "lessonContent"
+        );
+
+    if(
+        !element ||
+        typeof window.renderMathInElement !== "function"
+    ){
+
+        return;
+
+    }
+
+
+    window.renderMathInElement(
+        element,
+        {
+
+            delimiters:[
+
+                {
+                    left:"$$",
+                    right:"$$",
+                    display:true
+                },
+
+                {
+                    left:"\\(",
+                    right:"\\)",
+                    display:false
+                },
+
+                {
+                    left:"\\[",
+                    right:"\\]",
+                    display:true
+                }
+
+            ],
+
+            throwOnError:false
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   OUVRIR UNE LEÇON
+========================================================= */
+
+function openLesson(cIdx,lIdx){
+
+    const chapter =
+        PROGRAM[cIdx];
+
+    if(!chapter) return;
+
+
+    const lesson =
+        chapter[2][lIdx];
+
+    if(!lesson) return;
+
+
+    const titleElement =
+        document.getElementById(
+            "lessonTitle"
+        );
+
+    const tagElement =
+        document.getElementById(
+            "lessonTag"
+        );
+
+    const contentElement =
+        document.getElementById(
+            "lessonContent"
+        );
+
+
+    titleElement.textContent =
+        lesson[0];
+
+
+    tagElement.textContent =
+        `${chapter[0]} ${chapter[1]} — ${
+            currentLang === "fr"
+            ? "Leçon"
+            : "Lesson"
+        } ${lIdx + 1}`;
+
+
+    const key =
+        `${cIdx}-${lIdx}`;
+
+
+    /*
+     * Formule fondamentale
+     */
+
     let contentHTML = `
-        <div style="color:var(--muted); font-size:0.9rem;">Formule clé fondamentale</div>
-        <div class="formula">$$${lesson[1]}$$</div>
-        <h3 style="color:var(--gold); margin:25px 0 15px;">📖 Cours Détaillé</h3>
+
+        <div style="
+            color:var(--muted);
+            font-size:.9rem;
+        ">
+
+            ${
+                currentLang === "fr"
+                ?
+                "Formule clé fondamentale"
+                :
+                "Key fundamental formula"
+            }
+
+        </div>
+
+
+        <div class="formula">
+
+            $$${lesson[1]}$$
+
+        </div>
+
+
+        <h3 style="
+            color:var(--gold);
+            margin:25px 0 15px;
+        ">
+
+            📖 ${
+                currentLang === "fr"
+                ?
+                "Cours Détaillé"
+                :
+                "Detailed Course"
+            }
+
+        </h3>
+
     `;
 
+
+    /*
+     * SI LA LEÇON POSSÈDE DES DONNÉES
+     */
+
     if(COURS_TEXTE[key]){
-        const data = COURS_TEXTE[key];
-        contentHTML += `<div class="course-text">`;
-        data.paragraphs.forEach(p => { contentHTML += `<p>${p}</p>`; });
-        contentHTML += `</div>`;
 
-        if(data.image) {
-            contentHTML += `
-                <div class="illustration-box">
-                    <img src="${data.image}" alt="Illustration de la leçon" onerror="this.src='https://placehold.co/600x300/1c2541/f7b801?text=Illustration+Lecon'">
-                    <p><em>${data.imageCaption}</em></p>
-                </div>
-            `;
-        }
+        const data =
+            COURS_TEXTE[key];
 
-        if(data.example) {
-            contentHTML += `
-                <div class="example-box">
-                    <h3>📝 Exemple d'Application Pratique</h3>
-                    <p><strong>Énoncé :</strong> ${data.example.statement}</p>
-                    <p><strong>Questions :</strong> ${data.example.questions}</p>
-                    <hr style="border-color:var(--border); margin:15px 0;">
-                    <p><strong>Résolution détaillée :</strong></p>
-                    <p>${data.example.solution}</p>
-                </div>
-            `;
-        }
-    } else {
+
+        /* PARAGRAPHES */
+
         contentHTML += `
             <div class="course-text">
-                <p>Cette leçon développe rigoureusement les principes physiques de <strong>${lesson[0]}</strong> au sein du module <strong>${chapter[1]}</strong>.</p>
-                <p>L'analyse vectorielle et les équations différentielles associées permettent de prédire quantitativement le comportement dynamique du système.</p>
-            </div>
-            <div class="example-box">
-                <h3>📝 Exercice d'Application Type</h3>
-                <p><strong>Énoncé :</strong> Utiliser la formule fondamentale $$${lesson[1]}$$ pour déterminer l'état du système.</p>
-                <p><strong>Résolution :</strong> Remplacement direct par les constantes physiques dans le système international d'unités (SI).</p>
+        `;
+
+
+        data.paragraphs.forEach(function(p){
+
+            contentHTML += `
+                <p>${p}</p>
+            `;
+
+        });
+
+
+        contentHTML += `
             </div>
         `;
+
+
+        /* IMAGE */
+
+        if(data.image){
+
+            contentHTML += `
+
+                <div class="illustration-box">
+
+                    <img
+                        src="${data.image}"
+                        alt="Illustration de la leçon"
+                        onerror="
+                            this.src='https://placehold.co/600x300/1c2541/f7b801?text=Illustration+Lecon'
+                        "
+                    >
+
+                    <p>
+                        <em>
+                            ${data.imageCaption}
+                        </em>
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* EXEMPLE */
+
+        if(data.example){
+
+            contentHTML += `
+
+                <div class="example-box">
+
+                    <h3>
+                        📝 ${
+                            currentLang === "fr"
+                            ?
+                            "Exemple d'Application Pratique"
+                            :
+                            "Practical Application Example"
+                        }
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            ${
+                                currentLang === "fr"
+                                ?
+                                "Énoncé :"
+                                :
+                                "Statement:"
+                            }
+                        </strong>
+
+                        ${data.example.statement}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            ${
+                                currentLang === "fr"
+                                ?
+                                "Questions :"
+                                :
+                                "Questions:"
+                            }
+                        </strong>
+
+                        ${data.example.questions}
+
+                    </p>
+
+
+                    <hr style="
+                        border-color:var(--border);
+                        margin:15px 0;
+                    ">
+
+
+                    <p>
+
+                        <strong>
+                            ${
+                                currentLang === "fr"
+                                ?
+                                "Résolution détaillée :"
+                                :
+                                "Detailed solution:"
+                            }
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+                        ${data.example.solution}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
     }
 
-    document.getElementById("lessonContent").innerHTML = contentHTML;
 
-    if(window.renderMathInElement){
-        renderMathInElement(document.getElementById("lessonContent"), {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "\\(", right: "\\)", display: false }
-            ],
-            throwOnError: false
+    /*
+     * SI LA LEÇON N'A PAS ENCORE DE CONTENU DÉTAILLÉ
+     *
+     * On NE SUPPRIME PAS la leçon.
+     * Elle reste entièrement accessible.
+     */
+
+    else{
+
+        contentHTML += `
+
+            <div class="course-text">
+
+                <p>
+
+                    ${
+                        currentLang === "fr"
+                        ?
+
+                        `Cette leçon développe rigoureusement les principes physiques de <strong>${escapeHTML(lesson[0])}</strong> au sein du module <strong>${escapeHTML(chapter[1])}</strong>.`
+
+                        :
+
+                        `This lesson develops the physical principles of <strong>${escapeHTML(lesson[0])}</strong> within the <strong>${escapeHTML(chapter[1])}</strong> module.`
+                    }
+
+                </p>
+
+
+                <p>
+
+                    ${
+                        currentLang === "fr"
+
+                        ?
+
+                        "La formule fondamentale ci-dessus constitue le point de départ de l'analyse quantitative de cette leçon. Les développements détaillés peuvent être ajoutés ultérieurement dans la structure COURS_TEXTE sans modifier le fonctionnement de la plateforme."
+
+                        :
+
+                        "The fundamental formula above provides the starting point for the quantitative analysis of this lesson. Detailed content can be added later inside COURS_TEXTE without changing the platform structure."
+
+                    }
+
+                </p>
+
+            </div>
+
+
+            <div class="example-box">
+
+                <h3>
+
+                    📝 ${
+                        currentLang === "fr"
+                        ?
+                        "Exercice d'Application Type"
+                        :
+                        "Typical Application Exercise"
+                    }
+
+                </h3>
+
+
+                <p>
+
+                    <strong>
+                        ${
+                            currentLang === "fr"
+                            ?
+                            "Énoncé :"
+                            :
+                            "Statement:"
+                        }
+                    </strong>
+
+                    ${
+                        currentLang === "fr"
+                        ?
+
+                        `Utiliser la formule fondamentale $$${lesson[1]}$$ pour déterminer l'état du système.`
+
+                        :
+
+                        `Use the fundamental formula $$${lesson[1]}$$ to determine the state of the system.`
+
+                    }
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        ${
+                            currentLang === "fr"
+                            ?
+                            "Résolution :"
+                            :
+                            "Solution:"
+                        }
+                    </strong>
+
+                    ${
+                        currentLang === "fr"
+
+                        ?
+
+                        "Remplacement direct par les constantes physiques dans le système international d'unités (SI)."
+
+                        :
+
+                        "Direct substitution using the physical constants in the International System of Units (SI)."
+
+                    }
+
+                </p>
+
+            </div>
+
+
+            <div class="lesson-placeholder">
+
+                <strong>
+
+                    ${
+                        currentLang === "fr"
+                        ?
+                        "Contenu détaillé :"
+                        :
+                        "Detailed content:"
+                    }
+
+                </strong>
+
+                <br><br>
+
+                ${
+                    currentLang === "fr"
+
+                    ?
+
+                    "Cette leçon est bien enregistrée dans le programme et peut être sélectionnée depuis le menu. Les données détaillées spécifiques à cette leçon pourront être ajoutées dans COURS_TEXTE."
+
+                    :
+
+                    "This lesson is fully registered in the curriculum and can be selected from the menu. The specific detailed data for this lesson can be added inside COURS_TEXTE."
+
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+     * INJECTION DANS LE DOM
+     */
+
+    contentElement.innerHTML =
+        contentHTML;
+
+
+    /*
+     * IMPORTANT :
+     * KaTeX est exécuté APRÈS innerHTML.
+     */
+
+    requestAnimationFrame(function(){
+
+        renderMath();
+
+    });
+
+
+    /*
+     * Faire défiler vers le début
+     * du contenu de la leçon.
+     */
+
+    const main =
+        document.querySelector(
+            ".main-content"
+        );
+
+    if(main){
+
+        main.scrollTo({
+            top:0,
+            behavior:"smooth"
         });
+
     }
+
 }
 
-// Initialisation au chargement
-renderHomeChapters();
-renderCurriculum();
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        renderHomeChapters();
+
+        renderCurriculum();
+
+    }
+);
+
+
+/* =========================================================
+   FERMETURE DU MODAL EN CLIQUANT À L'EXTÉRIEUR
+========================================================= */
+
+document
+    .getElementById("loginModal")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(e.target === this){
+
+                closeLoginModal();
+
+            }
+
+        }
+    );
+
 </script>
+
 </body>
 </html>
+```
